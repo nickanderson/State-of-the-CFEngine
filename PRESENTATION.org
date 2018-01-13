@@ -1,0 +1,460 @@
+#+Title: State of the CFEngine
+#+SUBTITLE: Or Since last time at Config Management Camp
+#+Author: Nick Anderson
+#+Email: nick@cmdln.org
+#+REVEAL_ROOT: file:///home/nickanderson/src/reveal.js/
+#+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
+#+OPTIONS: reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
+#+OPTIONS: reveal_width:1200 reveal_height:800
+#+OPTIONS: reveal_single_file:t
+# The TOC is a bit much for a slide show IMHO
+#+OPTIONS: toc:nil tags:nil timestamp:nil
+#+REVEAL_MARGIN: 0.1
+#+REVEAL_MIN_SCALE: 0.5
+#+REVEAL_MAX_SCALE: 2.5
+# Available Transitions: default|cube|page|concave|zoom|linear|fade|none.
+#+REVEAL_TRANS: fade
+# Themes: Black (default) - White - League - Sky - Beige - Simple - Serif - Blood - Night - Moon - Solarized 
+#+REVEAL_THEME: white 
+# ?? Guess this flattens up to x levels deep
+#+REVEAL_HLEVEL: 1
+#+REVEAL_HEAD_PREAMBLE: <meta name=description" content=CFEngine Zero to Hero Primer.">
+#+REVEAL_POSTAMBLE: <p> Created by Nick Anderson. </p>
+#+REVEAL_PLUGINS: (markdown notes)
+* Contributions
+** Core
+
+:DRAWER:
+#+Name: NumCoreContributors
+#+BEGIN_SRC shell :dir /tmp/ :exports none :wrap text
+  REPOSITORY=https://github.com/cfengine/core
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-1 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMAUTHORS=$(git-stats --since "$LASTNEWYEAR" --authors --raw | jq '.authors | length')
+  rm -rf "$TMP"
+  echo "- $NUMAUTHORS contributors in the last year"
+#+END_SRC
+:END:
+- 24 contributors in the last year
+:DRAWER:
+#+BEGIN_SRC shell :dir ~/CFEngine/core :exports none
+git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC shell :dir ~/CFEngine/core :exports none
+  while read Author; do
+    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
+    echo "$FirstCommit,$Author"
+  done < /tmp/authors.txt 
+#+END_SRC
+
+#+RESULTS:
+| 2017-12-06T11:21:35-06:00 | Craig Comstock                |
+| 2017-12-04T02:01:48+01:00 | Eli Taft at Quoin             |
+| 2017-11-11T11:27:17+01:00 | Jonas Bernoulli               |
+| 2017-09-30T11:25:05+02:00 | Vratislav Podzimek            |
+| 2017-09-27T12:24:39+02:00 | Edward Kigwana                |
+| 2017-09-18T18:42:59+02:00 | Bernhard M. Wiedemann         |
+| 2017-07-11T14:24:55+02:00 | Aleksei Shpakovskii           |
+| 2017-05-26T21:04:38+02:00 | Jan He                        |
+| 2017-02-08T10:49:34+01:00 | Jan Chren (rindeal)           |
+| 2017-01-23T15:16:47+01:00 | michaelclelland               |
+| 2016-10-07T22:38:06+02:00 | Andy Cobaugh                  |
+| 2016-09-14T14:47:26+02:00 | Ole Herman Schumacher Elgesem |
+| 2016-07-30T20:29:50+02:00 | Yann Soubeyrand               |
+| 2016-05-11T13:58:04+02:00 | Geoffrey Thomas               |
+| 2016-05-09T18:56:43+05:30 | Dheeraj Kabra                 |
+| 2016-02-24T09:29:09+01:00 | David Durieux                 |
+| 2015-12-18T16:24:19+01:00 | Enrico Razzetti               |
+| 2015-12-12T04:40:35+00:00 | James Sanderson               |
+| 2015-12-02T16:41:46-08:00 | mikeweilgart                  |
+| 2015-11-24T21:16:50+05:30 | soumyadip                     |
+| 2015-11-16T13:08:09-08:00 | Mike Weilgart                 |
+| 2015-10-23T11:09:11+02:00 | pasinskim                     |
+| 2015-08-17T14:20:38+02:00 | Natanael Copa                 |
+| 2015-05-13T18:01:14+02:00 | Alexis Mousset                |
+| 2015-03-18T09:15:39+01:00 | Fabien Grumelard              |
+| 2015-01-14T08:53:10+01:00 | Andrew Lewis                  |
+| 2015-01-02T11:36:36+01:00 | Stefan Weil                   |
+| 2014-11-04T12:56:01-08:00 | Daniel Hoherd                 |
+| 2014-10-28T01:26:58+08:00 | Leo Liu                       |
+| 2014-10-06T15:19:23-07:00 | danielhoherd                  |
+| 2014-09-02T18:02:35+02:00 | Benoît Peccatte               |
+| 2014-07-08T06:06:40+10:00 | Alexander Borkowski           |
+| 2014-06-30T16:15:50+02:00 | Sudhir Pandey                 |
+| 2014-06-17T01:32:41+02:00 | Gary Wall                     |
+| 2014-05-26T06:00:23-04:00 | Phil Jaenke                   |
+| 2014-04-25T11:56:18+12:00 | Frank Kruchio                 |
+| 2014-04-16T16:38:33-04:00 | Chris Dituri                  |
+| 2014-04-14T11:07:23-04:00 | Michal SVAMBERG               |
+| 2014-03-19T10:53:10+01:00 | aappilattoq                   |
+| 2014-02-18T13:47:39+01:00 | Wojciech Lyszkiewicz          |
+| 2014-02-03T13:02:20+01:00 | mmuensch                      |
+| 2014-01-31T10:36:41-05:00 | Marcin Pasinski               |
+| 2014-01-16T04:02:52+01:00 | sudhirpandey                  |
+| 2013-12-09T21:01:37+09:00 | Yasuyuki Oka                  |
+| 2013-12-05T17:15:43+01:00 | Edward Welbourne              |
+| 2013-12-05T17:02:46+01:00 | David Volgyes                 |
+| 2013-10-04T16:08:47-05:00 | Dennis Stam                   |
+| 2013-09-19T10:09:09+02:00 | Nicolas CHARLES               |
+| 2013-09-17T13:00:25+02:00 | Howard Chu                    |
+| 2013-09-16T19:40:02+04:00 | Pavel Gashev                  |
+| 2013-08-26T04:47:00-07:00 | jonhenrik13                   |
+| 2013-07-20T21:11:35-04:00 | Steven Kreuzer                |
+| 2013-07-20T21:09:11-04:00 | Tero Kantonen                 |
+| 2013-07-09T17:47:41+02:00 | Matthew Cattell               |
+| 2013-07-04T10:34:37+02:00 | Jarle Bjørgeengen             |
+| 2013-07-02T16:26:12+02:00 | Jonathan Clarke               |
+| 2013-05-30T08:28:14-07:00 | Aleksey Tsalolikhin           |
+| 2013-05-22T22:57:18+02:00 | vohi                          |
+| 2013-05-01T22:27:30-07:00 | kacfengine                    |
+| 2013-04-29T22:03:25-05:00 | Ben Heilman                   |
+| 2013-04-27T06:28:34+02:00 | yac                           |
+| 2013-04-25T17:14:32+02:00 | Matthieu CERDA                |
+| 2013-04-25T09:23:57-04:00 | hicham                        |
+| 2013-04-25T09:23:57-04:00 | jeffali                       |
+| 2013-04-17T11:46:43+00:00 | David Lee                     |
+| 2013-04-16T21:56:41-04:00 | Jean Remond                   |
+| 2013-04-05T14:05:44+02:00 | Kristian Amlie                |
+| 2013-04-04T12:24:33+02:00 | Cédric Cabessa                |
+| 2013-03-30T08:23:01-05:00 | Russ Poyner                   |
+| 2013-03-28T14:18:16+01:00 | Remi Debay                    |
+| 2013-03-21T18:27:50+01:00 | Johan Stuyts                  |
+| 2013-03-15T09:26:24-04:00 | Neil Watson                   |
+| 2013-03-12T18:57:27+01:00 | Trond Hasle Amundsen          |
+| 2013-03-05T23:36:30-06:00 | Bryce Petrini                 |
+| 2013-02-21T18:44:25-08:00 | Chris Hiestand                |
+| 2013-02-21T08:02:36-08:00 | Brian Bennett                 |
+| 2013-02-18T18:47:08+01:00 | Dimitrios Apostolou           |
+| 2013-02-16T15:09:52+01:00 | Gonéri Le Bouder              |
+| 2013-02-05T16:42:14+01:00 | Riccardo Murri                |
+| 2013-01-31T13:11:41-06:00 | James Thompson                |
+| 2013-01-30T17:24:50+01:00 | jkrabbe                       |
+| 2013-01-23T14:07:26+01:00 | Bernard Brandl                |
+| 2013-01-22T17:04:02+01:00 | dolanor                       |
+| 2013-01-07T10:37:31+01:00 | Jeramey Crawford              |
+| 2013-01-03T10:29:05-05:00 | Melinda Fancsal               |
+| 2012-12-10T12:13:35-05:00 | Matt Lesko                    |
+| 2012-12-01T16:56:36-05:00 | George Gensure                |
+| 2012-11-29T09:03:46+01:00 | Klaus Kämpf                   |
+| 2012-11-22T16:44:33+00:00 | Franz Bettag                  |
+| 2012-11-02T10:46:36+01:00 | P. Christeas                  |
+| 2012-10-17T20:36:50+02:00 | Loic Pefferkorn               |
+| 2012-10-12T09:55:45+02:00 | Neil H Watson                 |
+| 2012-09-30T08:37:43-04:00 | Michael V. Pelletier          |
+| 2012-09-25T23:46:11+02:00 | Frerich Raabe                 |
+| 2012-09-03T09:57:11+02:00 | root                          |
+| 2012-08-25T21:14:40-04:00 | William Orr                   |
+| 2012-08-09T05:00:41-07:00 | Carlos Manuel Duclos Vergara  |
+| 2012-07-23T13:55:36-04:00 | Ted Zlatanov                  |
+| 2012-06-27T10:59:51+02:00 | Shauna Thomas                 |
+| 2012-05-26T10:40:06+02:00 | Bas van der Vlies             |
+| 2012-04-24T16:33:13-04:00 | Laurent Raufaste              |
+| 2012-04-06T13:25:10+02:00 | Jonathan CLARKE               |
+| 2012-04-06T13:25:04-05:00 | Nick Anderson                 |
+| 2012-03-28T22:33:26+03:00 | Kuba                          |
+| 2012-01-29T07:12:09+00:00 | Diego Zamboni                 |
+| 2012-01-24T14:36:48+00:00 | Volker Hilsheimer             |
+| 2012-01-15T21:03:42+00:00 | Maciej Mrowiec                |
+| 2011-11-03T12:58:21+00:00 | Maciej Patucha                |
+| 2011-10-06T15:35:17+00:00 | Sigurd Teigen                 |
+| 2011-08-25T16:52:36+00:00 | Daniel V. Klein               |
+| 2011-07-12T09:27:14+00:00 | Geir Nygård                   |
+| 2011-06-29T16:29:00+00:00 | Nakarin Phooripoom            |
+| 2011-02-09T12:15:08+00:00 | Mikhail Gusarov               |
+| 2010-08-09T14:13:53+00:00 | Bishwa Shrestha               |
+| 2009-09-14T10:54:19+00:00 | Eystein Måløy Stenberg        |
+| 2008-01-04T08:50:45+00:00 | Mark Burgess                  |
+:END:
+- 10 new contributors
+
+** MPF
+:DRAWER:
+#+Name: NumMPFContributors
+#+BEGIN_SRC shell :dir /tmp/ :exports none :wrap text
+  REPOSITORY=https://github.com/cfengine/masterfiles
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-1 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMAUTHORS=$(git-stats --since "$LASTNEWYEAR" --authors --raw | jq '.authors | length')
+  rm -rf "$TMP"
+  echo "- $NUMAUTHORS contributors in the last year"
+#+END_SRC
+:END:
+- 14 contributors in the last year
+:DRAWER:
+#+BEGIN_SRC shell :dir ~/CFEngine/masterfiles :exports none
+git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
+#+END_SRC
+
+#+BEGIN_SRC shell :dir ~/CFEngine/masterfiles :exports none
+  while read Author; do
+    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
+    echo "$FirstCommit,$Author"
+  done < /tmp/authors.txt 
+#+END_SRC
+#+RESULTS:
+| 2018-01-13T00:08:03+02:00 | teneri66                      |
+| 2017-10-02T17:46:45+03:00 | Igor Aleksandrychev           |
+| 2017-07-11T14:52:55+02:00 | Aleksei Shpakovskii           |
+| 2016-12-15T15:26:27+01:00 | Alexis Mousset                |
+| 2016-11-21T20:40:18+01:00 | Enrico Razzetti               |
+| 2016-10-18T01:21:03+02:00 | Ole Herman Schumacher Elgesem |
+| 2016-09-28T13:58:01-05:00 | Joe Moore                     |
+| 2016-09-28T08:05:45-05:00 | Aleksey Tsalolikhin           |
+| 2016-09-25T19:26:21+02:00 | Stefan Weil                   |
+| 2016-04-22T15:05:10-07:00 | Mike Weilgart                 |
+| 2016-01-06T08:27:52+01:00 | Trix Farrar                   |
+| 2015-12-22T15:26:36+00:00 | James Sanderson               |
+| 2015-12-08T14:26:51-08:00 | Alex Georgopoulos             |
+| 2015-11-25T20:34:09+01:00 | Maciej Mrowiec                |
+| 2015-10-10T01:38:02+02:00 | Guido Falsi                   |
+| 2015-09-16T17:36:48+02:00 | Subs                          |
+| 2015-07-24T15:24:42-04:00 | dsx                           |
+| 2015-07-14T12:45:05+05:30 | Soumyadip D. Mahapatra        |
+| 2015-05-26T18:15:06+02:00 | Johannes Huning               |
+| 2014-12-24T19:10:09+00:00 | Daniel                        |
+| 2014-12-24T19:10:09+00:00 | Daniel Malon                  |
+| 2014-12-23T10:01:49+01:00 | Antal Lohmann                 |
+| 2014-12-17T09:48:04+01:00 | Cory Coager                   |
+| 2014-09-04T10:53:33+02:00 | Marcin Pasinski               |
+| 2014-08-29T15:17:39+02:00 | Nicolas CHARLES               |
+| 2014-07-16T09:38:23+02:00 | Bryan Burke                   |
+| 2014-07-12T14:40:29+02:00 | Julien Dessaux                |
+| 2014-06-06T02:26:36+01:00 | Khushil Dep                   |
+| 2014-05-28T19:55:26+02:00 | Edward Welbourne              |
+| 2014-04-14T19:03:46+02:00 | Matthew Cattell               |
+| 2014-04-08T10:07:15+02:00 | Klaus Kämpf                   |
+| 2014-03-19T12:40:13+01:00 | Dmitry Shevchenko             |
+| 2014-03-17T07:35:23-04:00 | Marco Marongiu                |
+| 2014-02-10T12:38:29+01:00 | Sudhir Pandey                 |
+| 2014-02-05T11:38:11+01:00 | Carlos Manuel Duclos Vergara  |
+| 2014-02-05T10:35:27+10:00 | Alexander Borkowski           |
+| 2014-01-26T07:47:33-05:00 | Phil Jaenke                   |
+| 2014-01-25T04:15:02+01:00 | mmuensch                      |
+| 2014-01-24T17:17:02-05:00 | ed45626                       |
+| 2014-01-13T09:01:59+01:00 | Bas van der Vlies             |
+| 2013-12-19T11:37:47+01:00 | Marek Petko                   |
+| 2013-12-16T18:47:54+01:00 | jeffali                       |
+| 2013-10-13T00:24:38-05:00 | chris.dituri                  |
+| 2013-09-24T08:00:49+02:00 | Francois TIFFREAU             |
+| 2013-09-20T09:17:40-05:00 | Brian Farrell                 |
+| 2013-08-08T03:16:26-04:00 | Laurent Raufaste              |
+| 2013-07-20T21:11:35-04:00 | Steven Kreuzer                |
+| 2013-07-20T21:09:11-04:00 | Tero Kantonen                 |
+| 2013-07-12T12:06:35+02:00 | Jonathan Clarke               |
+| 2013-05-22T21:29:10-04:00 | Jean Remond                   |
+| 2013-05-07T11:38:07+02:00 | Dimitrios Apostolou           |
+| 2013-04-29T22:03:25-05:00 | Ben Heilman                   |
+| 2013-04-27T06:28:34+02:00 | yac                           |
+| 2013-04-26T15:19:39-04:00 | William Orr                   |
+| 2013-04-25T17:14:32+02:00 | Matthieu CERDA                |
+| 2013-04-24T15:28:27+02:00 | Kristian Amlie                |
+| 2013-03-30T08:23:01-05:00 | Russ Poyner                   |
+| 2013-03-28T14:18:16+01:00 | Remi Debay                    |
+| 2013-03-15T09:26:24-04:00 | Neil Watson                   |
+| 2013-03-12T18:57:27+01:00 | Trond Hasle Amundsen          |
+| 2013-03-08T20:02:31-08:00 | Chris Hiestand                |
+| 2013-02-22T20:16:35+01:00 | Loic Pefferkorn               |
+| 2013-02-22T13:05:45+01:00 | Sigurd Teigen                 |
+| 2013-02-21T08:02:36-08:00 | Brian Bennett                 |
+| 2013-02-16T15:09:52+01:00 | Gonéri Le Bouder              |
+| 2013-01-31T13:11:41-06:00 | James Thompson                |
+| 2013-01-30T17:24:50+01:00 | jkrabbe                       |
+| 2013-01-24T20:28:23-06:00 | Nick Anderson                 |
+| 2013-01-23T14:07:26+01:00 | Bernard Brandl                |
+| 2012-12-07T11:32:57+01:00 | P. Christeas                  |
+| 2012-11-22T16:44:33+00:00 | Franz Bettag                  |
+| 2012-11-20T05:02:28-08:00 | Shauna Thomas                 |
+| 2012-11-05T08:51:37-05:00 | Ted Zlatanov                  |
+| 2012-10-29T00:59:03-04:00 | Michael V. Pelletier          |
+| 2012-06-27T10:44:18+02:00 | Volker Hilsheimer             |
+| 2012-05-09T11:32:38+02:00 | Maciej Patucha                |
+| 2012-01-29T07:12:09+00:00 | Diego Zamboni                 |
+| 2011-07-06T22:20:47+00:00 | Eystein Måløy Stenberg        |
+| 2011-07-05T08:51:17+00:00 | Bishwa Shrestha               |
+| 2011-06-30T08:00:41+00:00 | Mikhail Gusarov               |
+| 2011-06-29T16:29:00+00:00 | Nakarin Phooripoom            |
+| 2011-06-29T13:27:50+00:00 | Mark Burgess                  |
+:END:
+- 3 new contributors
+
+** Documentation
+:DRAWER:
+#+Name: NumDocContributors
+#+BEGIN_SRC shell :dir /tmp/ :exports none :wrap text
+  REPOSITORY=https://github.com/cfengine/documentation
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-1 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMAUTHORS=$(git-stats --since "$LASTNEWYEAR" --authors --raw | jq '.authors | length')
+  rm -rf "$TMP"
+  echo "- $NUMAUTHORS contributors in the last year"
+#+END_SRC
+
+#+RESULTS: NumDocContributors
+:END:
+- 17 contributors
+:DRAWER:
+#+BEGIN_SRC shell :dir ~/CFEngine/documentation :exports none
+git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
+#+END_SRC
+
+#+RESULTS:
+
+#+BEGIN_SRC shell :dir ~/CFEngine/documentation :exports none
+  while read Author; do
+    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
+    echo "$FirstCommit,$Author"
+  done < /tmp/authors.txt 
+#+END_SRC
+#+RESULTS:
+| 2017-10-16T16:37:49+03:00 | Ihor Aleksandrychiev                              |
+| 2017-10-16T11:01:21+03:00 | Your Name                                         |
+| 2017-05-09T20:21:24+02:00 | Ole Herman Schumacher Elgesem                     |
+| 2017-02-23T14:04:25+02:00 | fevej                                             |
+| 2016-09-27T11:49:42-04:00 | Joe Moore                                         |
+| 2016-01-24T18:52:42-08:00 | Dillon Gilmore                                    |
+| 2016-01-22T16:39:44+01:00 | Alexis Mousset                                    |
+| 2016-01-22T10:10:10-05:00 | Steven Kreuzer                                    |
+| 2015-11-03T14:43:55+01:00 | Michael Clelland                                  |
+| 2015-10-16T10:30:05+02:00 | Benoît Peccatte                                   |
+| 2015-10-02T11:38:09+02:00 | Enrico Razzetti                                   |
+| 2015-04-09T17:29:03+03:00 | P. Christeas                                      |
+| 2015-04-01T13:35:32+02:00 | Pradeep Sanders                                   |
+| 2015-03-18T11:28:54+01:00 | Maciej Mrowiec                                    |
+| 2015-03-16T13:10:21+01:00 | michaelclelland                                   |
+| 2014-12-31T16:44:54+01:00 | Stefan Weil                                       |
+| 2014-12-29T23:58:08+01:00 | Jimmy Thrasibule                                  |
+| 2014-12-14T00:25:48-08:00 | William Orr                                       |
+| 2014-11-13T12:23:06-08:00 | Brian Bennett                                     |
+| 2014-10-02T15:25:24+02:00 | root                                              |
+| 2014-10-01T22:27:38-05:00 | philregier                                        |
+| 2014-09-30T14:27:43+02:00 | pasinskim                                         |
+| 2014-09-30T14:24:30+02:00 | Marcin Pasinski                                   |
+| 2014-08-30T22:21:07+02:00 | Michal Švamberg                                   |
+| 2014-08-28T10:37:55-04:00 | Robert Lambert                                    |
+| 2014-07-18T14:36:35+02:00 | Edward Welbourne                                  |
+| 2014-05-23T12:41:48+02:00 | Bas van der Vlies                                 |
+| 2014-05-15T22:51:31-05:00 | Chris Dituri                                      |
+| 2014-05-09T13:35:14-04:00 | Laurent Raufaste                                  |
+| 2014-04-25T10:05:28+02:00 | goarnaut                                          |
+| 2014-03-11T10:00:40+01:00 | KevWright                                         |
+| 2014-01-11T12:12:35+01:00 | Mark Burgess                                      |
+| 2013-12-10T09:12:22+01:00 | Mikhail Gusarov                                   |
+| 2013-11-15T15:03:37+01:00 | Vincent Membré                                    |
+| 2013-10-28T18:45:53+01:00 | Loic Pefferkorn                                   |
+| 2013-10-02T10:12:51+02:00 | Carlos Manuel Duclos Vergara (Senior QA Engineer) |
+| 2013-09-09T22:25:43+12:00 | Ivan Kurnosov                                     |
+| 2013-08-11T20:57:42+03:00 | Tero Kantonen                                     |
+| 2013-08-01T09:07:26-04:00 | Neil Watson                                       |
+| 2013-06-20T11:04:11+02:00 | Kristian Amlie                                    |
+| 2013-06-18T14:30:19+02:00 | deb-cfengine                                      |
+| 2013-06-12T18:09:03+02:00 | Sigurd Teigen                                     |
+| 2013-06-07T15:34:45+03:00 | Dimitrios Apostolou                               |
+| 2013-06-07T14:41:17+02:00 | Carlos Manuel Duclos Vergara                      |
+| 2013-06-04T00:02:31+02:00 | Bishwa Shrestha                                   |
+| 2013-05-31T10:33:25-07:00 | Eystein Måløy Stenberg                            |
+| 2013-05-29T07:13:21-07:00 | Ted Zlatanov                                      |
+| 2013-05-28T15:06:37+02:00 | Matthew Cattell                                   |
+| 2013-05-27T13:30:46+02:00 | Dmitry Shevchenko                                 |
+| 2013-05-23T22:10:59-07:00 | Aleksey Tsalolikhin                               |
+| 2013-05-23T16:59:27+02:00 | maciejmrowiec                                     |
+| 2013-05-22T22:33:31+02:00 | vohi                                              |
+| 2013-05-03T11:00:35-07:00 | Diego Zamboni                                     |
+| 2013-05-01T15:49:36-05:00 | Nick Anderson                                     |
+| 2013-04-19T06:55:57+02:00 | Kevin Wright                                      |
+| 2013-04-16T13:00:53+02:00 | Volker Hilsheimer                                 |
+| 2013-03-06T06:27:53-06:00 | Tim O'Brien                                       |
+| 2013-03-01T16:41:37+01:00 | Geir Nygård                                       |
+| 2013-03-01T07:34:37-08:00 | cf-gary                                           |
+| 2013-02-24T05:49:13-08:00 |                                                   |
+| 2013-02-24T05:49:13-08:00 | Alexandra Leisse                                  |
+|                           | Mike Weilgart                                     |
+:END:
+- 3 new contributors
+
+* Releases
+:DRAWER:
+
+#+BEGIN_COMMENT
+  Post process the generated table to add org header markup https://emacs.stackexchange.com/a/19521
+#+END_COMMENT
+
+#+name: addhdr
+#+begin_src emacs-lisp :var tbl="" :exports none
+(cons (car tbl) (cons 'hline (cdr tbl)))
+#+end_src
+
+
+#+Name: Release Date Table
+#+BEGIN_SRC shell :dir ~/CFEngine/core :exports results :results table :post addhdr(*this*)
+  git for-each-ref --sort=taggerdate --format '%(tag)_,,,_%(taggerdate:raw)' refs/tags \
+    | awk 'BEGIN { FS = "_,,,_"; print "Date Release\n| ---------- | ------- |" };
+                 { t=strftime("%Y-%m-%d",$2);
+                 printf "%s %s\n", t, $1 }' \
+    | egrep -v "build|PTV|\.0b" \
+    | egrep "2017|2018|Date"
+#+END_SRC
+:END:
+#+RESULTS: Release Date Table
+|       Date | Release |
+|------------+---------|
+| 2017-03-30 |   3.7.5 |
+| 2017-03-30 |  3.10.1 |
+| 2017-08-11 |  3.10.2 |
+| 2017-08-11 |  3.11.0 |
+| 2017-09-12 |   3.7.6 |
+
+:DRAWER:
+
+#+BEGIN_SRC shell :dir ~/CFEngine/masterfiles :exports results :wrap text
+  echo "$(git for-each-ref --sort=taggerdate --format '%(tag)_,,,_%(taggerdate:raw)' refs/tags \
+    | awk 'BEGIN { FS = "_,,,_" };
+                 { t=strftime("%Y-%m-%d",$2);
+                 printf "%s %s\n", t, $1 }' \
+    | egrep -v "build|PTV|\.0b" \
+    | egrep "2017|2018" \
+    | wc -l) releases"
+#+END_SRC
+#+RESULTS:
+:END:
+
+5 releases
+
+* Functionality
+** Core
+- =with= attribute
+- =missing_ok=
+- multiple augments
+- =inline_mustache=
+
+** Enterprise
+- inventory API 
+- global search
+- host count trend widget
+- mail settings
+- exported reports attached to scheduled mails
+- LDAP settings API
+- default roles
+- host events (bootstrap|decommission)
+
+* Tests
