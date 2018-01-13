@@ -1,0 +1,79 @@
+             ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                         STATE OF THE CFENGINE
+              Or Since last time at Config Management Camp
+
+                             Nick Anderson
+             ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+
+Contributions
+═════════════
+
+Core
+────
+
+  • 24 contributors in the last year
+  • 10 new contributors
+
+
+MPF
+───
+
+  • 14 contributors in the last year
+  • 3 new contributors
+
+
+Documentation
+─────────────
+
+  • 17 contributors
+  :DRAWER:
+  • 3 new contributors
+
+
+Releases
+════════
+
+
+  ━━━━━━━━━━━━━━━━━━━━━
+         Date  Release 
+  ─────────────────────
+   2017-03-30    3.7.5 
+   2017-03-30   3.10.1 
+   2017-08-11   3.10.2 
+   2017-08-11   3.11.0 
+   2017-09-12    3.7.6 
+  ━━━━━━━━━━━━━━━━━━━━━
+
+
+
+  5 releases
+
+
+Functionality
+═════════════
+
+Core
+────
+
+  • `with' attribute
+  • `missing_ok'
+  • multiple augments
+  • `inline_mustache'
+
+
+Enterprise
+──────────
+
+  • inventory API
+  • global search
+  • host count trend widget
+  • mail settings
+  • exported reports attached to scheduled mails
+  • LDAP settings API
+  • default roles
+  • host events (bootstrap|decommission)
+
+
+Tests
+═════
