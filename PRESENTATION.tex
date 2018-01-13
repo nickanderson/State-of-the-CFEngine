@@ -28,9 +28,9 @@
 
 \maketitle
 \section*{Contributions}
-\label{sec:org7a16ba1}
+\label{sec:org9aeae65}
 \subsection*{Core}
-\label{sec:orgea96256}
+\label{sec:orgc681ce0}
 
 \begin{itemize}
 \item 24 contributors in the last year
@@ -40,7 +40,7 @@
 \end{itemize}
 
 \subsection*{MPF}
-\label{sec:org54110d5}
+\label{sec:orgc145424}
 \begin{itemize}
 \item 14 contributors in the last year
 \end{itemize}
@@ -49,7 +49,7 @@
 \end{itemize}
 
 \subsection*{Documentation}
-\label{sec:org6df8c25}
+\label{sec:org78cadc2}
 \begin{itemize}
 \item 17 contributors
 \end{itemize}
@@ -59,7 +59,7 @@
 \end{itemize}
 
 \section*{Releases}
-\label{sec:orgf0065b6}
+\label{sec:orgd607242}
 
 \begin{center}
 \begin{tabular}{rr}
@@ -78,20 +78,38 @@ Date & Release\\
 5 releases
 
 \section*{Functionality}
-\label{sec:org06237f0}
+\label{sec:org7815b15}
 \subsection*{Core}
-\label{sec:orgc948160}
+\label{sec:org2732a34}
 \begin{itemize}
 \item \texttt{with} attribute
 \item \texttt{missing\_ok}
 \item multiple augments
 \item \texttt{inline\_mustache}
 \end{itemize}
-
-\subsection*{Enterprise}
-\label{sec:org569e066}
+\subsection*{MPF}
+\label{sec:orgc7ba929}
 \begin{itemize}
-\item inventory API
+\item more augments instrumentation
+\begin{itemize}
+\item common\(_{\text{control}}\)\(_{\text{bundlesequence}}\)\(_{\text{end}}\)
+\item update bundleseuence
+\item Log file retention and rotation limits
+\item executor schedule
+\item splaytime
+\item allowlegacyconnects
+\item maxconnections
+\item exclude\(_{\text{hosts}}\)
+\item client initiated reporting
+\item files single copy
+\item default\(_{\text{repository}}\)
+\end{itemize}
+\item templates shortcut
+\item track component variable change for restarts
+\end{itemize}
+\subsection*{Enterprise}
+\label{sec:org4381891}
+\begin{itemize}
 \item global search
 \item host count trend widget
 \item mail settings
@@ -99,8 +117,13 @@ Date & Release\\
 \item LDAP settings API
 \item default roles
 \item host events (bootstrap|decommission)
+\item Inventory
+\begin{itemize}
+\item inventory policy release id by default
+\item AIX oslevel
+\item New API
 \end{itemize}
-
+\end{itemize}
 \section*{Tests}
-\label{sec:orgd830285}
+\label{sec:org46aca06}
 \end{document}

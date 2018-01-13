@@ -62,10 +62,28 @@ Core
   • `inline_mustache'
 
 
+MPF
+───
+
+  • more augments instrumentation
+    • common_control_bundlesequence_end
+    • update bundleseuence
+    • Log file retention and rotation limits
+    • executor schedule
+    • splaytime
+    • allowlegacyconnects
+    • maxconnections
+    • exclude_hosts
+    • client initiated reporting
+    • files single copy
+    • default_repository
+  • templates shortcut
+  • track component variable change for restarts
+
+
 Enterprise
 ──────────
 
-  • inventory API
   • global search
   • host count trend widget
   • mail settings
@@ -73,6 +91,10 @@ Enterprise
   • LDAP settings API
   • default roles
   • host events (bootstrap|decommission)
+  • Inventory
+    • inventory policy release id by default
+    • AIX oslevel
+    • New API
 
 
 Tests
