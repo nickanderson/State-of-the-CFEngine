@@ -748,7 +748,7 @@ Results in =/tmp/example.txt= having this content.
 :ID:       f97c9b4d-d46f-4aee-bd68-630f44106b0e
 :Attachments: 2018-01-14_Selection_002_2018-01-14_13-21-21.png
 :END:
-- Easy find hosts by name, ip or identity
+- Easily find hosts by name, ip or identity
 
 #+DOWNLOADED: /home/nickanderson/Pictures/Screenshots/2018-01-14_Selection_002.png @ 2018-01-14 13:21:24
 [[file:data/f9/7c9b4d-d46f-4aee-bd68-630f44106b0e/2018-01-14_Selection_002_2018-01-14_13-21-21.png]]

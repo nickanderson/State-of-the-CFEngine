@@ -29,7 +29,7 @@
 \maketitle
 
 \section*{Releases}
-\label{sec:org5d45ecc}
+\label{sec:org3647df4}
 5 releases
 
 
@@ -45,9 +45,9 @@ Date & Release\\
 \end{tabular}
 \end{center}
 \section*{Contributions}
-\label{sec:org2937a57}
+\label{sec:orge982660}
 \subsection*{Core}
-\label{sec:org9a8fdeb}
+\label{sec:org8061f96}
 \begin{itemize}
 \item 24 contributors in the last year
 \end{itemize}
@@ -56,7 +56,7 @@ Date & Release\\
 \end{itemize}
 
 \subsection*{MPF}
-\label{sec:orgefd0575}
+\label{sec:org4cb2a7b}
 \begin{itemize}
 \item 14 contributors in the last year
 \end{itemize}
@@ -65,18 +65,18 @@ Date & Release\\
 \end{itemize}
 
 \subsection*{Documentation}
-\label{sec:org243b638}
+\label{sec:orgab4f82c}
 \begin{itemize}
 \item 17 contributors
 \item 3 new contributors
 \end{itemize}
 
 \section*{Functionality}
-\label{sec:org208e336}
+\label{sec:orgf16de7d}
 \subsection*{Core}
-\label{sec:orgf49e802}
+\label{sec:org7999a59}
 \subsubsection*{\texttt{with} attribute}
-\label{sec:orgb8c9f87}
+\label{sec:orgd5f5de0}
 
 \begin{verbatim}
 bundle agent main
@@ -106,11 +106,11 @@ bundle agent main
         with => storejson(complex);
 }
 \end{verbatim}
-\captionof{figure}{\label{org8c6538b}
+\captionof{figure}{\label{orgb5e1b68}
 With attribute usage example policy}
 
 \subsubsection*{\texttt{with} attribute}
-\label{sec:org6a692d7}
+\label{sec:org1a6f1c2}
 
 \begin{verbatim}
 R: For iterable 'a 1' we created variable 'a_1' and its value is 'a 1'
@@ -129,7 +129,7 @@ R: We can print a data container fully without creating a temporary variable: {
 }
 \end{verbatim}
 \subsubsection*{Multiple augments}
-\label{sec:org7f96d39}
+\label{sec:org28dabe6}
 
 \textbf{NOTE:} Current implementation discussion in progress in \href{https://tracker.mender.io/browse/CFE-2741}{CFE-2741}. Please
 consider participating.
@@ -148,7 +148,7 @@ consider participating.
 \captionof{figure}{Example \texttt{/tmp/def.json}}
 
 \subsubsection*{Multiple augments}
-\label{sec:org2761328}
+\label{sec:org1e2259d}
 
 \begin{verbatim}
 {
@@ -161,7 +161,7 @@ consider participating.
 \captionof{figure}{Example \texttt{/tmp/centos\_6.json}}
 
 \subsubsection*{Multiple augments}
-\label{sec:orgcb2460a}
+\label{sec:orgdc03179}
 
 \begin{verbatim}
 [root@hub tmp]# cf-agent -KIf ./example.cf 
@@ -171,7 +171,7 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 \end{verbatim}
 
 \subsubsection*{\texttt{inline\_mustache}}
-\label{sec:org5d07945}
+\label{sec:orgdbee9f1}
 
 \begin{NOTES}
 You are no longer required to use an external file template. Now you can
@@ -197,7 +197,7 @@ bundle agent main
 \captionof{figure}{Example \texttt{template\_method} \texttt{inline\_mustache}}
 
 \subsubsection*{\texttt{inline\_mustache}}
-\label{sec:orga5fc03b}
+\label{sec:org034600a}
 
 Results in \texttt{/tmp/example.txt} having this content.
 
@@ -214,12 +214,12 @@ Results in \texttt{/tmp/example.txt} having this content.
 \captionof{figure}{Example \texttt{template\_method} \texttt{inline\_mustache}}
 
 \subsubsection*{\texttt{missing\_ok}}
-\label{sec:org39940fc}
+\label{sec:org58e50df}
 \subsection*{MPF}
-\label{sec:org74be73f}
+\label{sec:org7f7f7b6}
 
 \subsubsection*{Augments - Append the \texttt{bundlesequnece} of \texttt{promises.cf} and \texttt{update.cf}}
-\label{sec:orga3cdf89}
+\label{sec:org28cb21e}
 
 \begin{itemize}
 \item \texttt{control\_common\_bundlesequence\_end}
@@ -241,7 +241,7 @@ Results in \texttt{/tmp/example.txt} having this content.
 \end{itemize}
 
 \subsubsection*{Augments - Log file retention and rotation limits}
-\label{sec:org8434c7b}
+\label{sec:org3bb27f8}
 
 \begin{description}
 \item[{\texttt{mpf\_log\_files\_max\_size}}] Max file size before rotation
@@ -261,7 +261,7 @@ Results in \texttt{/tmp/example.txt} having this content.
 \end{verbatim}
 
 \subsubsection*{Augments - Execution schedule}
-\label{sec:org28cf21d}
+\label{sec:orgd3a3f01}
 
 \begin{description}
 \item[{\texttt{control\_executor\_schedule}}] Classes that trigger execution of \texttt{cf-agent}.
@@ -276,7 +276,7 @@ Results in \texttt{/tmp/example.txt} having this content.
 \end{verbatim}
 
 \subsubsection*{Augments - \texttt{splaytime}}
-\label{sec:org8d28135}
+\label{sec:org94af5e2}
 
 \begin{description}
 \item[{\texttt{control\_executor\_splaytime}}] Maximum number of minutes \texttt{exec\_commad} should
@@ -292,7 +292,7 @@ wait before executing.
 \end{verbatim}
 
 \subsubsection*{Augments - \texttt{allowlegacyconnects}}
-\label{sec:org96e4931}
+\label{sec:org49ac3e4}
 
 \begin{description}
 \item[{\texttt{control\_server\_allowlegacyconnects}}] List of subnets allowed to connect
@@ -308,7 +308,7 @@ using legacy protocol (versions prior to 3.7.0).
 \end{verbatim}
 
 \subsubsection*{Augments - \texttt{maxconnections}}
-\label{sec:org350fe40}
+\label{sec:org7749ced}
 
 \begin{description}
 \item[{\texttt{control\_serverd\_maxconnections}}] Maximum number of connections allowed by
@@ -324,7 +324,7 @@ using legacy protocol (versions prior to 3.7.0).
 \end{verbatim}
 
 \subsubsection*{Augments - Client initiated reporting (Enterprise)}
-\label{sec:orgf5a214e}
+\label{sec:org45cf62b}
 
 \begin{description}
 \item[{\texttt{control\_hub\_exclude\_hosts}}] List of subnets to exclude from hub initiated
@@ -349,7 +349,7 @@ initiated reporting.
 \end{verbatim}
 
 \subsubsection*{Augments - \texttt{files\_single\_copy}}
-\label{sec:org17746c1}
+\label{sec:orgee972f0}
 
 \begin{description}
 \item[{\texttt{control\_agent\_files\_single\_copy}}] List of regular expressions matching
@@ -366,7 +366,7 @@ files that should not be copied more than once.
 \end{verbatim}
 
 \subsubsection*{Augments - \texttt{default\_repository}}
-\label{sec:org56bf475}
+\label{sec:orgcefc418}
 
 \begin{description}
 \item[{\texttt{mpf\_control\_agent\_default\_repository}}] List of classes class will cause
@@ -390,7 +390,7 @@ these backups to be placed in \texttt{\$(sys.workdir)/backups}.
 \end{verbatim}
 
 \subsubsection*{\texttt{templates} shortcut}
-\label{sec:org0a3295a}
+\label{sec:org834b6b1}
 
 \begin{description}
 \item[{\texttt{dir\_templates}}] Path to common template directory. Shortcut provided by
@@ -421,7 +421,7 @@ bundle agent example
 \end{verbatim}
 
 \subsubsection*{Automatically restart components on related data change}
-\label{sec:orgfff7bf1}
+\label{sec:orgf3ee449}
 
 \begin{NOTES}
 While the agent itsef will reload its config upon notice of policy change this
@@ -443,7 +443,7 @@ restart on related data change should be enabled for.
 \end{verbatim}
 
 \subsubsection*{Host info report now now renders inventory variables}
-\label{sec:org94b84ac}
+\label{sec:org1f33295}
 
 \begin{verbatim}
 cf-agent -KIb host_info_report
@@ -479,17 +479,17 @@ cf-agent -KIb host_info_report
 \captionof{figure}{Sample from inventory section of host info report}
 
 \subsection*{Enterprise}
-\label{sec:orge451150}
+\label{sec:org42af890}
 \subsubsection*{UI responsiveness}
-\label{sec:orga95c50d}
+\label{sec:org43d7294}
 \begin{itemize}
 \item \href{data/75/971753-cddb-4739-a0a1-dcb66df44ab9/alert-status-speed-comparison.webm}{Testing} with 50,000 host data sets
 \end{itemize}
 
 \subsubsection*{Global Host Search}
-\label{sec:org783c911}
+\label{sec:org82709f3}
 \begin{itemize}
-\item Easy find hosts by name, ip or identity
+\item Easily find hosts by name, ip or identity
 \end{itemize}
 
 \begin{center}
@@ -497,13 +497,13 @@ cf-agent -KIb host_info_report
 \end{center}
 
 \subsubsection*{host count trend widget}
-\label{sec:org0314f2b}
+\label{sec:orgca2142f}
 \begin{center}
 \includegraphics[width=.9\linewidth]{data/e9/0e4df9-0bb7-4a1e-84d5-25911497f93c/2018-01-10_Selection_001_2018-01-14_12-02-44.png}
 \end{center}
 
 \subsubsection*{mail settings}
-\label{sec:org1cdfec7}
+\label{sec:org678dab6}
 \begin{itemize}
 \item Exported reports can now be sent as attachments in emails
 \end{itemize}
@@ -513,19 +513,19 @@ cf-agent -KIb host_info_report
 \end{center}
 
 \subsubsection*{LDAP settings API}
-\label{sec:org6550bef}
+\label{sec:org32dea0c}
 \begin{center}
 \includegraphics[width=.9\linewidth]{data/29/4c1258-49f4-4c72-9f8d-2b7535cfbea8/Authentication-settings_2018-01-14_12-04-18.png}
 \end{center}
 
 \subsubsection*{default roles}
-\label{sec:org4c7ce39}
+\label{sec:orgd992f0c}
 \begin{center}
 \includegraphics[width=.9\linewidth]{data/bf/10ec4b-5b6b-4140-9336-fb7ab7808fed/2018-01-14_Selection_004_2018-01-14_14-03-29.png}
 \end{center}
 
 \subsubsection*{New OOTB Inventory Attributes}
-\label{sec:orgea32955}
+\label{sec:org7b0549f}
 
 \begin{itemize}
 \item Policy Release Id
@@ -533,7 +533,7 @@ cf-agent -KIb host_info_report
 \end{itemize}
 
 \subsubsection*{Inventory API}
-\label{sec:orga013efc}
+\label{sec:orge7026eb}
 
 \begin{verbatim}
 curl --user admin -X POST \
@@ -543,7 +543,7 @@ curl --user admin -X POST \
 \captionof{figure}{Example API Query}
 
 \subsubsection*{Inventory API}
-\label{sec:org53ee4b2}
+\label{sec:orgc228a75}
 
 \#+BEGIN\(_{\text{SRC}}\) json
 \{

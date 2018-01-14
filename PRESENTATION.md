@@ -428,7 +428,7 @@ from external data sources which are unknown to the components themselves.
 
 ### Global Host Search
 
--   Easy find hosts by name, ip or identity
+-   Easily find hosts by name, ip or identity
 
 ![img](data/f9/7c9b4d-d46f-4aee-bd68-630f44106b0e/2018-01-14_Selection_002_2018-01-14_13-21-21.png)
 

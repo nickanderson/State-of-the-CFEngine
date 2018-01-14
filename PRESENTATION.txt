@@ -484,7 +484,7 @@ file:data/75/971753-cddb-4739-a0a1-dcb66df44ab9/alert-status-speed-comparison.we
 Global Host Search
 ╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌╌
 
-  • Easy find hosts by name, ip or identity
+  • Easily find hosts by name, ip or identity
 
   [file:data/f9/7c9b4d-d46f-4aee-bd68-630f44106b0e/2018-01-14_Selection_002_2018-01-14_13-21-21.png]
 
