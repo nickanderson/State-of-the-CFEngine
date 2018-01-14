@@ -4,4 +4,4 @@ Presentation source for what's been going on with CFEngine for the last year.
 Typically this content is delivered by someone at Config Management Camp in Gent
 Belgium.
 
-The presentation is generated from org-mode using org-reveal.
+[[https://htmlpreview.github.io/?https://github.com/nickanderson/State-of-the-CFEngine/blob/master/PRESENTATION.html][The presentation]] is generated from org-mode using org-reveal.
