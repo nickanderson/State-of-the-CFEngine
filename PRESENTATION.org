@@ -23,6 +23,11 @@
 #+REVEAL_PLUGINS: (markdown notes)
 #+REVEAL_TITLE_SLIDE_BACKGROUND: ./orange-blue-tilt-right.png
 
+* 
+:PROPERTIES:
+:REVEAL_BACKGROUND: ./2018-01-14_Selection_005.png
+:END:
+
 * Releases
 :DRAWER:
 #+BEGIN_SRC shell :dir ~/CFEngine/masterfiles :exports results :wrap text
@@ -221,6 +226,27 @@ git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
 | 2008-01-04T08:50:45+00:00 | Mark Burgess                  |
 :END:
 - 10 new contributors
+:DRAWER:
+#+Name: NumCoreCommits
+#+BEGIN_SRC shell :dir /tmp/ :exports none :wrap text
+  REPOSITORY=https://github.com/cfengine/core
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-1 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMCOMMITS=$(git --no-pager log --since "$LASTNEWYEAR" --oneline --no-merges | wc -l)
+  rm -rf "$TMP"
+  echo "- $NUMCOMMITS commits in the last year"
+#+END_SRC
+:END:
+#+RESULTS: NumCoreCommits
+#+BEGIN_text
+- 256 commits in the last year
+#+END_text
 
 ** MPF
 :DRAWER:
@@ -337,6 +363,28 @@ git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
 | 2011-06-29T13:27:50+00:00 | Mark Burgess                  |
 :END:
 - 3 new contributors
+:DRAWER:
+#+Name: NumMPFCommits
+#+BEGIN_SRC shell :dir /tmp/ :exports none :wrap text
+  REPOSITORY=https://github.com/cfengine/masterfiles
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-1 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMCOMMITS=$(git --no-pager log --since "$LASTNEWYEAR" --oneline --no-merges | wc -l)
+  rm -rf "$TMP"
+  echo "- $NUMCOMMITS commits in the last year"
+#+END_SRC
+:END:
+
+#+RESULTS: NumMPFCommits
+#+BEGIN_text
+- 163 commits in the last year
+#+END_text
 
 ** Documentation
 #+Name: NumDocContributors
@@ -371,9 +419,33 @@ git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
     echo "$FirstCommit,$Author"
   done < /tmp/authors.txt 
 #+END_SRC
-* Functionality
-** Core
-*** =with= attribute
+
+:DRAWER:
+#+Name: NumDocCommits
+#+BEGIN_SRC shell :dir /tmp/ :exports none :wrap text
+  REPOSITORY=https://github.com/cfengine/documentation
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-1 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMCOMMITS=$(git --no-pager log --since "$LASTNEWYEAR" --oneline --no-merges | wc -l)
+  rm -rf "$TMP"
+  echo "- $NUMCOMMITS commits in the last year"
+#+END_SRC
+:END:
+
+#+RESULTS: NumDocCommits
+#+BEGIN_text
+- 207 commits in the last year
+#+END_text
+
+
+* Core Functionality
+** =with= attribute
 
 #+Name: With attribute usage example
 #+Caption: With attribute usage example policy
@@ -406,7 +478,7 @@ bundle agent main
 }
 #+END_SRC
 
-*** =with= attribute
+** =with= attribute
 
 #+Caption: With attribute usage example policy output
 #+RESULTS: With attribute usage example
@@ -426,7 +498,7 @@ R: We can print a data container fully without creating a temporary variable: {
   ]
 }
 #+end_example
-*** Multiple augments
+** Multiple augments
 
 *NOTE:* Current implementation discussion in progress in [[jira:CFE-2741][CFE-2741]]. Please
 consider participating.
@@ -444,7 +516,7 @@ consider participating.
 }
 #+END_SRC
 
-*** Multiple augments
+** Multiple augments
 
 #+Caption: Example =/tmp/centos_6.json=
 #+BEGIN_SRC json
@@ -456,7 +528,7 @@ consider participating.
 }
 #+END_SRC
 
-*** Multiple augments
+** Multiple augments
 
 #+Caption: Execution output on CentOS 6
 #+BEGIN_EXAMPLE
@@ -466,7 +538,7 @@ R: def.my_other_var == Defined ONLY in def.json
 R: def.centos_6_var == Defined ONLY in centos_6.json
 #+END_EXAMPLE
 
-*** =inline_mustache=
+** =inline_mustache=
 
 #+BEGIN_NOTES
   You are no longer required to use an external file template. Now you can
@@ -491,7 +563,7 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
   }
 #+END_SRC
 
-*** =inline_mustache=
+** =inline_mustache=
 
 Results in =/tmp/example.txt= having this content.
 
@@ -507,10 +579,9 @@ Results in =/tmp/example.txt= having this content.
   }
 #+END_SRC
 
-*** =missing_ok=
-** MPF
-
-*** Augments - Append the =bundlesequnece= of =promises.cf= and =update.cf=
+** =missing_ok=
+* MPF Functionality
+** Augments - Append the =bundlesequnece= of =promises.cf= and =update.cf=
 
 - =control_common_bundlesequence_end=
 - =control_common_update_bundlesequence_end=
@@ -527,7 +598,7 @@ Results in =/tmp/example.txt= having this content.
 - Order of bundle actuation not guaranteed.
 - Agent errors if named bundle is missing.
 
-*** Augments - Log file retention and rotation limits
+** Augments - Log file retention and rotation limits
 
 - =mpf_log_files_max_size= :: Max file size before rotation
 - =mpf_log_file_retention= :: Number of file rotations to keep
@@ -544,7 +615,7 @@ Results in =/tmp/example.txt= having this content.
 }
 #+END_SRC
 
-*** Augments - Execution schedule
+** Augments - Execution schedule
 
 - =control_executor_schedule= :: Classes that trigger execution of =cf-agent=.
  
@@ -556,7 +627,7 @@ Results in =/tmp/example.txt= having this content.
 }
 #+END_SRC 
 
-*** Augments - =splaytime=
+** Augments - =splaytime=
 
 - =control_executor_splaytime= :: Maximum number of minutes =exec_commad= should
      wait before executing.
@@ -569,7 +640,7 @@ Results in =/tmp/example.txt= having this content.
 }
 #+END_SRC
 
-*** Augments - =allowlegacyconnects=
+** Augments - =allowlegacyconnects=
 
 - =control_server_allowlegacyconnects= :: List of subnets allowed to connect
      using legacy protocol (versions prior to 3.7.0).
@@ -582,7 +653,7 @@ Results in =/tmp/example.txt= having this content.
 }
 #+END_SRC
 
-*** Augments - =maxconnections=
+** Augments - =maxconnections=
 
 - =control_serverd_maxconnections= :: Maximum number of connections allowed by
      =cf-serverd=.
@@ -595,7 +666,7 @@ Results in =/tmp/example.txt= having this content.
 }
 #+END_SRC
 
-*** Augments - Client initiated reporting (Enterprise)
+** Augments - Client initiated reporting (Enterprise)
 
 - =control_hub_exclude_hosts= :: List of subnets to exclude from hub initiated
      report collection.
@@ -617,7 +688,7 @@ Results in =/tmp/example.txt= having this content.
   }
 #+END_SRC
 
-*** Augments - =files_single_copy=
+** Augments - =files_single_copy=
 
 - =control_agent_files_single_copy= :: List of regular expressions matching
      files that should not be copied more than once.
@@ -631,7 +702,7 @@ Results in =/tmp/example.txt= having this content.
 }
 #+END_SRC
 
-*** Augments - =default_repository=
+** Augments - =default_repository=
 
 - =mpf_control_agent_default_repository= :: List of classes class will cause
      these backups to be placed in =$(sys.workdir)/backups=.
@@ -652,7 +723,7 @@ Results in =/tmp/example.txt= having this content.
 }
 #+END_SRC
 
-*** =templates= shortcut 
+** =templates= shortcut 
 
 - =dir_templates= :: Path to common template directory. Shortcut provided by
      =cf-serverd= as =templates/=.
@@ -680,7 +751,7 @@ Results in =/tmp/example.txt= having this content.
   }
 #+END_SRC
 
-*** Automatically restart components on related data change
+** Automatically restart components on related data change
 
 #+BEGIN_NOTES
   While the agent itsef will reload its config upon notice of policy change this
@@ -699,7 +770,7 @@ Results in =/tmp/example.txt= having this content.
 }
 #+END_SRC
 
-*** Host info report now now renders inventory variables
+** Host info report now now renders inventory variables
 
 #+BEGIN_SRC shell
   cf-agent -KIb host_info_report
@@ -734,8 +805,8 @@ Results in =/tmp/example.txt= having this content.
     "default_gateway": "192.168.42.1",
 #+END_SRC 
 
-** Enterprise
-*** UI responsiveness :ATTACH:
+* Enterprise Functionality
+** UI responsiveness                                                :ATTACH:
 :PROPERTIES:
 :Attachments: alert-status-speed-comparison.webm
 :ID:       75971753-cddb-4739-a0a1-dcb66df44ab9
@@ -743,7 +814,7 @@ Results in =/tmp/example.txt= having this content.
 
 - [[file:data/75/971753-cddb-4739-a0a1-dcb66df44ab9/alert-status-speed-comparison.webm][Testing]] with 50,000 host data sets
 
-*** Global Host Search :ATTACH:
+** Global Host Search                                               :ATTACH:
 :PROPERTIES:
 :ID:       f97c9b4d-d46f-4aee-bd68-630f44106b0e
 :Attachments: 2018-01-14_Selection_002_2018-01-14_13-21-21.png
@@ -753,7 +824,7 @@ Results in =/tmp/example.txt= having this content.
 #+DOWNLOADED: /home/nickanderson/Pictures/Screenshots/2018-01-14_Selection_002.png @ 2018-01-14 13:21:24
 [[file:data/f9/7c9b4d-d46f-4aee-bd68-630f44106b0e/2018-01-14_Selection_002_2018-01-14_13-21-21.png]]
 
-*** host count trend widget :ATTACH:
+** host count trend widget                                          :ATTACH:
 :PROPERTIES:
 :ID:       e90e4df9-0bb7-4a1e-84d5-25911497f93c
 :Attachments: 2018-01-10_Selection_001_2018-01-14_12-02-44.png
@@ -762,7 +833,7 @@ Results in =/tmp/example.txt= having this content.
 #+DOWNLOADED: https://cfengine.com/wp-content/uploads/2018/01/2018-01-10_Selection_001.png @ 2018-01-14 12:02:44
 [[file:data/e9/0e4df9-0bb7-4a1e-84d5-25911497f93c/2018-01-10_Selection_001_2018-01-14_12-02-44.png]]
 
-*** mail settings :ATTACH:
+** mail settings                                                    :ATTACH:
 :PROPERTIES:
 :ID:       748d9e15-278e-46ac-822f-9e0f7e6b2830
 :Attachments: mail-settings-1024x537_2018-01-14_12-01-05.png
@@ -773,7 +844,7 @@ Results in =/tmp/example.txt= having this content.
 #+DOWNLOADED: https://cfengine.com/wp-content/uploads/2018/01/mail-settings-1024x537.png @ 2018-01-14 12:01:05
 [[file:data/74/8d9e15-278e-46ac-822f-9e0f7e6b2830/mail-settings-1024x537_2018-01-14_12-01-05.png]]
 
-*** LDAP settings API                                              :ATTACH:
+** LDAP settings API                                                :ATTACH:
 :PROPERTIES:
 :ID:       294c1258-49f4-4c72-9f8d-2b7535cfbea8
 :Attachments: Authentication-settings_2018-01-14_12-04-18.png
@@ -782,7 +853,7 @@ Results in =/tmp/example.txt= having this content.
 #+DOWNLOADED: https://cfengine.com/wp-content/uploads/2018/01/Authentication-settings.png @ 2018-01-14 12:04:18
 [[file:data/29/4c1258-49f4-4c72-9f8d-2b7535cfbea8/Authentication-settings_2018-01-14_12-04-18.png]]
 
-*** default roles :ATTACH:
+** default roles                                                    :ATTACH:
 :PROPERTIES:
 :ID:       bf10ec4b-5b6b-4140-9336-fb7ab7808fed
 :Attachments: 2018-01-14_Selection_004_2018-01-14_14-03-29.png
@@ -791,12 +862,12 @@ Results in =/tmp/example.txt= having this content.
 #+DOWNLOADED: /home/nickanderson/Pictures/Screenshots/2018-01-14_Selection_004.png @ 2018-01-14 14:03:32
 [[file:data/bf/10ec4b-5b6b-4140-9336-fb7ab7808fed/2018-01-14_Selection_004_2018-01-14_14-03-29.png]]
 
-*** New OOTB Inventory Attributes
+** New OOTB Inventory Attributes
 
 - Policy Release Id
 - AIX OS Level
  
-*** Inventory API 
+** Inventory API 
 
 #+Caption: Example API Query
 #+BEGIN_SRC shell
@@ -805,7 +876,7 @@ Results in =/tmp/example.txt= having this content.
     https://hub/api/inventory -d '{ "select":[ "Host name", "OS type"]}'
 #+END_SRC
 
-*** Inventory API
+** Inventory API
 
 #+Caption: Example Query Response
 #+BEGIN_SRC json
@@ -843,5 +914,5 @@ Results in =/tmp/example.txt= having this content.
         "total": 1
     }
 }
-
+#+END_SRC
 
