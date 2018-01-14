@@ -21,6 +21,53 @@
 #+REVEAL_HEAD_PREAMBLE: <meta name=description" content=CFEngine Zero to Hero Primer.">
 #+REVEAL_POSTAMBLE: <p> Created by Nick Anderson. </p>
 #+REVEAL_PLUGINS: (markdown notes)
+#+REVEAL_TITLE_SLIDE_BACKGROUND: ./orange-blue-tilt-right.png
+
+* Releases
+:DRAWER:
+#+BEGIN_SRC shell :dir ~/CFEngine/masterfiles :exports results :wrap text
+  echo "$(git for-each-ref --sort=taggerdate --format '%(tag)_,,,_%(taggerdate:raw)' refs/tags \
+    | awk 'BEGIN { FS = "_,,,_" };
+                 { t=strftime("%Y-%m-%d",$2);
+                 printf "%s %s\n", t, $1 }' \
+    | egrep -v "build|PTV|\.0b" \
+    | egrep "2017|2018" \
+    | wc -l) releases"
+#+END_SRC
+#+RESULTS:
+:END:
+5 releases
+
+:DRAWER:
+
+#+BEGIN_COMMENT
+  Post process the generated table to add org header markup https://emacs.stackexchange.com/a/19521
+#+END_COMMENT
+
+#+name: addhdr
+#+begin_src emacs-lisp :var tbl="" :exports none
+(cons (car tbl) (cons 'hline (cdr tbl)))
+#+end_src
+
+
+#+Name: Release Date Table
+#+BEGIN_SRC shell :dir ~/CFEngine/core :exports results :results table :post addhdr(*this*)
+  git for-each-ref --sort=taggerdate --format '%(tag)_,,,_%(taggerdate:raw)' refs/tags \
+    | awk 'BEGIN { FS = "_,,,_"; print "Date Release\n| ---------- | ------- |" };
+                 { t=strftime("%Y-%m-%d",$2);
+                 printf "%s %s\n", t, $1 }' \
+    | egrep -v "build|PTV|\.0b" \
+    | egrep "2017|2018|Date"
+#+END_SRC
+:END:
+#+RESULTS: Release Date Table
+|       Date | Release |
+|------------+---------|
+| 2017-03-30 |   3.7.5 |
+| 2017-03-30 |  3.10.1 |
+| 2017-08-11 |  3.10.2 |
+| 2017-08-11 |  3.11.0 |
+| 2017-09-12 |   3.7.6 |
 * Contributions
 ** Core
 :DRAWER:
@@ -324,53 +371,6 @@ git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
     echo "$FirstCommit,$Author"
   done < /tmp/authors.txt 
 #+END_SRC
-
-* Releases
-:DRAWER:
-#+BEGIN_SRC shell :dir ~/CFEngine/masterfiles :exports results :wrap text
-  echo "$(git for-each-ref --sort=taggerdate --format '%(tag)_,,,_%(taggerdate:raw)' refs/tags \
-    | awk 'BEGIN { FS = "_,,,_" };
-                 { t=strftime("%Y-%m-%d",$2);
-                 printf "%s %s\n", t, $1 }' \
-    | egrep -v "build|PTV|\.0b" \
-    | egrep "2017|2018" \
-    | wc -l) releases"
-#+END_SRC
-#+RESULTS:
-:END:
-5 releases
-
-:DRAWER:
-
-#+BEGIN_COMMENT
-  Post process the generated table to add org header markup https://emacs.stackexchange.com/a/19521
-#+END_COMMENT
-
-#+name: addhdr
-#+begin_src emacs-lisp :var tbl="" :exports none
-(cons (car tbl) (cons 'hline (cdr tbl)))
-#+end_src
-
-
-#+Name: Release Date Table
-#+BEGIN_SRC shell :dir ~/CFEngine/core :exports results :results table :post addhdr(*this*)
-  git for-each-ref --sort=taggerdate --format '%(tag)_,,,_%(taggerdate:raw)' refs/tags \
-    | awk 'BEGIN { FS = "_,,,_"; print "Date Release\n| ---------- | ------- |" };
-                 { t=strftime("%Y-%m-%d",$2);
-                 printf "%s %s\n", t, $1 }' \
-    | egrep -v "build|PTV|\.0b" \
-    | egrep "2017|2018|Date"
-#+END_SRC
-:END:
-#+RESULTS: Release Date Table
-|       Date | Release |
-|------------+---------|
-| 2017-03-30 |   3.7.5 |
-| 2017-03-30 |  3.10.1 |
-| 2017-08-11 |  3.10.2 |
-| 2017-08-11 |  3.11.0 |
-| 2017-09-12 |   3.7.6 |
-
 * Functionality
 ** Core
 *** =with= attribute

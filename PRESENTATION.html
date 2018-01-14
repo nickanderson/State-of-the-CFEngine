@@ -1632,51 +1632,12 @@ body {
 <body>
 <div class="reveal">
 <div class="slides">
-<section id="sec-title-slide"><h1 class="title">State of the CFEngine</h1><h2 class="author">Nick Anderson</h2>
+<section id="sec-title-slide" data-background="./orange-blue-tilt-right.png"><h1 class="title">State of the CFEngine</h1><h2 class="author">Nick Anderson</h2>
 </section>
+
 <section>
-<section id="slide-orgecacb14">
-<h2 id="orgecacb14">Contributions</h2>
-<div class="outline-text-2" id="text-orgecacb14">
-</div>
-</section>
-<section id="slide-org1c65c47">
-<h3 id="org1c65c47">Core</h3>
-<ul>
-<li>24 contributors in the last year</li>
-
-</ul>
-<ul>
-<li>10 new contributors</li>
-
-</ul>
-
-</section>
-<section id="slide-org95362ad">
-<h3 id="org95362ad">MPF</h3>
-<ul>
-<li>14 contributors in the last year</li>
-
-</ul>
-<ul>
-<li>3 new contributors</li>
-
-</ul>
-
-</section>
-<section id="slide-orgd65a084">
-<h3 id="orgd65a084">Documentation</h3>
-<ul>
-<li>17 contributors</li>
-<li>3 new contributors</li>
-
-</ul>
-
-</section>
-</section>
-<section>
-<section id="slide-orge2fbe06">
-<h2 id="orge2fbe06">Releases</h2>
+<section id="slide-orgf015a0d">
+<h2 id="orgf015a0d">Releases</h2>
 <p>
 5 releases
 </p>
@@ -1725,22 +1686,61 @@ body {
 </tr>
 </tbody>
 </table>
+</section>
+</section>
+<section>
+<section id="slide-orga8aa172">
+<h2 id="orga8aa172">Contributions</h2>
+<div class="outline-text-2" id="text-orga8aa172">
+</div>
+</section>
+<section id="slide-org3ca0686">
+<h3 id="org3ca0686">Core</h3>
+<ul>
+<li>24 contributors in the last year</li>
+
+</ul>
+<ul>
+<li>10 new contributors</li>
+
+</ul>
+
+</section>
+<section id="slide-org19b4053">
+<h3 id="org19b4053">MPF</h3>
+<ul>
+<li>14 contributors in the last year</li>
+
+</ul>
+<ul>
+<li>3 new contributors</li>
+
+</ul>
+
+</section>
+<section id="slide-org900f908">
+<h3 id="org900f908">Documentation</h3>
+<ul>
+<li>17 contributors</li>
+<li>3 new contributors</li>
+
+</ul>
 
 </section>
 </section>
 <section>
-<section id="slide-org624a653">
-<h2 id="org624a653">Functionality</h2>
-<div class="outline-text-2" id="text-org624a653">
+<section id="slide-orgebc52aa">
+<h2 id="orgebc52aa">Functionality</h2>
+<div class="outline-text-2" id="text-orgebc52aa">
 </div>
 </section>
-<section id="slide-orgb0e164b">
-<h3 id="orgb0e164b">Core</h3>
-<div class="outline-text-3" id="text-orgb0e164b">
+<section id="slide-org93d7bfb">
+<h3 id="org93d7bfb">Core</h3>
+<div class="outline-text-3" id="text-org93d7bfb">
 </div>
 </section>
-<section id="slide-orgd39fafd">
-<h4 id="orgd39fafd"><code>with</code> attribute</h4>
+<section id="slide-org5f4555e">
+<h4 id="org5f4555e"><code>with</code> attribute</h4>
 <div class="org-src-container">
 <label class="org-src-name">With attribute usage example policy</label>
 <pre  class="src src-cfengine3" id="With attribute usage example"><span style="color: #4f97d7;">bundle</span> <span style="color: #a45bad;">agent</span> <span style="color: #bc6ec5; font-weight: bold;">main</span>
@@ -1773,8 +1773,8 @@ body {
 </div>
 
 </section>
-<section id="slide-org7b1adae">
-<h4 id="org7b1adae"><code>with</code> attribute</h4>
+<section id="slide-orgde316ef">
+<h4 id="orgde316ef"><code>with</code> attribute</h4>
 <pre class="example">
 R: For iterable 'a 1' we created variable 'a_1' and its value is 'a 1'
 R: For iterable 'b 2' we created variable 'b_2' and its value is 'b 2'
@@ -1792,8 +1792,8 @@ R: We can print a data container fully without creating a temporary variable: {
 }
 </pre>
 </section>
-<section id="slide-org82844e5">
-<h4 id="org82844e5">Multiple augments</h4>
+<section id="slide-org7517234">
+<h4 id="org7517234">Multiple augments</h4>
 <p>
 <b>NOTE:</b> Current implementation discussion in progress in <a href="https://tracker.mender.io/browse/CFE-2741">CFE-2741</a>. Please
 consider participating.
@@ -1814,8 +1814,8 @@ consider participating.
 </div>
 
 </section>
-<section id="slide-orgc979f47">
-<h4 id="orgc979f47">Multiple augments</h4>
+<section id="slide-org623ffb6">
+<h4 id="org623ffb6">Multiple augments</h4>
 <div class="org-src-container">
 <label class="org-src-name">Example <code>/tmp/centos_6.json</code></label>
 <pre  class="src src-json"><span style="color: #4f97d7;">{</span>
@@ -1828,8 +1828,8 @@ consider participating.
 </div>
 
 </section>
-<section id="slide-org04818f5">
-<h4 id="org04818f5">Multiple augments</h4>
+<section id="slide-orgcee80be">
+<h4 id="orgcee80be">Multiple augments</h4>
 <pre class="example">
 [root@hub tmp]# cf-agent -KIf ./example.cf 
 R: def.my_var == Overridden in centos_6.json
@@ -1838,8 +1838,8 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 </pre>
 
 </section>
-<section id="slide-orgc959b6f">
-<h4 id="orgc959b6f"><code>inline_mustache</code></h4>
+<section id="slide-org490319b">
+<h4 id="org490319b"><code>inline_mustache</code></h4>
 <aside class="notes">
 <p>
 You are no longer required to use an external file template. Now you can
@@ -1868,8 +1868,8 @@ provide the template directly within the policy.
 </div>
 
 </section>
-<section id="slide-orgfe1dc6f">
-<h4 id="orgfe1dc6f"><code>inline_mustache</code></h4>
+<section id="slide-orga78e032">
+<h4 id="orga78e032"><code>inline_mustache</code></h4>
 <p>
 Results in <code>/tmp/example.txt</code> having this content.
 </p>
@@ -1888,16 +1888,16 @@ Results in <code>/tmp/example.txt</code> having this content.
 </div>
 
 </section>
-<section id="slide-org963c8c8">
-<h4 id="org963c8c8"><code>missing_ok</code></h4>
+<section id="slide-orgbb3f34e">
+<h4 id="orgbb3f34e"><code>missing_ok</code></h4>
 </section>
-<section id="slide-org9b0428b">
-<h3 id="org9b0428b">MPF</h3>
-<div class="outline-text-3" id="text-org9b0428b">
+<section id="slide-orgf3cec18">
+<h3 id="orgf3cec18">MPF</h3>
+<div class="outline-text-3" id="text-orgf3cec18">
 </div>
 </section>
-<section id="slide-org3d046cf">
-<h4 id="org3d046cf">Augments - Append the <code>bundlesequnece</code> of <code>promises.cf</code> and <code>update.cf</code></h4>
+<section id="slide-orgf2c8f2b">
+<h4 id="orgf2c8f2b">Augments - Append the <code>bundlesequnece</code> of <code>promises.cf</code> and <code>update.cf</code></h4>
 <ul>
 <li><code>control_common_bundlesequence_end</code></li>
 <li><code>control_common_update_bundlesequence_end</code></li>
@@ -1922,8 +1922,8 @@ Results in <code>/tmp/example.txt</code> having this content.
 </ul>
 
 </section>
-<section id="slide-org28116f2">
-<h4 id="org28116f2">Augments - Log file retention and rotation limits</h4>
+<section id="slide-org047330a">
+<h4 id="org047330a">Augments - Log file retention and rotation limits</h4>
 <dl>
 <dt><code>mpf_log_files_max_size</code></dt><dd>Max file size before rotation</dd>
 <dt><code>mpf_log_file_retention</code></dt><dd>Number of file rotations to keep</dd>
@@ -1945,8 +1945,8 @@ Results in <code>/tmp/example.txt</code> having this content.
 </div>
 
 </section>
-<section id="slide-org8ae7b8a">
-<h4 id="org8ae7b8a">Augments - Execution schedule</h4>
+<section id="slide-org003c348">
+<h4 id="org003c348">Augments - Execution schedule</h4>
 <dl>
 <dt><code>control_executor_schedule</code></dt><dd>Classes that trigger execution of <code>cf-agent</code>.</dd>
 
@@ -1963,8 +1963,8 @@ Results in <code>/tmp/example.txt</code> having this content.
 </div>
 
 </section>
-<section id="slide-orgcbbaec0">
-<h4 id="orgcbbaec0">Augments - <code>splaytime</code></h4>
+<section id="slide-orgec6dc4d">
+<h4 id="orgec6dc4d">Augments - <code>splaytime</code></h4>
 <dl>
 <dt><code>control_executor_splaytime</code></dt><dd>Maximum number of minutes <code>exec_commad</code> should
 wait before executing.</dd>
@@ -1982,8 +1982,8 @@ wait before executing.</dd>
 </div>
 
 </section>
-<section id="slide-org90460ae">
-<h4 id="org90460ae">Augments - <code>allowlegacyconnects</code></h4>
+<section id="slide-org3b3385b">
+<h4 id="org3b3385b">Augments - <code>allowlegacyconnects</code></h4>
 <dl>
 <dt><code>control_server_allowlegacyconnects</code></dt><dd>List of subnets allowed to connect
 using legacy protocol (versions prior to 3.7.0).</dd>
@@ -2001,8 +2001,8 @@ using legacy protocol (versions prior to 3.7.0).</dd>
 </div>
 
 </section>
-<section id="slide-orgb98996e">
-<h4 id="orgb98996e">Augments - <code>maxconnections</code></h4>
+<section id="slide-org0b498f8">
+<h4 id="org0b498f8">Augments - <code>maxconnections</code></h4>
 <dl>
 <dt><code>control_serverd_maxconnections</code></dt><dd>Maximum number of connections allowed by
 <code>cf-serverd</code>.</dd>
@@ -2020,8 +2020,8 @@ using legacy protocol (versions prior to 3.7.0).</dd>
 </div>
 
 </section>
-<section id="slide-org5a03f36">
-<h4 id="org5a03f36">Augments - Client initiated reporting (Enterprise)</h4>
+<section id="slide-org921216e">
+<h4 id="org921216e">Augments - Client initiated reporting (Enterprise)</h4>
 <dl>
 <dt><code>control_hub_exclude_hosts</code></dt><dd>List of subnets to exclude from hub initiated
 report collection.</dd>
@@ -2048,8 +2048,8 @@ initiated reporting.</dd>
 </div>
 
 </section>
-<section id="slide-org32d1bbe">
-<h4 id="org32d1bbe">Augments - <code>files_single_copy</code></h4>
+<section id="slide-org70dbb2a">
+<h4 id="org70dbb2a">Augments - <code>files_single_copy</code></h4>
 <dl>
 <dt><code>control_agent_files_single_copy</code></dt><dd>List of regular expressions matching
 files that should not be copied more than once.</dd>
@@ -2068,8 +2068,8 @@ files that should not be copied more than once.</dd>
 </div>
 
 </section>
-<section id="slide-org33cebb0">
-<h4 id="org33cebb0">Augments - <code>default_repository</code></h4>
+<section id="slide-org89085e3">
+<h4 id="org89085e3">Augments - <code>default_repository</code></h4>
 <dl>
 <dt><code>mpf_control_agent_default_repository</code></dt><dd>List of classes class will cause
 these backups to be placed in <code>$(sys.workdir)/backups</code>.</dd>
@@ -2095,8 +2095,8 @@ these backups to be placed in <code>$(sys.workdir)/backups</code>.</dd>
 </div>
 
 </section>
-<section id="slide-orgba1843d">
-<h4 id="orgba1843d"><code>templates</code> shortcut</h4>
+<section id="slide-org76dafff">
+<h4 id="org76dafff"><code>templates</code> shortcut</h4>
 <dl>
 <dt><code>dir_templates</code></dt><dd><p>
 Path to common template directory. Shortcut provided by
@@ -2133,8 +2133,8 @@ Path to common template directory. Shortcut provided by
 </div>
 
 </section>
-<section id="slide-org2aacb4d">
-<h4 id="org2aacb4d">Automatically restart components on related data change</h4>
+<section id="slide-orgc351690">
+<h4 id="orgc351690">Automatically restart components on related data change</h4>
 <aside class="notes">
 <p>
 While the agent itsef will reload its config upon notice of policy change this
@@ -2161,8 +2161,8 @@ restart on related data change should be enabled for.</dd>
 </div>
 
 </section>
-<section id="slide-org6397156">
-<h4 id="org6397156">Host info report now now renders inventory variables</h4>
+<section id="slide-org26ee2bd">
+<h4 id="org26ee2bd">Host info report now now renders inventory variables</h4>
 <div class="org-src-container">
 
 <pre  class="src src-shell">cf-agent -KIb host_info_report
@@ -2200,21 +2200,21 @@ restart on related data change should be enabled for.</dd>
 </div>
 
 </section>
-<section id="slide-orga73c449">
-<h3 id="orga73c449">Enterprise</h3>
-<div class="outline-text-3" id="text-orga73c449">
+<section id="slide-org48f44d4">
+<h3 id="org48f44d4">Enterprise</h3>
+<div class="outline-text-3" id="text-org48f44d4">
 </div>
 </section>
-<section id="slide-org4f244fb">
-<h4 id="org4f244fb"><a id="ID-75971753-cddb-4739-a0a1-dcb66df44ab9"></a>UI responsiveness</h4>
+<section id="slide-orge216ed0">
+<h4 id="orge216ed0"><a id="ID-75971753-cddb-4739-a0a1-dcb66df44ab9"></a>UI responsiveness</h4>
 <ul>
 <li><a href="data/75/971753-cddb-4739-a0a1-dcb66df44ab9/alert-status-speed-comparison.webm">Testing</a> with 50,000 host data sets</li>
 
 </ul>
 
 </section>
-<section id="slide-org8bdb67c">
-<h4 id="org8bdb67c"><a id="ID-f97c9b4d-d46f-4aee-bd68-630f44106b0e"></a>Global Host Search</h4>
+<section id="slide-org409b23a">
+<h4 id="org409b23a"><a id="ID-f97c9b4d-d46f-4aee-bd68-630f44106b0e"></a>Global Host Search</h4>
 <ul>
 <li>Easy find hosts by name, ip or identity</li>
 
@@ -2268,8 +2268,8 @@ gGwDALINAMg2ACDbAMg2ACDbAIBsA8Cr9F+VWzJtWX04KAAAAABJRU5ErkJggg==" />
 </div>
 
 </section>
-<section id="slide-orgc47d37a">
-<h4 id="orgc47d37a"><a id="ID-e90e4df9-0bb7-4a1e-84d5-25911497f93c"></a>host count trend widget</h4>
+<section id="slide-orgc38a78b">
+<h4 id="orgc38a78b"><a id="ID-e90e4df9-0bb7-4a1e-84d5-25911497f93c"></a>host count trend widget</h4>
 
 <div class="figure">
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdQAAAEqCAIAAAAj3TZSAAAAA3NCSVQICAjb4U/gAAAAEHRFWHRT
@@ -2482,8 +2482,8 @@ ZpZl+/r6bty4gVlgAIDJWLBgwcKFCzkcDpfLHfqGbWrhCwAAXhkRowsAABC+AAAIXwAA8I7/D+FK
 </div>
 
 </section>
-<section id="slide-org84b9c0d">
-<h4 id="org84b9c0d"><a id="ID-748d9e15-278e-46ac-822f-9e0f7e6b2830"></a>mail settings</h4>
+<section id="slide-org7a3ef9c">
+<h4 id="org7a3ef9c"><a id="ID-748d9e15-278e-46ac-822f-9e0f7e6b2830"></a>mail settings</h4>
 <ul>
 <li>Exported reports can now be sent as attachments in emails</li>
 
@@ -4111,8 +4111,8 @@ j/9usfqopzY2/vGP/2n75xYAAAAAAAAAgAXw/wGvPyIGTHNxLQAAAABJRU5ErkJggg==" />
 </div>
 
 </section>
-<section id="slide-org9401507">
-<h4 id="org9401507"><a id="ID-294c1258-49f4-4c72-9f8d-2b7535cfbea8"></a>LDAP settings API</h4>
+<section id="slide-org3c192e6">
+<h4 id="org3c192e6"><a id="ID-294c1258-49f4-4c72-9f8d-2b7535cfbea8"></a>LDAP settings API</h4>
 
 <div class="figure">
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABDsAAAL0CAYAAAAC3Tx5AAAgAElEQVR4AezdC1RTZ743/i9JSMIl
@@ -5922,8 +5922,8 @@ AVMI0OwwRZlJEgEEEEAAAQQQQAABBBBAAAHzCPwvp6besSdg/vgAAAAASUVORK5CYII=" />
 </div>
 
 </section>
-<section id="slide-org89843ea">
-<h4 id="org89843ea"><a id="ID-bf10ec4b-5b6b-4140-9336-fb7ab7808fed"></a>default roles</h4>
+<section id="slide-orge314437">
+<h4 id="orge314437"><a id="ID-bf10ec4b-5b6b-4140-9336-fb7ab7808fed"></a>default roles</h4>
 
 <div class="figure">
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABIcAAAGHCAIAAAClK6VrAAAAA3NCSVQICAjb4U/gAAAAEHRFWHRT
@@ -6228,8 +6228,8 @@ AKgyAAAAVQYAAIAqAwAAUGUAAACoMgAAAFUGAACAKgMAADi2N3YUZPChdo3jAAAAAElFTkSuQmCC" />
 </div>
 
 </section>
-<section id="slide-org46fa295">
-<h4 id="org46fa295">New OOTB Inventory Attributes</h4>
+<section id="slide-org00e7e17">
+<h4 id="org00e7e17">New OOTB Inventory Attributes</h4>
 <ul>
 <li>Policy Release Id</li>
 <li>AIX OS Level</li>
@@ -6237,8 +6237,8 @@ AKgyAAAAVQYAAIAqAwAAUGUAAACoMgAAAFUGAACAKgMAADi2N3YUZPChdo3jAAAAAElFTkSuQmCC" />
 </ul>
 
 </section>
-<section id="slide-orgbfb159f">
-<h4 id="orgbfb159f">Inventory API</h4>
+<section id="slide-org2c486d6">
+<h4 id="org2c486d6">Inventory API</h4>
 <div class="org-src-container">
 <label class="org-src-name">Example API Query</label>
 <pre  class="src src-shell">curl --user admin -X POST <span style="color: #2d9574;">\</span>
@@ -6248,8 +6248,8 @@ AKgyAAAAVQYAAIAqAwAAUGUAAACoMgAAAFUGAACAKgMAADi2N3YUZPChdo3jAAAAAElFTkSuQmCC" />
 </div>
 
 </section>
-<section id="slide-org84dea04">
-<h4 id="org84dea04">Inventory API</h4>
+<section id="slide-orgaf88df2">
+<h4 id="orgaf88df2">Inventory API</h4>
 <div class="org-src-container">
 <label class="org-src-name">Example Query Response</label>
 <pre  class="src src-json"><span style="color: #4f97d7;">{</span>
