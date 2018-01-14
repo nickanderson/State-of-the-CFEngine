@@ -27,35 +27,9 @@
 \begin{document}
 
 \maketitle
-\section*{Contributions}
-\label{sec:org7232e70}
-\subsection*{Core}
-\label{sec:org29e153c}
-\begin{itemize}
-\item 24 contributors in the last year
-\end{itemize}
-\begin{itemize}
-\item 10 new contributors
-\end{itemize}
-
-\subsection*{MPF}
-\label{sec:org5dd986e}
-\begin{itemize}
-\item 14 contributors in the last year
-\end{itemize}
-\begin{itemize}
-\item 3 new contributors
-\end{itemize}
-
-\subsection*{Documentation}
-\label{sec:org71ee2eb}
-\begin{itemize}
-\item 17 contributors
-\item 3 new contributors
-\end{itemize}
 
 \section*{Releases}
-\label{sec:org64f46ad}
+\label{sec:org5d45ecc}
 5 releases
 
 
@@ -70,13 +44,39 @@ Date & Release\\
 2017-09-12 & 3.7.6\\
 \end{tabular}
 \end{center}
+\section*{Contributions}
+\label{sec:org2937a57}
+\subsection*{Core}
+\label{sec:org9a8fdeb}
+\begin{itemize}
+\item 24 contributors in the last year
+\end{itemize}
+\begin{itemize}
+\item 10 new contributors
+\end{itemize}
+
+\subsection*{MPF}
+\label{sec:orgefd0575}
+\begin{itemize}
+\item 14 contributors in the last year
+\end{itemize}
+\begin{itemize}
+\item 3 new contributors
+\end{itemize}
+
+\subsection*{Documentation}
+\label{sec:org243b638}
+\begin{itemize}
+\item 17 contributors
+\item 3 new contributors
+\end{itemize}
 
 \section*{Functionality}
-\label{sec:orgfe9c866}
+\label{sec:org208e336}
 \subsection*{Core}
-\label{sec:org9f2b313}
+\label{sec:orgf49e802}
 \subsubsection*{\texttt{with} attribute}
-\label{sec:org2468d0b}
+\label{sec:orgb8c9f87}
 
 \begin{verbatim}
 bundle agent main
@@ -106,11 +106,11 @@ bundle agent main
         with => storejson(complex);
 }
 \end{verbatim}
-\captionof{figure}{\label{orgbf76327}
+\captionof{figure}{\label{org8c6538b}
 With attribute usage example policy}
 
 \subsubsection*{\texttt{with} attribute}
-\label{sec:orged86c9b}
+\label{sec:org6a692d7}
 
 \begin{verbatim}
 R: For iterable 'a 1' we created variable 'a_1' and its value is 'a 1'
@@ -129,7 +129,7 @@ R: We can print a data container fully without creating a temporary variable: {
 }
 \end{verbatim}
 \subsubsection*{Multiple augments}
-\label{sec:org0c906d9}
+\label{sec:org7f96d39}
 
 \textbf{NOTE:} Current implementation discussion in progress in \href{https://tracker.mender.io/browse/CFE-2741}{CFE-2741}. Please
 consider participating.
@@ -148,7 +148,7 @@ consider participating.
 \captionof{figure}{Example \texttt{/tmp/def.json}}
 
 \subsubsection*{Multiple augments}
-\label{sec:orga5de698}
+\label{sec:org2761328}
 
 \begin{verbatim}
 {
@@ -161,7 +161,7 @@ consider participating.
 \captionof{figure}{Example \texttt{/tmp/centos\_6.json}}
 
 \subsubsection*{Multiple augments}
-\label{sec:org4b0a1cd}
+\label{sec:orgcb2460a}
 
 \begin{verbatim}
 [root@hub tmp]# cf-agent -KIf ./example.cf 
@@ -171,7 +171,7 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 \end{verbatim}
 
 \subsubsection*{\texttt{inline\_mustache}}
-\label{sec:orgab42c93}
+\label{sec:org5d07945}
 
 \begin{NOTES}
 You are no longer required to use an external file template. Now you can
@@ -197,7 +197,7 @@ bundle agent main
 \captionof{figure}{Example \texttt{template\_method} \texttt{inline\_mustache}}
 
 \subsubsection*{\texttt{inline\_mustache}}
-\label{sec:org61a69bc}
+\label{sec:orga5fc03b}
 
 Results in \texttt{/tmp/example.txt} having this content.
 
@@ -214,12 +214,12 @@ Results in \texttt{/tmp/example.txt} having this content.
 \captionof{figure}{Example \texttt{template\_method} \texttt{inline\_mustache}}
 
 \subsubsection*{\texttt{missing\_ok}}
-\label{sec:orgcffd25b}
+\label{sec:org39940fc}
 \subsection*{MPF}
-\label{sec:orgfd3d3f9}
+\label{sec:org74be73f}
 
 \subsubsection*{Augments - Append the \texttt{bundlesequnece} of \texttt{promises.cf} and \texttt{update.cf}}
-\label{sec:org4849f5e}
+\label{sec:orga3cdf89}
 
 \begin{itemize}
 \item \texttt{control\_common\_bundlesequence\_end}
@@ -241,7 +241,7 @@ Results in \texttt{/tmp/example.txt} having this content.
 \end{itemize}
 
 \subsubsection*{Augments - Log file retention and rotation limits}
-\label{sec:orgf0329df}
+\label{sec:org8434c7b}
 
 \begin{description}
 \item[{\texttt{mpf\_log\_files\_max\_size}}] Max file size before rotation
@@ -261,7 +261,7 @@ Results in \texttt{/tmp/example.txt} having this content.
 \end{verbatim}
 
 \subsubsection*{Augments - Execution schedule}
-\label{sec:orgd64a221}
+\label{sec:org28cf21d}
 
 \begin{description}
 \item[{\texttt{control\_executor\_schedule}}] Classes that trigger execution of \texttt{cf-agent}.
@@ -276,7 +276,7 @@ Results in \texttt{/tmp/example.txt} having this content.
 \end{verbatim}
 
 \subsubsection*{Augments - \texttt{splaytime}}
-\label{sec:org0dcded6}
+\label{sec:org8d28135}
 
 \begin{description}
 \item[{\texttt{control\_executor\_splaytime}}] Maximum number of minutes \texttt{exec\_commad} should
@@ -292,7 +292,7 @@ wait before executing.
 \end{verbatim}
 
 \subsubsection*{Augments - \texttt{allowlegacyconnects}}
-\label{sec:org0f26685}
+\label{sec:org96e4931}
 
 \begin{description}
 \item[{\texttt{control\_server\_allowlegacyconnects}}] List of subnets allowed to connect
@@ -308,7 +308,7 @@ using legacy protocol (versions prior to 3.7.0).
 \end{verbatim}
 
 \subsubsection*{Augments - \texttt{maxconnections}}
-\label{sec:orgaf809e8}
+\label{sec:org350fe40}
 
 \begin{description}
 \item[{\texttt{control\_serverd\_maxconnections}}] Maximum number of connections allowed by
@@ -324,7 +324,7 @@ using legacy protocol (versions prior to 3.7.0).
 \end{verbatim}
 
 \subsubsection*{Augments - Client initiated reporting (Enterprise)}
-\label{sec:orgcfc3041}
+\label{sec:orgf5a214e}
 
 \begin{description}
 \item[{\texttt{control\_hub\_exclude\_hosts}}] List of subnets to exclude from hub initiated
@@ -349,7 +349,7 @@ initiated reporting.
 \end{verbatim}
 
 \subsubsection*{Augments - \texttt{files\_single\_copy}}
-\label{sec:orgab0e710}
+\label{sec:org17746c1}
 
 \begin{description}
 \item[{\texttt{control\_agent\_files\_single\_copy}}] List of regular expressions matching
@@ -366,7 +366,7 @@ files that should not be copied more than once.
 \end{verbatim}
 
 \subsubsection*{Augments - \texttt{default\_repository}}
-\label{sec:org334bd44}
+\label{sec:org56bf475}
 
 \begin{description}
 \item[{\texttt{mpf\_control\_agent\_default\_repository}}] List of classes class will cause
@@ -390,7 +390,7 @@ these backups to be placed in \texttt{\$(sys.workdir)/backups}.
 \end{verbatim}
 
 \subsubsection*{\texttt{templates} shortcut}
-\label{sec:org80cadfc}
+\label{sec:org0a3295a}
 
 \begin{description}
 \item[{\texttt{dir\_templates}}] Path to common template directory. Shortcut provided by
@@ -421,7 +421,7 @@ bundle agent example
 \end{verbatim}
 
 \subsubsection*{Automatically restart components on related data change}
-\label{sec:org7fff688}
+\label{sec:orgfff7bf1}
 
 \begin{NOTES}
 While the agent itsef will reload its config upon notice of policy change this
@@ -443,7 +443,7 @@ restart on related data change should be enabled for.
 \end{verbatim}
 
 \subsubsection*{Host info report now now renders inventory variables}
-\label{sec:org75d0818}
+\label{sec:org94b84ac}
 
 \begin{verbatim}
 cf-agent -KIb host_info_report
@@ -479,15 +479,15 @@ cf-agent -KIb host_info_report
 \captionof{figure}{Sample from inventory section of host info report}
 
 \subsection*{Enterprise}
-\label{sec:org6d031ab}
+\label{sec:orge451150}
 \subsubsection*{UI responsiveness}
-\label{sec:orgaf58ca2}
+\label{sec:orga95c50d}
 \begin{itemize}
 \item \href{data/75/971753-cddb-4739-a0a1-dcb66df44ab9/alert-status-speed-comparison.webm}{Testing} with 50,000 host data sets
 \end{itemize}
 
 \subsubsection*{Global Host Search}
-\label{sec:org8d7ab1b}
+\label{sec:org783c911}
 \begin{itemize}
 \item Easy find hosts by name, ip or identity
 \end{itemize}
@@ -497,13 +497,13 @@ cf-agent -KIb host_info_report
 \end{center}
 
 \subsubsection*{host count trend widget}
-\label{sec:orgef89f04}
+\label{sec:org0314f2b}
 \begin{center}
 \includegraphics[width=.9\linewidth]{data/e9/0e4df9-0bb7-4a1e-84d5-25911497f93c/2018-01-10_Selection_001_2018-01-14_12-02-44.png}
 \end{center}
 
 \subsubsection*{mail settings}
-\label{sec:orgddc7aa1}
+\label{sec:org1cdfec7}
 \begin{itemize}
 \item Exported reports can now be sent as attachments in emails
 \end{itemize}
@@ -513,19 +513,19 @@ cf-agent -KIb host_info_report
 \end{center}
 
 \subsubsection*{LDAP settings API}
-\label{sec:org23ff792}
+\label{sec:org6550bef}
 \begin{center}
 \includegraphics[width=.9\linewidth]{data/29/4c1258-49f4-4c72-9f8d-2b7535cfbea8/Authentication-settings_2018-01-14_12-04-18.png}
 \end{center}
 
 \subsubsection*{default roles}
-\label{sec:org7edff2b}
+\label{sec:org4c7ce39}
 \begin{center}
 \includegraphics[width=.9\linewidth]{data/bf/10ec4b-5b6b-4140-9336-fb7ab7808fed/2018-01-14_Selection_004_2018-01-14_14-03-29.png}
 \end{center}
 
 \subsubsection*{New OOTB Inventory Attributes}
-\label{sec:orgf7dac12}
+\label{sec:orgea32955}
 
 \begin{itemize}
 \item Policy Release Id
@@ -533,7 +533,7 @@ cf-agent -KIb host_info_report
 \end{itemize}
 
 \subsubsection*{Inventory API}
-\label{sec:orgf090c48}
+\label{sec:orga013efc}
 
 \begin{verbatim}
 curl --user admin -X POST \
@@ -543,21 +543,21 @@ curl --user admin -X POST \
 \captionof{figure}{Example API Query}
 
 \subsubsection*{Inventory API}
-\label{sec:orgdfe0115}
+\label{sec:org53ee4b2}
 
-\begin{verbatim}
-{
+\#+BEGIN\(_{\text{SRC}}\) json
+\{
     "data": [
-        {
+        \{
             "header": [
-                {
+                \{
                     "columnName": "Host name",
                     "columnType": "STRING"
-                },
-                {
+                \},
+                \{
                     "columnName": "OS type",
                     "columnType": "STRING"
-                }
+                \}
             ],
             "queryTimeMs": 11,
             "rowCount": 2,
@@ -571,15 +571,13 @@ curl --user admin -X POST \
                     "linux"
                 ]
             ]
-        }
+        \}
     ],
-    "meta": {
+    "meta": \{
         "count": 1,
         "page": 1,
         "timestamp": 1515607751,
         "total": 1
-    }
-}
-\end{verbatim}
-\captionof{figure}{Example Query Response}
+    \}
+\}
 \end{document}

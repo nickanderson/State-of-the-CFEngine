@@ -1,28 +1,5 @@
 
 
-# Contributions
-
-
-## Core
-
--   24 contributors in the last year
-
--   10 new contributors
-
-
-## MPF
-
--   14 contributors in the last year
-
--   3 new contributors
-
-
-## Documentation
-
--   17 contributors
--   3 new contributors
-
-
 # Releases
 
 
@@ -76,6 +53,29 @@
 </tr>
 </tbody>
 </table>
+
+
+# Contributions
+
+
+## Core
+
+-   24 contributors in the last year
+
+-   10 new contributors
+
+
+## MPF
+
+-   14 contributors in the last year
+
+-   3 new contributors
+
+
+## Documentation
+
+-   17 contributors
+-   3 new contributors
 
 
 # Functionality
@@ -470,38 +470,39 @@ from external data sources which are unknown to the components themselves.
 
 ### Inventory API
 
-    {
-        "data": [
-            {
-                "header": [
-                    {
-                        "columnName": "Host name",
-                        "columnType": "STRING"
-                    },
-                    {
-                        "columnName": "OS type",
-                        "columnType": "STRING"
-                    }
+\#+BEGIN<sub>SRC</sub> json
+{
+    "data": [
+        {
+            "header": [
+                {
+                    "columnName": "Host name",
+                    "columnType": "STRING"
+                },
+                {
+                    "columnName": "OS type",
+                    "columnType": "STRING"
+                }
+            ],
+            "queryTimeMs": 11,
+            "rowCount": 2,
+            "rows": [
+                [
+                    "host001",
+                    "linux"
                 ],
-                "queryTimeMs": 11,
-                "rowCount": 2,
-                "rows": [
-                    [
-                        "host001",
-                        "linux"
-                    ],
-                    [
-                        "hub",
-                        "linux"
-                    ]
+                [
+                    "hub",
+                    "linux"
                 ]
-            }
-        ],
-        "meta": {
-            "count": 1,
-            "page": 1,
-            "timestamp": 1515607751,
-            "total": 1
+            ]
         }
+    ],
+    "meta": {
+        "count": 1,
+        "page": 1,
+        "timestamp": 1515607751,
+        "total": 1
     }
+}
 
