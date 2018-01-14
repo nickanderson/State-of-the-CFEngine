@@ -20,13 +20,13 @@
 ## Documentation
 
 -   17 contributors
-
-:DRAWER:
-
 -   3 new contributors
 
 
 # Releases
+
+
+5 releases
 
 
 
@@ -78,53 +78,430 @@
 </table>
 
 
-
-5 releases
-
-
 # Functionality
 
 
 ## Core
 
--   `with` attribute
--   `missing_ok`
--   multiple augments
--   `inline_mustache`
+
+### `with` attribute
+
+    bundle agent main
+    {
+      vars:
+          "todo" slist => { "a 1", "b 2", "c 3" };
+          # Here, `with` is the canonified version of $(todo), letting us avoid an
+    
+          # intermediate canonification array.
+          "$(with)" string => "$(todo)", with => canonify($(todo));
+    
+          "complex" data => '
+    {
+      "x": 200,
+      "y": [ 1, 2, null, true, false ]
+    }
+    ';
+    
+      reports:
+          "For iterable '$(todo)' we created variable '$(with)' and its value is '$(todo)'"
+            with => canonify($(todo));
+    
+          "We can print a data container compactly without creating a temporary variable: $(with)"
+            with => format("%S", complex);
+    
+          "We can print a data container fully without creating a temporary variable: $(with)"
+            with => storejson(complex);
+    }
+
+
+### `with` attribute
+
+    R: For iterable 'a 1' we created variable 'a_1' and its value is 'a 1'
+    R: For iterable 'b 2' we created variable 'b_2' and its value is 'b 2'
+    R: For iterable 'c 3' we created variable 'c_3' and its value is 'c 3'
+    R: We can print a data container compactly without creating a temporary variable: {"x":200,"y":[1,2,null,true,false]}
+    R: We can print a data container fully without creating a temporary variable: {
+      "x": 200,
+      "y": [
+        1,
+        2,
+        null,
+        true,
+        false
+      ]
+    }
+
+
+### Multiple augments
+
+**NOTE:** Current implementation discussion in progress in [CFE-2741](https://tracker.mender.io/browse/CFE-2741). Please
+consider participating.
+
+    {
+      "vars":{
+        "my_var": "defined in def.json",
+        "my_other_var": "Defined ONLY in def.json"
+      },
+      "augments": [
+        "/tmp/$(sys.flavor).json"
+      ]
+    }
+
+
+### Multiple augments
+
+    {
+      "vars": {
+        "my_var": "Overridden in centos_6.json",
+        "centos_6_var": "Defined ONLY in centos_6.json"
+      }
+    }
+
+
+### Multiple augments
+
+    [root@hub tmp]# cf-agent -KIf ./example.cf 
+    R: def.my_var == Overridden in centos_6.json
+    R: def.my_other_var == Defined ONLY in def.json
+    R: def.centos_6_var == Defined ONLY in centos_6.json
+
+
+### `inline_mustache`
+
+<div class="NOTES">
+You are no longer required to use an external file template. Now you can
+provide the template directly within the policy.
+
+</div>
+
+    bundle agent main
+    {
+      vars:
+        "d" data => '{ "hello": "world", "feature": [ "render", "inline", "mustache" ] }';
+    
+      files:
+    
+        "/tmp/example.txt"
+          create => "true",
+          template_method => "inline_mustache",
+          edit_template_string => "{{%-top-}}",
+          template_data => @(d);
+    
+    }
+
+
+### `inline_mustache`
+
+Results in `/tmp/example.txt` having this content.
+
+    {
+      "feature": [
+        "render",
+        "inline",
+        "mustache"
+      ],
+      "hello": "world"
+    }
+
+
+### `missing_ok`
 
 
 ## MPF
 
--   more augments instrumentation
-    -   common<sub>control</sub><sub>bundlesequence</sub><sub>end</sub>
-    -   update bundleseuence
-    -   Log file retention and rotation limits
-    -   executor schedule
-    -   splaytime
-    -   allowlegacyconnects
-    -   maxconnections
-    -   exclude<sub>hosts</sub>
-    -   client initiated reporting
-    -   files single copy
-    -   default<sub>repository</sub>
--   templates shortcut
--   track component variable change for restarts
+
+### Augments - Append the `bundlesequnece` of `promises.cf` and `update.cf`
+
+-   `control_common_bundlesequence_end`
+-   `control_common_update_bundlesequence_end`
+
+    {
+      "vars":{
+        "control_common_bundlesequence_end": [ "mybundle1", "mybundle2" ],
+        "control_common_update_bundlesequence_end": [ "my_updatebundle1", "mybundle2" ]
+      }
+    }
+
+-   Order of bundle actuation not guaranteed.
+-   Agent errors if named bundle is missing.
+
+
+### Augments - Log file retention and rotation limits
+
+-   **`mpf_log_files_max_size`:** Max file size before rotation
+-   **`mpf_log_file_retention`:** Number of file rotations to keep
+-   **`mpf_log_dir_retention`:** Number of file rotations to keep in `outputs`,
+    `reports`, and the Enterprise application log directory.
+
+    {
+      "vars": {
+        "mpf_log_file_retention": "5",
+        "mpf_log_file_max_size": "10M",
+        "mpf_log_dir_retention": "7"
+      }
+    }
+
+
+### Augments - Execution schedule
+
+-   **`control_executor_schedule`:** Classes that trigger execution of `cf-agent`.
+
+    {
+      "vars": {
+        "control_executor_schedule": [ "Min00", "Min30" ]
+      }
+    }
+
+
+### Augments - `splaytime`
+
+-   **`control_executor_splaytime`:** Maximum number of minutes `exec_commad` should
+    wait before executing.
+
+    {
+      "vars": {
+        "control_executor_splaytime": "3"
+      }
+    }
+
+
+### Augments - `allowlegacyconnects`
+
+-   **`control_server_allowlegacyconnects`:** List of subnets allowed to connect
+    using legacy protocol (versions prior to 3.7.0).
+
+    {
+      "vars": {
+        "control_server_allowlegacyconnects": [ "0.0.0.0/0" ]
+      }
+    }
+
+
+### Augments - `maxconnections`
+
+-   **`control_serverd_maxconnections`:** Maximum number of connections allowed by
+    `cf-serverd`.
+
+    {
+      "vars":{
+          "control_serverd_maxconnections": "1000"
+      }
+    }
+
+
+### Augments - Client initiated reporting (Enterprise)
+
+-   **`control_hub_exclude_hosts`:** List of subnets to exclude from hub initiated
+    report collection.
+-   **`client_initiated_reporting_enabled`:** List of classes that if defined should
+    initiate reporting to an enterprise hub.
+-   **`control_server_call_collect_interval`:** Number of minutes between client
+    initiated reporting.
+
+    {
+        "vars": {
+            "control_server_call_collect_interval": "1",
+            "control_hub_exclude_hosts": [ "0.0.0.0/0" ]
+        },
+    
+        "classes" {
+            "client_initiated_reporting_enabled": [ "any" ]
+        }
+    }
+
+
+### Augments - `files_single_copy`
+
+-   **`control_agent_files_single_copy`:** List of regular expressions matching
+    files that should not be copied more than once.
+
+    {
+      "vars":{
+        "control_agent_files_single_copy": [ ".*" ]
+      }
+    
+    }
+
+
+### Augments - `default_repository`
+
+-   **`mpf_control_agent_default_repository`:** List of classes class will cause
+    these backups to be placed in `$(sys.workdir)/backups`.
+
+-   **`control_agent_default_backup`:** Directory where backups should be placed
+    (defaults to `$(sys.workdir/backups`).
+
+    
+    {
+      "classes": {
+        "mpf_control_agent_default_repository": [ "any" ]
+      },
+    
+      "vars": {
+        "control_agent_default_repository": "/var/cfengine/edit_backups"
+      }
+    }
+
+
+### `templates` shortcut
+
+-   **`dir_templates`:** Path to common template directory. Shortcut provided by
+    `cf-serverd` as `templates/`.
+    
+        {
+            "vars": {
+                "dir_templates": "/var/cfengine/mytemplates"
+                }
+        }
+
+    bundle agent example
+    {
+      files:
+    
+        "$(def.dir_templates)/mytemplate.mustache" -> { "myservice" }
+    
+          copy_from => remote_dcp( "templates/mytemplate.mustache",
+                                   $(sys.policy_server) ),
+    
+          comment => "mytemplate is necessary in order to render
+                      myservice configuration file.";
+    }
+
+
+### Automatically restart components on related data change
+
+<div class="NOTES">
+While the agent itsef will reload its config upon notice of policy change this
+bundle specifically handles changes to variables used in the MPF which may come
+from external data sources which are unknown to the components themselves.
+
+</div>
+
+-   **`mpf_augments_control_enabled`:** List of classes that automatic component
+    restart on related data change should be enabled for.
+
+    {
+      "classes":{
+          "mpf_augments_control_enabled": [ "any" ]
+      }
+    }
+
+
+### Host info report now now renders inventory variables
+
+    cf-agent -KIb host_info_report
+
+    ### Inventory
+    
+    #### Variables tagged for inventory
+    
+    {
+      "default:cfe_autorun_inventory_disk.free": "5.00",
+      "default:cfe_autorun_inventory_listening_ports.ports": [
+        "22",
+        "25",
+        "53",
+      ],
+      "default:cfe_autorun_inventory_memory.total": "32050.27",
+      "default:sys.arch": "x86_64",
+      "default:sys.cf_version": "3.11.0",
+      "default:sys.class": "linux",
+      "default:sys.cpus": "4",
+      "default:sys.flavor": "ubuntu_17",
+      "default:sys.hardware_addresses": [
+        "5c:e0:c5:9f:f3:8f",
+        "52:54:00:6b:62:06",
+        "02:42:79:79:f6:02",
+        "0a:00:27:00:00:00"
+      ],
+      "default:sys.inet": {
+        "default_gateway": "192.168.42.1",
 
 
 ## Enterprise
 
--   global search
--   host count trend widget
--   mail settings
--   exported reports attached to scheduled mails
--   LDAP settings API
--   default roles
--   host events (bootstrap|decommission)
--   Inventory
-    -   inventory policy release id by default
-    -   AIX oslevel
-    -   New API
+
+### UI responsiveness
+
+-   [Testing](data/75/971753-cddb-4739-a0a1-dcb66df44ab9/alert-status-speed-comparison.webm) with 50,000 host data sets
 
 
-# Tests
+### Global Host Search
+
+-   Easy find hosts by name, ip or identity
+
+![img](data/f9/7c9b4d-d46f-4aee-bd68-630f44106b0e/2018-01-14_Selection_002_2018-01-14_13-21-21.png)
+
+
+### host count trend widget
+
+![img](data/e9/0e4df9-0bb7-4a1e-84d5-25911497f93c/2018-01-10_Selection_001_2018-01-14_12-02-44.png)
+
+
+### mail settings
+
+-   Exported reports can now be sent as attachments in emails
+
+![img](data/74/8d9e15-278e-46ac-822f-9e0f7e6b2830/mail-settings-1024x537_2018-01-14_12-01-05.png)
+
+
+### LDAP settings API
+
+![img](data/29/4c1258-49f4-4c72-9f8d-2b7535cfbea8/Authentication-settings_2018-01-14_12-04-18.png)
+
+
+### default roles
+
+![img](data/bf/10ec4b-5b6b-4140-9336-fb7ab7808fed/2018-01-14_Selection_004_2018-01-14_14-03-29.png)
+
+
+### New OOTB Inventory Attributes
+
+-   Policy Release Id
+-   AIX OS Level
+
+
+### Inventory API
+
+    curl --user admin -X POST \
+      -H 'content-type: application/json' \
+      https://hub/api/inventory -d '{ "select":[ "Host name", "OS type"]}'
+
+
+### Inventory API
+
+    {
+        "data": [
+            {
+                "header": [
+                    {
+                        "columnName": "Host name",
+                        "columnType": "STRING"
+                    },
+                    {
+                        "columnName": "OS type",
+                        "columnType": "STRING"
+                    }
+                ],
+                "queryTimeMs": 11,
+                "rowCount": 2,
+                "rows": [
+                    [
+                        "host001",
+                        "linux"
+                    ],
+                    [
+                        "hub",
+                        "linux"
+                    ]
+                ]
+            }
+        ],
+        "meta": {
+            "count": 1,
+            "page": 1,
+            "timestamp": 1515607751,
+            "total": 1
+        }
+    }
 

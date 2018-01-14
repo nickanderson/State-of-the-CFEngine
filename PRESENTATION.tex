@@ -22,16 +22,15 @@
  pdftitle={State of the CFEngine},
  pdfkeywords={},
  pdfsubject={},
- pdfcreator={Emacs 25.2.2 (Org mode 9.1.4)}, 
+ pdfcreator={Emacs 25.2.2 (Org mode 9.1.6)}, 
  pdflang={English}}
 \begin{document}
 
 \maketitle
 \section*{Contributions}
-\label{sec:org9aeae65}
+\label{sec:org7232e70}
 \subsection*{Core}
-\label{sec:orgc681ce0}
-
+\label{sec:org29e153c}
 \begin{itemize}
 \item 24 contributors in the last year
 \end{itemize}
@@ -40,7 +39,7 @@
 \end{itemize}
 
 \subsection*{MPF}
-\label{sec:orgc145424}
+\label{sec:org5dd986e}
 \begin{itemize}
 \item 14 contributors in the last year
 \end{itemize}
@@ -49,17 +48,16 @@
 \end{itemize}
 
 \subsection*{Documentation}
-\label{sec:org78cadc2}
+\label{sec:org71ee2eb}
 \begin{itemize}
 \item 17 contributors
-\end{itemize}
-:DRAWER:
-\begin{itemize}
 \item 3 new contributors
 \end{itemize}
 
 \section*{Releases}
-\label{sec:orgd607242}
+\label{sec:org64f46ad}
+5 releases
+
 
 \begin{center}
 \begin{tabular}{rr}
@@ -73,57 +71,515 @@ Date & Release\\
 \end{tabular}
 \end{center}
 
-
-
-5 releases
-
 \section*{Functionality}
-\label{sec:org7815b15}
+\label{sec:orgfe9c866}
 \subsection*{Core}
-\label{sec:org2732a34}
-\begin{itemize}
-\item \texttt{with} attribute
-\item \texttt{missing\_ok}
-\item multiple augments
-\item \texttt{inline\_mustache}
-\end{itemize}
+\label{sec:org9f2b313}
+\subsubsection*{\texttt{with} attribute}
+\label{sec:org2468d0b}
+
+\begin{verbatim}
+bundle agent main
+{
+  vars:
+      "todo" slist => { "a 1", "b 2", "c 3" };
+      # Here, `with` is the canonified version of $(todo), letting us avoid an
+
+      # intermediate canonification array.
+      "$(with)" string => "$(todo)", with => canonify($(todo));
+
+      "complex" data => '
+{
+  "x": 200,
+  "y": [ 1, 2, null, true, false ]
+}
+';
+
+  reports:
+      "For iterable '$(todo)' we created variable '$(with)' and its value is '$(todo)'"
+        with => canonify($(todo));
+
+      "We can print a data container compactly without creating a temporary variable: $(with)"
+        with => format("%S", complex);
+
+      "We can print a data container fully without creating a temporary variable: $(with)"
+        with => storejson(complex);
+}
+\end{verbatim}
+\captionof{figure}{\label{orgbf76327}
+With attribute usage example policy}
+
+\subsubsection*{\texttt{with} attribute}
+\label{sec:orged86c9b}
+
+\begin{verbatim}
+R: For iterable 'a 1' we created variable 'a_1' and its value is 'a 1'
+R: For iterable 'b 2' we created variable 'b_2' and its value is 'b 2'
+R: For iterable 'c 3' we created variable 'c_3' and its value is 'c 3'
+R: We can print a data container compactly without creating a temporary variable: {"x":200,"y":[1,2,null,true,false]}
+R: We can print a data container fully without creating a temporary variable: {
+  "x": 200,
+  "y": [
+    1,
+    2,
+    null,
+    true,
+    false
+  ]
+}
+\end{verbatim}
+\subsubsection*{Multiple augments}
+\label{sec:org0c906d9}
+
+\textbf{NOTE:} Current implementation discussion in progress in \href{https://tracker.mender.io/browse/CFE-2741}{CFE-2741}. Please
+consider participating.
+
+\begin{verbatim}
+{
+  "vars":{
+    "my_var": "defined in def.json",
+    "my_other_var": "Defined ONLY in def.json"
+  },
+  "augments": [
+    "/tmp/$(sys.flavor).json"
+  ]
+}
+\end{verbatim}
+\captionof{figure}{Example \texttt{/tmp/def.json}}
+
+\subsubsection*{Multiple augments}
+\label{sec:orga5de698}
+
+\begin{verbatim}
+{
+  "vars": {
+    "my_var": "Overridden in centos_6.json",
+    "centos_6_var": "Defined ONLY in centos_6.json"
+  }
+}
+\end{verbatim}
+\captionof{figure}{Example \texttt{/tmp/centos\_6.json}}
+
+\subsubsection*{Multiple augments}
+\label{sec:org4b0a1cd}
+
+\begin{verbatim}
+[root@hub tmp]# cf-agent -KIf ./example.cf 
+R: def.my_var == Overridden in centos_6.json
+R: def.my_other_var == Defined ONLY in def.json
+R: def.centos_6_var == Defined ONLY in centos_6.json
+\end{verbatim}
+
+\subsubsection*{\texttt{inline\_mustache}}
+\label{sec:orgab42c93}
+
+\begin{NOTES}
+You are no longer required to use an external file template. Now you can
+provide the template directly within the policy.
+\end{NOTES}
+
+\begin{verbatim}
+bundle agent main
+{
+  vars:
+    "d" data => '{ "hello": "world", "feature": [ "render", "inline", "mustache" ] }';
+
+  files:
+
+    "/tmp/example.txt"
+      create => "true",
+      template_method => "inline_mustache",
+      edit_template_string => "{{%-top-}}",
+      template_data => @(d);
+
+}
+\end{verbatim}
+\captionof{figure}{Example \texttt{template\_method} \texttt{inline\_mustache}}
+
+\subsubsection*{\texttt{inline\_mustache}}
+\label{sec:org61a69bc}
+
+Results in \texttt{/tmp/example.txt} having this content.
+
+\begin{verbatim}
+{
+  "feature": [
+    "render",
+    "inline",
+    "mustache"
+  ],
+  "hello": "world"
+}
+\end{verbatim}
+\captionof{figure}{Example \texttt{template\_method} \texttt{inline\_mustache}}
+
+\subsubsection*{\texttt{missing\_ok}}
+\label{sec:orgcffd25b}
 \subsection*{MPF}
-\label{sec:orgc7ba929}
+\label{sec:orgfd3d3f9}
+
+\subsubsection*{Augments - Append the \texttt{bundlesequnece} of \texttt{promises.cf} and \texttt{update.cf}}
+\label{sec:org4849f5e}
+
 \begin{itemize}
-\item more augments instrumentation
+\item \texttt{control\_common\_bundlesequence\_end}
+\item \texttt{control\_common\_update\_bundlesequence\_end}
+\end{itemize}
+
+\begin{verbatim}
+{
+  "vars":{
+    "control_common_bundlesequence_end": [ "mybundle1", "mybundle2" ],
+    "control_common_update_bundlesequence_end": [ "my_updatebundle1", "mybundle2" ]
+  }
+}
+\end{verbatim}
+
 \begin{itemize}
-\item common\(_{\text{control}}\)\(_{\text{bundlesequence}}\)\(_{\text{end}}\)
-\item update bundleseuence
-\item Log file retention and rotation limits
-\item executor schedule
-\item splaytime
-\item allowlegacyconnects
-\item maxconnections
-\item exclude\(_{\text{hosts}}\)
-\item client initiated reporting
-\item files single copy
-\item default\(_{\text{repository}}\)
+\item Order of bundle actuation not guaranteed.
+\item Agent errors if named bundle is missing.
 \end{itemize}
-\item templates shortcut
-\item track component variable change for restarts
-\end{itemize}
+
+\subsubsection*{Augments - Log file retention and rotation limits}
+\label{sec:orgf0329df}
+
+\begin{description}
+\item[{\texttt{mpf\_log\_files\_max\_size}}] Max file size before rotation
+\item[{\texttt{mpf\_log\_file\_retention}}] Number of file rotations to keep
+\item[{\texttt{mpf\_log\_dir\_retention}}] Number of file rotations to keep in \texttt{outputs},
+\texttt{reports}, and the Enterprise application log directory.
+\end{description}
+
+\begin{verbatim}
+{
+  "vars": {
+    "mpf_log_file_retention": "5",
+    "mpf_log_file_max_size": "10M",
+    "mpf_log_dir_retention": "7"
+  }
+}
+\end{verbatim}
+
+\subsubsection*{Augments - Execution schedule}
+\label{sec:orgd64a221}
+
+\begin{description}
+\item[{\texttt{control\_executor\_schedule}}] Classes that trigger execution of \texttt{cf-agent}.
+\end{description}
+
+\begin{verbatim}
+{
+  "vars": {
+    "control_executor_schedule": [ "Min00", "Min30" ]
+  }
+}
+\end{verbatim}
+
+\subsubsection*{Augments - \texttt{splaytime}}
+\label{sec:org0dcded6}
+
+\begin{description}
+\item[{\texttt{control\_executor\_splaytime}}] Maximum number of minutes \texttt{exec\_commad} should
+wait before executing.
+\end{description}
+
+\begin{verbatim}
+{
+  "vars": {
+    "control_executor_splaytime": "3"
+  }
+}
+\end{verbatim}
+
+\subsubsection*{Augments - \texttt{allowlegacyconnects}}
+\label{sec:org0f26685}
+
+\begin{description}
+\item[{\texttt{control\_server\_allowlegacyconnects}}] List of subnets allowed to connect
+using legacy protocol (versions prior to 3.7.0).
+\end{description}
+
+\begin{verbatim}
+{
+  "vars": {
+    "control_server_allowlegacyconnects": [ "0.0.0.0/0" ]
+  }
+}
+\end{verbatim}
+
+\subsubsection*{Augments - \texttt{maxconnections}}
+\label{sec:orgaf809e8}
+
+\begin{description}
+\item[{\texttt{control\_serverd\_maxconnections}}] Maximum number of connections allowed by
+\texttt{cf-serverd}.
+\end{description}
+
+\begin{verbatim}
+{
+  "vars":{
+      "control_serverd_maxconnections": "1000"
+  }
+}
+\end{verbatim}
+
+\subsubsection*{Augments - Client initiated reporting (Enterprise)}
+\label{sec:orgcfc3041}
+
+\begin{description}
+\item[{\texttt{control\_hub\_exclude\_hosts}}] List of subnets to exclude from hub initiated
+report collection.
+\item[{\texttt{client\_initiated\_reporting\_enabled}}] List of classes that if defined should
+initiate reporting to an enterprise hub.
+\item[{\texttt{control\_server\_call\_collect\_interval}}] Number of minutes between client
+initiated reporting.
+\end{description}
+
+\begin{verbatim}
+{
+    "vars": {
+        "control_server_call_collect_interval": "1",
+        "control_hub_exclude_hosts": [ "0.0.0.0/0" ]
+    },
+
+    "classes" {
+        "client_initiated_reporting_enabled": [ "any" ]
+    }
+}
+\end{verbatim}
+
+\subsubsection*{Augments - \texttt{files\_single\_copy}}
+\label{sec:orgab0e710}
+
+\begin{description}
+\item[{\texttt{control\_agent\_files\_single\_copy}}] List of regular expressions matching
+files that should not be copied more than once.
+\end{description}
+
+\begin{verbatim}
+{
+  "vars":{
+    "control_agent_files_single_copy": [ ".*" ]
+  }
+
+}
+\end{verbatim}
+
+\subsubsection*{Augments - \texttt{default\_repository}}
+\label{sec:org334bd44}
+
+\begin{description}
+\item[{\texttt{mpf\_control\_agent\_default\_repository}}] List of classes class will cause
+these backups to be placed in \texttt{\$(sys.workdir)/backups}.
+
+\item[{\texttt{control\_agent\_default\_backup}}] Directory where backups should be placed
+(defaults to \texttt{\$(sys.workdir/backups}).
+\end{description}
+
+\begin{verbatim}
+
+{
+  "classes": {
+    "mpf_control_agent_default_repository": [ "any" ]
+  },
+
+  "vars": {
+    "control_agent_default_repository": "/var/cfengine/edit_backups"
+  }
+}
+\end{verbatim}
+
+\subsubsection*{\texttt{templates} shortcut}
+\label{sec:org80cadfc}
+
+\begin{description}
+\item[{\texttt{dir\_templates}}] Path to common template directory. Shortcut provided by
+\texttt{cf-serverd} as \texttt{templates/}.
+
+\begin{verbatim}
+{
+    "vars": {
+        "dir_templates": "/var/cfengine/mytemplates"
+        }
+}
+\end{verbatim}
+\end{description}
+
+\begin{verbatim}
+bundle agent example
+{
+  files:
+
+    "$(def.dir_templates)/mytemplate.mustache" -> { "myservice" }
+
+      copy_from => remote_dcp( "templates/mytemplate.mustache",
+                               $(sys.policy_server) ),
+
+      comment => "mytemplate is necessary in order to render
+                  myservice configuration file.";
+}
+\end{verbatim}
+
+\subsubsection*{Automatically restart components on related data change}
+\label{sec:org7fff688}
+
+\begin{NOTES}
+While the agent itsef will reload its config upon notice of policy change this
+bundle specifically handles changes to variables used in the MPF which may come
+from external data sources which are unknown to the components themselves.
+\end{NOTES}
+
+\begin{description}
+\item[{\texttt{mpf\_augments\_control\_enabled}}] List of classes that automatic component
+restart on related data change should be enabled for.
+\end{description}
+
+\begin{verbatim}
+{
+  "classes":{
+      "mpf_augments_control_enabled": [ "any" ]
+  }
+}
+\end{verbatim}
+
+\subsubsection*{Host info report now now renders inventory variables}
+\label{sec:org75d0818}
+
+\begin{verbatim}
+cf-agent -KIb host_info_report
+\end{verbatim}
+
+\begin{verbatim}
+### Inventory
+
+#### Variables tagged for inventory
+
+{
+  "default:cfe_autorun_inventory_disk.free": "5.00",
+  "default:cfe_autorun_inventory_listening_ports.ports": [
+    "22",
+    "25",
+    "53",
+  ],
+  "default:cfe_autorun_inventory_memory.total": "32050.27",
+  "default:sys.arch": "x86_64",
+  "default:sys.cf_version": "3.11.0",
+  "default:sys.class": "linux",
+  "default:sys.cpus": "4",
+  "default:sys.flavor": "ubuntu_17",
+  "default:sys.hardware_addresses": [
+    "5c:e0:c5:9f:f3:8f",
+    "52:54:00:6b:62:06",
+    "02:42:79:79:f6:02",
+    "0a:00:27:00:00:00"
+  ],
+  "default:sys.inet": {
+    "default_gateway": "192.168.42.1",
+\end{verbatim}
+\captionof{figure}{Sample from inventory section of host info report}
+
 \subsection*{Enterprise}
-\label{sec:org4381891}
+\label{sec:org6d031ab}
+\subsubsection*{UI responsiveness}
+\label{sec:orgaf58ca2}
 \begin{itemize}
-\item global search
-\item host count trend widget
-\item mail settings
-\item exported reports attached to scheduled mails
-\item LDAP settings API
-\item default roles
-\item host events (bootstrap|decommission)
-\item Inventory
+\item \href{data/75/971753-cddb-4739-a0a1-dcb66df44ab9/alert-status-speed-comparison.webm}{Testing} with 50,000 host data sets
+\end{itemize}
+
+\subsubsection*{Global Host Search}
+\label{sec:org8d7ab1b}
 \begin{itemize}
-\item inventory policy release id by default
-\item AIX oslevel
-\item New API
+\item Easy find hosts by name, ip or identity
 \end{itemize}
+
+\begin{center}
+\includegraphics[width=.9\linewidth]{data/f9/7c9b4d-d46f-4aee-bd68-630f44106b0e/2018-01-14_Selection_002_2018-01-14_13-21-21.png}
+\end{center}
+
+\subsubsection*{host count trend widget}
+\label{sec:orgef89f04}
+\begin{center}
+\includegraphics[width=.9\linewidth]{data/e9/0e4df9-0bb7-4a1e-84d5-25911497f93c/2018-01-10_Selection_001_2018-01-14_12-02-44.png}
+\end{center}
+
+\subsubsection*{mail settings}
+\label{sec:orgddc7aa1}
+\begin{itemize}
+\item Exported reports can now be sent as attachments in emails
 \end{itemize}
-\section*{Tests}
-\label{sec:org46aca06}
+
+\begin{center}
+\includegraphics[width=.9\linewidth]{data/74/8d9e15-278e-46ac-822f-9e0f7e6b2830/mail-settings-1024x537_2018-01-14_12-01-05.png}
+\end{center}
+
+\subsubsection*{LDAP settings API}
+\label{sec:org23ff792}
+\begin{center}
+\includegraphics[width=.9\linewidth]{data/29/4c1258-49f4-4c72-9f8d-2b7535cfbea8/Authentication-settings_2018-01-14_12-04-18.png}
+\end{center}
+
+\subsubsection*{default roles}
+\label{sec:org7edff2b}
+\begin{center}
+\includegraphics[width=.9\linewidth]{data/bf/10ec4b-5b6b-4140-9336-fb7ab7808fed/2018-01-14_Selection_004_2018-01-14_14-03-29.png}
+\end{center}
+
+\subsubsection*{New OOTB Inventory Attributes}
+\label{sec:orgf7dac12}
+
+\begin{itemize}
+\item Policy Release Id
+\item AIX OS Level
+\end{itemize}
+
+\subsubsection*{Inventory API}
+\label{sec:orgf090c48}
+
+\begin{verbatim}
+curl --user admin -X POST \
+  -H 'content-type: application/json' \
+  https://hub/api/inventory -d '{ "select":[ "Host name", "OS type"]}'
+\end{verbatim}
+\captionof{figure}{Example API Query}
+
+\subsubsection*{Inventory API}
+\label{sec:orgdfe0115}
+
+\begin{verbatim}
+{
+    "data": [
+        {
+            "header": [
+                {
+                    "columnName": "Host name",
+                    "columnType": "STRING"
+                },
+                {
+                    "columnName": "OS type",
+                    "columnType": "STRING"
+                }
+            ],
+            "queryTimeMs": 11,
+            "rowCount": 2,
+            "rows": [
+                [
+                    "host001",
+                    "linux"
+                ],
+                [
+                    "hub",
+                    "linux"
+                ]
+            ]
+        }
+    ],
+    "meta": {
+        "count": 1,
+        "page": 1,
+        "timestamp": 1515607751,
+        "total": 1
+    }
+}
+\end{verbatim}
+\captionof{figure}{Example Query Response}
 \end{document}

@@ -23,7 +23,6 @@
 #+REVEAL_PLUGINS: (markdown notes)
 * Contributions
 ** Core
-
 :DRAWER:
 #+Name: NumCoreContributors
 #+BEGIN_SRC shell :dir /tmp/ :exports none :wrap text
@@ -293,7 +292,6 @@ git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
 - 3 new contributors
 
 ** Documentation
-:DRAWER:
 #+Name: NumDocContributors
 #+BEGIN_SRC shell :dir /tmp/ :exports none :wrap text
   REPOSITORY=https://github.com/cfengine/documentation
@@ -312,13 +310,13 @@ git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
 
 #+RESULTS: NumDocContributors
 :END:
-- 17 contributors
-:DRAWER:
-#+BEGIN_SRC shell :dir ~/CFEngine/documentation :exports none
-git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
-#+END_SRC
 
-#+RESULTS:
+- 17 contributors
+- 3 new contributors
+
+#+BEGIN_SRC shell :dir ~/CFEngine/documentation :exports none
+  git --no-pager log --format="%aN" | sort -u
+#+END_SRC
 
 #+BEGIN_SRC shell :dir ~/CFEngine/documentation :exports none
   while read Author; do
@@ -326,73 +324,22 @@ git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
     echo "$FirstCommit,$Author"
   done < /tmp/authors.txt 
 #+END_SRC
-#+RESULTS:
-| 2017-10-16T16:37:49+03:00 | Ihor Aleksandrychiev                              |
-| 2017-10-16T11:01:21+03:00 | Your Name                                         |
-| 2017-05-09T20:21:24+02:00 | Ole Herman Schumacher Elgesem                     |
-| 2017-02-23T14:04:25+02:00 | fevej                                             |
-| 2016-09-27T11:49:42-04:00 | Joe Moore                                         |
-| 2016-01-24T18:52:42-08:00 | Dillon Gilmore                                    |
-| 2016-01-22T16:39:44+01:00 | Alexis Mousset                                    |
-| 2016-01-22T10:10:10-05:00 | Steven Kreuzer                                    |
-| 2015-11-03T14:43:55+01:00 | Michael Clelland                                  |
-| 2015-10-16T10:30:05+02:00 | Benoît Peccatte                                   |
-| 2015-10-02T11:38:09+02:00 | Enrico Razzetti                                   |
-| 2015-04-09T17:29:03+03:00 | P. Christeas                                      |
-| 2015-04-01T13:35:32+02:00 | Pradeep Sanders                                   |
-| 2015-03-18T11:28:54+01:00 | Maciej Mrowiec                                    |
-| 2015-03-16T13:10:21+01:00 | michaelclelland                                   |
-| 2014-12-31T16:44:54+01:00 | Stefan Weil                                       |
-| 2014-12-29T23:58:08+01:00 | Jimmy Thrasibule                                  |
-| 2014-12-14T00:25:48-08:00 | William Orr                                       |
-| 2014-11-13T12:23:06-08:00 | Brian Bennett                                     |
-| 2014-10-02T15:25:24+02:00 | root                                              |
-| 2014-10-01T22:27:38-05:00 | philregier                                        |
-| 2014-09-30T14:27:43+02:00 | pasinskim                                         |
-| 2014-09-30T14:24:30+02:00 | Marcin Pasinski                                   |
-| 2014-08-30T22:21:07+02:00 | Michal Švamberg                                   |
-| 2014-08-28T10:37:55-04:00 | Robert Lambert                                    |
-| 2014-07-18T14:36:35+02:00 | Edward Welbourne                                  |
-| 2014-05-23T12:41:48+02:00 | Bas van der Vlies                                 |
-| 2014-05-15T22:51:31-05:00 | Chris Dituri                                      |
-| 2014-05-09T13:35:14-04:00 | Laurent Raufaste                                  |
-| 2014-04-25T10:05:28+02:00 | goarnaut                                          |
-| 2014-03-11T10:00:40+01:00 | KevWright                                         |
-| 2014-01-11T12:12:35+01:00 | Mark Burgess                                      |
-| 2013-12-10T09:12:22+01:00 | Mikhail Gusarov                                   |
-| 2013-11-15T15:03:37+01:00 | Vincent Membré                                    |
-| 2013-10-28T18:45:53+01:00 | Loic Pefferkorn                                   |
-| 2013-10-02T10:12:51+02:00 | Carlos Manuel Duclos Vergara (Senior QA Engineer) |
-| 2013-09-09T22:25:43+12:00 | Ivan Kurnosov                                     |
-| 2013-08-11T20:57:42+03:00 | Tero Kantonen                                     |
-| 2013-08-01T09:07:26-04:00 | Neil Watson                                       |
-| 2013-06-20T11:04:11+02:00 | Kristian Amlie                                    |
-| 2013-06-18T14:30:19+02:00 | deb-cfengine                                      |
-| 2013-06-12T18:09:03+02:00 | Sigurd Teigen                                     |
-| 2013-06-07T15:34:45+03:00 | Dimitrios Apostolou                               |
-| 2013-06-07T14:41:17+02:00 | Carlos Manuel Duclos Vergara                      |
-| 2013-06-04T00:02:31+02:00 | Bishwa Shrestha                                   |
-| 2013-05-31T10:33:25-07:00 | Eystein Måløy Stenberg                            |
-| 2013-05-29T07:13:21-07:00 | Ted Zlatanov                                      |
-| 2013-05-28T15:06:37+02:00 | Matthew Cattell                                   |
-| 2013-05-27T13:30:46+02:00 | Dmitry Shevchenko                                 |
-| 2013-05-23T22:10:59-07:00 | Aleksey Tsalolikhin                               |
-| 2013-05-23T16:59:27+02:00 | maciejmrowiec                                     |
-| 2013-05-22T22:33:31+02:00 | vohi                                              |
-| 2013-05-03T11:00:35-07:00 | Diego Zamboni                                     |
-| 2013-05-01T15:49:36-05:00 | Nick Anderson                                     |
-| 2013-04-19T06:55:57+02:00 | Kevin Wright                                      |
-| 2013-04-16T13:00:53+02:00 | Volker Hilsheimer                                 |
-| 2013-03-06T06:27:53-06:00 | Tim O'Brien                                       |
-| 2013-03-01T16:41:37+01:00 | Geir Nygård                                       |
-| 2013-03-01T07:34:37-08:00 | cf-gary                                           |
-| 2013-02-24T05:49:13-08:00 |                                                   |
-| 2013-02-24T05:49:13-08:00 | Alexandra Leisse                                  |
-|                           | Mike Weilgart                                     |
-:END:
-- 3 new contributors
 
 * Releases
+:DRAWER:
+#+BEGIN_SRC shell :dir ~/CFEngine/masterfiles :exports results :wrap text
+  echo "$(git for-each-ref --sort=taggerdate --format '%(tag)_,,,_%(taggerdate:raw)' refs/tags \
+    | awk 'BEGIN { FS = "_,,,_" };
+                 { t=strftime("%Y-%m-%d",$2);
+                 printf "%s %s\n", t, $1 }' \
+    | egrep -v "build|PTV|\.0b" \
+    | egrep "2017|2018" \
+    | wc -l) releases"
+#+END_SRC
+#+RESULTS:
+:END:
+5 releases
+
 :DRAWER:
 
 #+BEGIN_COMMENT
@@ -424,53 +371,477 @@ git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
 | 2017-08-11 |  3.11.0 |
 | 2017-09-12 |   3.7.6 |
 
-:DRAWER:
-
-#+BEGIN_SRC shell :dir ~/CFEngine/masterfiles :exports results :wrap text
-  echo "$(git for-each-ref --sort=taggerdate --format '%(tag)_,,,_%(taggerdate:raw)' refs/tags \
-    | awk 'BEGIN { FS = "_,,,_" };
-                 { t=strftime("%Y-%m-%d",$2);
-                 printf "%s %s\n", t, $1 }' \
-    | egrep -v "build|PTV|\.0b" \
-    | egrep "2017|2018" \
-    | wc -l) releases"
-#+END_SRC
-#+RESULTS:
-:END:
-
-5 releases
-
 * Functionality
 ** Core
-- =with= attribute
-- =missing_ok=
-- multiple augments
-- =inline_mustache=
+*** =with= attribute
+
+#+Name: With attribute usage example
+#+Caption: With attribute usage example policy
+#+BEGIN_SRC cfengine3 :exports both
+bundle agent main
+{
+  vars:
+      "todo" slist => { "a 1", "b 2", "c 3" };
+      # Here, `with` is the canonified version of $(todo), letting us avoid an
+
+      # intermediate canonification array.
+      "$(with)" string => "$(todo)", with => canonify($(todo));
+
+      "complex" data => '
+{
+  "x": 200,
+  "y": [ 1, 2, null, true, false ]
+}
+';
+
+  reports:
+      "For iterable '$(todo)' we created variable '$(with)' and its value is '$(todo)'"
+        with => canonify($(todo));
+
+      "We can print a data container compactly without creating a temporary variable: $(with)"
+        with => format("%S", complex);
+
+      "We can print a data container fully without creating a temporary variable: $(with)"
+        with => storejson(complex);
+}
+#+END_SRC
+
+*** =with= attribute
+
+#+Caption: With attribute usage example policy output
+#+RESULTS: With attribute usage example
+#+begin_example
+R: For iterable 'a 1' we created variable 'a_1' and its value is 'a 1'
+R: For iterable 'b 2' we created variable 'b_2' and its value is 'b 2'
+R: For iterable 'c 3' we created variable 'c_3' and its value is 'c 3'
+R: We can print a data container compactly without creating a temporary variable: {"x":200,"y":[1,2,null,true,false]}
+R: We can print a data container fully without creating a temporary variable: {
+  "x": 200,
+  "y": [
+    1,
+    2,
+    null,
+    true,
+    false
+  ]
+}
+#+end_example
+*** Multiple augments
+
+*NOTE:* Current implementation discussion in progress in [[jira:CFE-2741][CFE-2741]]. Please
+consider participating.
+
+#+Caption: Example =/tmp/def.json=
+#+BEGIN_SRC json
+{
+  "vars":{
+    "my_var": "defined in def.json",
+    "my_other_var": "Defined ONLY in def.json"
+  },
+  "augments": [
+    "/tmp/$(sys.flavor).json"
+  ]
+}
+#+END_SRC
+
+*** Multiple augments
+
+#+Caption: Example =/tmp/centos_6.json=
+#+BEGIN_SRC json
+{
+  "vars": {
+    "my_var": "Overridden in centos_6.json",
+    "centos_6_var": "Defined ONLY in centos_6.json"
+  }
+}
+#+END_SRC
+
+*** Multiple augments
+
+#+Caption: Execution output on CentOS 6
+#+BEGIN_EXAMPLE
+[root@hub tmp]# cf-agent -KIf ./example.cf 
+R: def.my_var == Overridden in centos_6.json
+R: def.my_other_var == Defined ONLY in def.json
+R: def.centos_6_var == Defined ONLY in centos_6.json
+#+END_EXAMPLE
+
+*** =inline_mustache=
+
+#+BEGIN_NOTES
+  You are no longer required to use an external file template. Now you can
+  provide the template directly within the policy.
+#+END_NOTES
+
+#+Caption: Example =template_method= =inline_mustache=
+#+BEGIN_SRC cfengine3
+  bundle agent main
+  {
+    vars:
+      "d" data => '{ "hello": "world", "feature": [ "render", "inline", "mustache" ] }';
+
+    files:
+
+      "/tmp/example.txt"
+        create => "true",
+        template_method => "inline_mustache",
+        edit_template_string => "{{%-top-}}",
+        template_data => @(d);
+
+  }
+#+END_SRC
+
+*** =inline_mustache=
+
+Results in =/tmp/example.txt= having this content.
+
+#+Caption: Example =template_method= =inline_mustache=
+#+BEGIN_SRC text
+  {
+    "feature": [
+      "render",
+      "inline",
+      "mustache"
+    ],
+    "hello": "world"
+  }
+#+END_SRC
+
+*** =missing_ok=
 ** MPF
-- more augments instrumentation
-  - common_control_bundlesequence_end
-  - update bundleseuence 
-  - Log file retention and rotation limits
-  - executor schedule
-  - splaytime
-  - allowlegacyconnects
-  - maxconnections
-  - exclude_hosts
-  - client initiated reporting
-  - files single copy
-  - default_repository
-- templates shortcut 
-- track component variable change for restarts
+
+*** Augments - Append the =bundlesequnece= of =promises.cf= and =update.cf=
+
+- =control_common_bundlesequence_end=
+- =control_common_update_bundlesequence_end=
+
+#+BEGIN_SRC json
+{
+  "vars":{
+    "control_common_bundlesequence_end": [ "mybundle1", "mybundle2" ],
+    "control_common_update_bundlesequence_end": [ "my_updatebundle1", "mybundle2" ]
+  }
+}
+#+END_SRC
+
+- Order of bundle actuation not guaranteed.
+- Agent errors if named bundle is missing.
+
+*** Augments - Log file retention and rotation limits
+
+- =mpf_log_files_max_size= :: Max file size before rotation
+- =mpf_log_file_retention= :: Number of file rotations to keep
+- =mpf_log_dir_retention= :: Number of file rotations to keep in =outputs=,
+     =reports=, and the Enterprise application log directory.
+
+#+BEGIN_SRC json
+{
+  "vars": {
+    "mpf_log_file_retention": "5",
+    "mpf_log_file_max_size": "10M",
+    "mpf_log_dir_retention": "7"
+  }
+}
+#+END_SRC
+
+*** Augments - Execution schedule
+
+- =control_executor_schedule= :: Classes that trigger execution of =cf-agent=.
+ 
+#+BEGIN_SRC json
+{
+  "vars": {
+    "control_executor_schedule": [ "Min00", "Min30" ]
+  }
+}
+#+END_SRC 
+
+*** Augments - =splaytime=
+
+- =control_executor_splaytime= :: Maximum number of minutes =exec_commad= should
+     wait before executing.
+
+#+BEGIN_SRC json
+{
+  "vars": {
+    "control_executor_splaytime": "3"
+  }
+}
+#+END_SRC
+
+*** Augments - =allowlegacyconnects=
+
+- =control_server_allowlegacyconnects= :: List of subnets allowed to connect
+     using legacy protocol (versions prior to 3.7.0).
+
+#+BEGIN_SRC json
+{
+  "vars": {
+    "control_server_allowlegacyconnects": [ "0.0.0.0/0" ]
+  }
+}
+#+END_SRC
+
+*** Augments - =maxconnections=
+
+- =control_serverd_maxconnections= :: Maximum number of connections allowed by
+     =cf-serverd=.
+
+#+BEGIN_SRC json
+{
+  "vars":{
+      "control_serverd_maxconnections": "1000"
+  }
+}
+#+END_SRC
+
+*** Augments - Client initiated reporting (Enterprise)
+
+- =control_hub_exclude_hosts= :: List of subnets to exclude from hub initiated
+     report collection.
+- =client_initiated_reporting_enabled= :: List of classes that if defined should
+     initiate reporting to an enterprise hub.
+- =control_server_call_collect_interval= :: Number of minutes between client
+     initiated reporting.
+
+#+BEGIN_SRC json
+  {
+      "vars": {
+          "control_server_call_collect_interval": "1",
+          "control_hub_exclude_hosts": [ "0.0.0.0/0" ]
+      },
+
+      "classes" {
+          "client_initiated_reporting_enabled": [ "any" ]
+      }
+  }
+#+END_SRC
+
+*** Augments - =files_single_copy=
+
+- =control_agent_files_single_copy= :: List of regular expressions matching
+     files that should not be copied more than once.
+
+#+BEGIN_SRC json
+{
+  "vars":{
+    "control_agent_files_single_copy": [ ".*" ]
+  }
+
+}
+#+END_SRC
+
+*** Augments - =default_repository=
+
+- =mpf_control_agent_default_repository= :: List of classes class will cause
+     these backups to be placed in =$(sys.workdir)/backups=.
+
+- =control_agent_default_backup= :: Directory where backups should be placed
+     (defaults to =$(sys.workdir/backups=).
+
+#+BEGIN_SRC json
+
+{
+  "classes": {
+    "mpf_control_agent_default_repository": [ "any" ]
+  },
+
+  "vars": {
+    "control_agent_default_repository": "/var/cfengine/edit_backups"
+  }
+}
+#+END_SRC
+
+*** =templates= shortcut 
+
+- =dir_templates= :: Path to common template directory. Shortcut provided by
+     =cf-serverd= as =templates/=.
+ 
+  #+BEGIN_SRC json
+  {
+      "vars": {
+          "dir_templates": "/var/cfengine/mytemplates"
+          }
+  }
+  #+END_SRC 
+
+#+BEGIN_SRC cfengine3
+  bundle agent example
+  {
+    files:
+
+      "$(def.dir_templates)/mytemplate.mustache" -> { "myservice" }
+
+        copy_from => remote_dcp( "templates/mytemplate.mustache",
+                                 $(sys.policy_server) ),
+      
+        comment => "mytemplate is necessary in order to render
+                    myservice configuration file.";
+  }
+#+END_SRC
+
+*** Automatically restart components on related data change
+
+#+BEGIN_NOTES
+  While the agent itsef will reload its config upon notice of policy change this
+  bundle specifically handles changes to variables used in the MPF which may come
+  from external data sources which are unknown to the components themselves.
+#+END_NOTES
+
+- =mpf_augments_control_enabled= :: List of classes that automatic component
+     restart on related data change should be enabled for.
+
+#+BEGIN_SRC json
+{
+  "classes":{
+      "mpf_augments_control_enabled": [ "any" ]
+  }
+}
+#+END_SRC
+
+*** Host info report now now renders inventory variables
+
+#+BEGIN_SRC shell
+  cf-agent -KIb host_info_report
+#+END_SRC
+
+#+Caption: Sample from inventory section of host info report
+#+BEGIN_SRC text
+### Inventory
+
+#### Variables tagged for inventory
+
+{
+  "default:cfe_autorun_inventory_disk.free": "5.00",
+  "default:cfe_autorun_inventory_listening_ports.ports": [
+    "22",
+    "25",
+    "53",
+  ],
+  "default:cfe_autorun_inventory_memory.total": "32050.27",
+  "default:sys.arch": "x86_64",
+  "default:sys.cf_version": "3.11.0",
+  "default:sys.class": "linux",
+  "default:sys.cpus": "4",
+  "default:sys.flavor": "ubuntu_17",
+  "default:sys.hardware_addresses": [
+    "5c:e0:c5:9f:f3:8f",
+    "52:54:00:6b:62:06",
+    "02:42:79:79:f6:02",
+    "0a:00:27:00:00:00"
+  ],
+  "default:sys.inet": {
+    "default_gateway": "192.168.42.1",
+#+END_SRC 
+
 ** Enterprise
-- global search
-- host count trend widget
-- mail settings
-- exported reports attached to scheduled mails
-- LDAP settings API
-- default roles
-- host events (bootstrap|decommission)
-- Inventory
-  - inventory policy release id by default
-  - AIX oslevel
-  - New API 
-* Tests
+*** UI responsiveness :ATTACH:
+:PROPERTIES:
+:Attachments: alert-status-speed-comparison.webm
+:ID:       75971753-cddb-4739-a0a1-dcb66df44ab9
+:END:
+
+- [[file:data/75/971753-cddb-4739-a0a1-dcb66df44ab9/alert-status-speed-comparison.webm][Testing]] with 50,000 host data sets
+
+*** Global Host Search :ATTACH:
+:PROPERTIES:
+:ID:       f97c9b4d-d46f-4aee-bd68-630f44106b0e
+:Attachments: 2018-01-14_Selection_002_2018-01-14_13-21-21.png
+:END:
+- Easy find hosts by name, ip or identity
+
+#+DOWNLOADED: /home/nickanderson/Pictures/Screenshots/2018-01-14_Selection_002.png @ 2018-01-14 13:21:24
+[[file:data/f9/7c9b4d-d46f-4aee-bd68-630f44106b0e/2018-01-14_Selection_002_2018-01-14_13-21-21.png]]
+
+*** host count trend widget :ATTACH:
+:PROPERTIES:
+:ID:       e90e4df9-0bb7-4a1e-84d5-25911497f93c
+:Attachments: 2018-01-10_Selection_001_2018-01-14_12-02-44.png
+:END:
+
+#+DOWNLOADED: https://cfengine.com/wp-content/uploads/2018/01/2018-01-10_Selection_001.png @ 2018-01-14 12:02:44
+[[file:data/e9/0e4df9-0bb7-4a1e-84d5-25911497f93c/2018-01-10_Selection_001_2018-01-14_12-02-44.png]]
+
+*** mail settings :ATTACH:
+:PROPERTIES:
+:ID:       748d9e15-278e-46ac-822f-9e0f7e6b2830
+:Attachments: mail-settings-1024x537_2018-01-14_12-01-05.png
+:END:
+
+- Exported reports can now be sent as attachments in emails
+
+#+DOWNLOADED: https://cfengine.com/wp-content/uploads/2018/01/mail-settings-1024x537.png @ 2018-01-14 12:01:05
+[[file:data/74/8d9e15-278e-46ac-822f-9e0f7e6b2830/mail-settings-1024x537_2018-01-14_12-01-05.png]]
+
+*** LDAP settings API                                              :ATTACH:
+:PROPERTIES:
+:ID:       294c1258-49f4-4c72-9f8d-2b7535cfbea8
+:Attachments: Authentication-settings_2018-01-14_12-04-18.png
+:END:
+
+#+DOWNLOADED: https://cfengine.com/wp-content/uploads/2018/01/Authentication-settings.png @ 2018-01-14 12:04:18
+[[file:data/29/4c1258-49f4-4c72-9f8d-2b7535cfbea8/Authentication-settings_2018-01-14_12-04-18.png]]
+
+*** default roles :ATTACH:
+:PROPERTIES:
+:ID:       bf10ec4b-5b6b-4140-9336-fb7ab7808fed
+:Attachments: 2018-01-14_Selection_004_2018-01-14_14-03-29.png
+:END:
+
+#+DOWNLOADED: /home/nickanderson/Pictures/Screenshots/2018-01-14_Selection_004.png @ 2018-01-14 14:03:32
+[[file:data/bf/10ec4b-5b6b-4140-9336-fb7ab7808fed/2018-01-14_Selection_004_2018-01-14_14-03-29.png]]
+
+*** New OOTB Inventory Attributes
+
+- Policy Release Id
+- AIX OS Level
+ 
+*** Inventory API 
+
+#+Caption: Example API Query
+#+BEGIN_SRC shell
+  curl --user admin -X POST \
+    -H 'content-type: application/json' \
+    https://hub/api/inventory -d '{ "select":[ "Host name", "OS type"]}'
+#+END_SRC
+
+*** Inventory API
+
+#+Caption: Example Query Response
+#+BEGIN_SRC json
+{
+    "data": [
+        {
+            "header": [
+                {
+                    "columnName": "Host name",
+                    "columnType": "STRING"
+                },
+                {
+                    "columnName": "OS type",
+                    "columnType": "STRING"
+                }
+            ],
+            "queryTimeMs": 11,
+            "rowCount": 2,
+            "rows": [
+                [
+                    "host001",
+                    "linux"
+                ],
+                [
+                    "hub",
+                    "linux"
+                ]
+            ]
+        }
+    ],
+    "meta": {
+        "count": 1,
+        "page": 1,
+        "timestamp": 1515607751,
+        "total": 1
+    }
+}
+#+END_SRC
+
