@@ -29,45 +29,41 @@
 \maketitle
 
 \section*{}
-\label{sec:orga9a5146}
+\label{sec:org3e38e4b}
 
 \section*{Releases}
-\label{sec:org6688799}
+\label{sec:org93816a3}
 5 releases since 2017-01-01
 
 
 \begin{center}
 \begin{tabular}{rr}
-Date & Release\\
+Version & Date\\
 \hline
-2017-03-30 & 3.7.5\\
-2017-03-30 & 3.10.1\\
-2017-08-11 & 3.10.2\\
-2017-08-11 & 3.11.0\\
-2017-09-12 & 3.7.6\\
+3.7.5 & 2017-03-30\\
+3.10.1 & 2017-03-30\\
+3.10.2 & 2017-08-11\\
+3.11.0 & 2017-08-11\\
+3.7.6 & 2017-09-12\\
 \end{tabular}
 \end{center}
 
 \section*{Contributions}
-\label{sec:orgfb9dc79}
+\label{sec:org2e7d66b}
 \begin{center}
-\begin{tabular}{|l|l|l|l|}
-\hline
- & Core & MPF & Docs \\
-\hline
-Commits & 256 & 163 & 207 \\
-\hline
-Contributors & 24 & 14 & 17 \\
-\hline
-New Contributors & 9 & 2 & 4 \\
-\hline
+\label{tab:org67eb355}
+\begin{tabular}{lrrr}
+ & Core & MPF & Docs\\
+Commits & 256 & 163 & 207\\
+Contributors & 24 & 14 & 17\\
+New Contributors & 9 & 4 & 6\\
 \end{tabular}
 \end{center}
 
 \section*{Core Functionality}
-\label{sec:org3b388c0}
+\label{sec:org4564deb}
 \subsection*{\texttt{with} attribute}
-\label{sec:org617f455}
+\label{sec:orgb653bd2}
 
 \begin{verbatim}
 bundle agent main
@@ -97,11 +93,11 @@ bundle agent main
         with => storejson(complex);
 }
 \end{verbatim}
-\captionof{figure}{\label{org498c253}
+\captionof{figure}{\label{orgbcf8039}
 With attribute usage example policy}
 
 \subsection*{\texttt{with} attribute}
-\label{sec:orgb02338b}
+\label{sec:org28cd640}
 
 \begin{verbatim}
 R: For iterable 'a 1' we created variable 'a_1' and its value is 'a 1'
@@ -119,50 +115,9 @@ R: We can print a data container fully without creating a temporary variable: {
   ]
 }
 \end{verbatim}
-\subsection*{Multiple augments}
-\label{sec:org9dd5cb9}
-
-\textbf{NOTE:} Current implementation discussion in progress in \href{https://tracker.mender.io/browse/CFE-2741}{CFE-2741}. Please
-consider participating.
-
-\begin{verbatim}
-{
-  "vars":{
-    "my_var": "defined in def.json",
-    "my_other_var": "Defined ONLY in def.json"
-  },
-  "augments": [
-    "/tmp/$(sys.flavor).json"
-  ]
-}
-\end{verbatim}
-\captionof{figure}{Example \texttt{/tmp/def.json}}
-
-\subsection*{Multiple augments}
-\label{sec:orgcd6b25b}
-
-\begin{verbatim}
-{
-  "vars": {
-    "my_var": "Overridden in centos_6.json",
-    "centos_6_var": "Defined ONLY in centos_6.json"
-  }
-}
-\end{verbatim}
-\captionof{figure}{Example \texttt{/tmp/centos\_6.json}}
-
-\subsection*{Multiple augments}
-\label{sec:org431fdb4}
-
-\begin{verbatim}
-[root@hub tmp]# cf-agent -KIf ./example.cf 
-R: def.my_var == Overridden in centos_6.json
-R: def.my_other_var == Defined ONLY in def.json
-R: def.centos_6_var == Defined ONLY in centos_6.json
-\end{verbatim}
 
 \subsection*{\texttt{inline\_mustache}}
-\label{sec:org0573f7c}
+\label{sec:orge726f0e}
 
 \begin{NOTES}
 You are no longer required to use an external file template. Now you can
@@ -188,7 +143,7 @@ bundle agent main
 \captionof{figure}{Example \texttt{template\_method} \texttt{inline\_mustache}}
 
 \subsection*{\texttt{inline\_mustache}}
-\label{sec:org404c161}
+\label{sec:orgb5ccdb9}
 
 Results in \texttt{/tmp/example.txt} having this content.
 
@@ -203,13 +158,54 @@ Results in \texttt{/tmp/example.txt} having this content.
 }
 \end{verbatim}
 \captionof{figure}{Example \texttt{template\_method} \texttt{inline\_mustache}}
+\subsection*{Multiple augments}
+\label{sec:org945c492}
+
+\textbf{NOTE:} Current implementation discussion in progress in \href{https://tracker.mender.io/browse/CFE-2741}{CFE-2741}. Please
+consider participating.
+
+\begin{verbatim}
+{
+  "vars":{
+    "my_var": "defined in def.json",
+    "my_other_var": "Defined ONLY in def.json"
+  },
+  "augments": [
+    "/tmp/$(sys.flavor).json"
+  ]
+}
+\end{verbatim}
+\captionof{figure}{Example \texttt{/tmp/def.json}}
+
+\subsection*{Multiple augments}
+\label{sec:org052bdf0}
+
+\begin{verbatim}
+{
+  "vars": {
+    "my_var": "Overridden in centos_6.json",
+    "centos_6_var": "Defined ONLY in centos_6.json"
+  }
+}
+\end{verbatim}
+\captionof{figure}{Example \texttt{/tmp/centos\_6.json}}
+
+\subsection*{Multiple augments}
+\label{sec:org77c0e35}
+
+\begin{verbatim}
+[root@hub tmp]# cf-agent -KIf ./example.cf 
+R: def.my_var == Overridden in centos_6.json
+R: def.my_other_var == Defined ONLY in def.json
+R: def.centos_6_var == Defined ONLY in centos_6.json
+\end{verbatim}
 
 \subsection*{\texttt{missing\_ok}}
-\label{sec:orgaddf09f}
+\label{sec:org8ee3217}
 \section*{MPF Functionality}
-\label{sec:org9dd1ac8}
+\label{sec:orga7af1b8}
 \subsection*{Augments - Append the \texttt{bundlesequnece} of \texttt{promises.cf} and \texttt{update.cf}}
-\label{sec:orgb7736d7}
+\label{sec:orgb1b3403}
 
 \begin{itemize}
 \item \texttt{control\_common\_bundlesequence\_end}
@@ -231,7 +227,7 @@ Results in \texttt{/tmp/example.txt} having this content.
 \end{itemize}
 
 \subsection*{Augments - Log file retention and rotation limits}
-\label{sec:org0bafe46}
+\label{sec:orgaae6216}
 
 \begin{description}
 \item[{\texttt{mpf\_log\_files\_max\_size}}] Max file size before rotation
@@ -251,7 +247,7 @@ Results in \texttt{/tmp/example.txt} having this content.
 \end{verbatim}
 
 \subsection*{Augments - Execution schedule}
-\label{sec:org90c9b0f}
+\label{sec:org0f9b0ce}
 
 \begin{description}
 \item[{\texttt{control\_executor\_schedule}}] Classes that trigger execution of \texttt{cf-agent}.
@@ -266,7 +262,7 @@ Results in \texttt{/tmp/example.txt} having this content.
 \end{verbatim}
 
 \subsection*{Augments - \texttt{splaytime}}
-\label{sec:orgcf916a9}
+\label{sec:org77cb975}
 
 \begin{description}
 \item[{\texttt{control\_executor\_splaytime}}] Maximum number of minutes \texttt{exec\_commad} should
@@ -282,7 +278,7 @@ wait before executing.
 \end{verbatim}
 
 \subsection*{Augments - \texttt{allowlegacyconnects}}
-\label{sec:org270f0a1}
+\label{sec:orgd61e204}
 
 \begin{description}
 \item[{\texttt{control\_server\_allowlegacyconnects}}] List of subnets allowed to connect
@@ -298,7 +294,7 @@ using legacy protocol (versions prior to 3.7.0).
 \end{verbatim}
 
 \subsection*{Augments - \texttt{maxconnections}}
-\label{sec:org8d8674e}
+\label{sec:org2d82bcb}
 
 \begin{description}
 \item[{\texttt{control\_serverd\_maxconnections}}] Maximum number of connections allowed by
@@ -314,7 +310,7 @@ using legacy protocol (versions prior to 3.7.0).
 \end{verbatim}
 
 \subsection*{Augments - Client initiated reporting (Enterprise)}
-\label{sec:org47a33d9}
+\label{sec:org350c13d}
 
 \begin{description}
 \item[{\texttt{control\_hub\_exclude\_hosts}}] List of subnets to exclude from hub initiated
@@ -339,7 +335,7 @@ initiated reporting.
 \end{verbatim}
 
 \subsection*{Augments - \texttt{files\_single\_copy}}
-\label{sec:org49e3b9a}
+\label{sec:org3910fbd}
 
 \begin{description}
 \item[{\texttt{control\_agent\_files\_single\_copy}}] List of regular expressions matching
@@ -356,7 +352,7 @@ files that should not be copied more than once.
 \end{verbatim}
 
 \subsection*{Augments - \texttt{default\_repository}}
-\label{sec:org389b43b}
+\label{sec:org1209b12}
 
 \begin{description}
 \item[{\texttt{mpf\_control\_agent\_default\_repository}}] List of classes class will cause
@@ -380,7 +376,7 @@ these backups to be placed in \texttt{\$(sys.workdir)/backups}.
 \end{verbatim}
 
 \subsection*{\texttt{templates} shortcut}
-\label{sec:orgac221a0}
+\label{sec:org90caa4c}
 
 \begin{description}
 \item[{\texttt{dir\_templates}}] Path to common template directory. Shortcut provided by
@@ -411,7 +407,7 @@ bundle agent example
 \end{verbatim}
 
 \subsection*{Automatically restart components on related data change}
-\label{sec:org765b9eb}
+\label{sec:org56b9bf1}
 
 \begin{NOTES}
 While the agent itsef will reload its config upon notice of policy change this
@@ -433,7 +429,7 @@ restart on related data change should be enabled for.
 \end{verbatim}
 
 \subsection*{Host info report now now renders inventory variables}
-\label{sec:org4a19fb4}
+\label{sec:org011b701}
 
 \begin{verbatim}
 cf-agent -KIb host_info_report
@@ -469,15 +465,15 @@ cf-agent -KIb host_info_report
 \captionof{figure}{Sample from inventory section of host info report}
 
 \section*{Enterprise Functionality}
-\label{sec:org9c6b951}
+\label{sec:orgfe44e59}
 \subsection*{UI responsiveness}
-\label{sec:org8ab74c4}
+\label{sec:org987f090}
 \begin{itemize}
 \item \href{data/75/971753-cddb-4739-a0a1-dcb66df44ab9/alert-status-speed-comparison.webm}{Testing} with 50,000 host data sets
 \end{itemize}
 
 \subsection*{Global Host Search}
-\label{sec:org38b3292}
+\label{sec:org657be7b}
 \begin{itemize}
 \item Easily find hosts by name, ip or identity
 \end{itemize}
@@ -487,13 +483,13 @@ cf-agent -KIb host_info_report
 \end{center}
 
 \subsection*{host count trend widget}
-\label{sec:orge7f5f71}
+\label{sec:orgc7512ff}
 \begin{center}
 \includegraphics[width=.9\linewidth]{data/e9/0e4df9-0bb7-4a1e-84d5-25911497f93c/2018-01-10_Selection_001_2018-01-14_12-02-44.png}
 \end{center}
 
 \subsection*{mail settings}
-\label{sec:org46ffa86}
+\label{sec:org3486fbf}
 \begin{itemize}
 \item Exported reports can now be sent as attachments in emails
 \end{itemize}
@@ -503,19 +499,19 @@ cf-agent -KIb host_info_report
 \end{center}
 
 \subsection*{LDAP settings API}
-\label{sec:org1e61904}
+\label{sec:orgaa99384}
 \begin{center}
 \includegraphics[width=.9\linewidth]{data/29/4c1258-49f4-4c72-9f8d-2b7535cfbea8/Authentication-settings_2018-01-14_12-04-18.png}
 \end{center}
 
 \subsection*{default roles}
-\label{sec:org44cb09d}
+\label{sec:org1d8ec8a}
 \begin{center}
 \includegraphics[width=.9\linewidth]{data/bf/10ec4b-5b6b-4140-9336-fb7ab7808fed/2018-01-14_Selection_004_2018-01-14_14-03-29.png}
 \end{center}
 
 \subsection*{New OOTB Inventory Attributes}
-\label{sec:orgfdba618}
+\label{sec:org4cfbb08}
 
 \begin{itemize}
 \item Policy Release Id
@@ -523,7 +519,7 @@ cf-agent -KIb host_info_report
 \end{itemize}
 
 \subsection*{Inventory API}
-\label{sec:org3cb4f85}
+\label{sec:org15c1182}
 
 \begin{verbatim}
 curl --user admin -X POST \
@@ -533,7 +529,7 @@ curl --user admin -X POST \
 \captionof{figure}{Example API Query}
 
 \subsection*{Inventory API}
-\label{sec:org5cc3187}
+\label{sec:org120e0a8}
 
 \begin{verbatim}
 {

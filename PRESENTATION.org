@@ -1,7 +1,7 @@
 #+Title: State of the CFEngine
 #+SUBTITLE: Or Since last time at Config Management Camp
 #+Author: Nick Anderson
-#+Email: nick@cmdln.org
+#+Email: nick.anderson@northern.tech
 #+REVEAL_ROOT: file:///home/nickanderson/src/reveal.js/
 #+OPTIONS: reveal_center:t reveal_progress:t reveal_history:nil reveal_control:t
 #+OPTIONS: reveal_rolling_links:t reveal_keyboard:t reveal_overview:t num:nil
@@ -18,7 +18,7 @@
 #+REVEAL_THEME: white 
 # ?? Guess this flattens up to x levels deep
 #+REVEAL_HLEVEL: 1
-#+REVEAL_HEAD_PREAMBLE: <meta name=description" content=CFEngine Zero to Hero Primer.">
+#+REVEAL_HEAD_PREAMBLE: <meta name=description" content=Or Since last time at config management camp ...">
 #+REVEAL_POSTAMBLE: <p> Created by Nick Anderson. </p>
 #+REVEAL_PLUGINS: (markdown notes)
 #+REVEAL_TITLE_SLIDE_BACKGROUND: ./orange-blue-tilt-right.png
@@ -55,24 +55,24 @@
 #+end_src
 
 
-#+Name: Release Date Table
+#+Name: Release Dates
 #+BEGIN_SRC shell :dir ~/CFEngine/core :exports results :results table :post addhdr(*this*)
   git for-each-ref --sort=taggerdate --format '%(tag)_,,,_%(taggerdate:raw)' refs/tags \
-    | awk 'BEGIN { FS = "_,,,_"; print "Date Release\n| ---------- | ------- |" };
+    | awk 'BEGIN { FS = "_,,,_"; print "Version Date \n| ------- | ---------- |" };
                  { t=strftime("%Y-%m-%d",$2);
-                 printf "%s %s\n", t, $1 }' \
+                 printf "%s %s\n", $1, t  }' \
     | egrep -v "build|PTV|\.0b" \
     | egrep "2017|2018|Date"
 #+END_SRC
 :END:
-#+RESULTS: Release Date Table
-|       Date | Release |
-|------------+---------|
-| 2017-03-30 |   3.7.5 |
-| 2017-03-30 |  3.10.1 |
-| 2017-08-11 |  3.10.2 |
-| 2017-08-11 |  3.11.0 |
-| 2017-09-12 |   3.7.6 |
+#+RESULTS: Release Dates
+| Version |       Date |
+|---------+------------|
+|   3.7.5 | 2017-03-30 |
+|  3.10.1 | 2017-03-30 |
+|  3.10.2 | 2017-08-11 |
+|  3.11.0 | 2017-08-11 |
+|   3.7.6 | 2017-09-12 |
 
 * Contributions
 #+Name: NumCommits
@@ -92,19 +92,19 @@
 #+END_SRC
 
 #+Name: NumCoreCommits
-#+CALL: NumCommits(REPOSITORY="https://github.com/cfengine/core")
+#+CALL: NumCommits(REPOSITORY="https://github.com/cfengine/core") :exports none
 
 #+RESULTS: NumCoreCommits
 | 256 |
 
 #+Name: NumMPFCommits
-#+CALL: NumCommits(REPOSITORY="https://github.com/cfengine/masterfiles")
+#+CALL: NumCommits(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
 
 #+RESULTS: NumMPFCommits
 | 163 |
 
 #+Name: NumDocCommits
-#+CALL: NumCommits(REPOSITORY="https://github.com/cfengine/Documentation")
+#+CALL: NumCommits(REPOSITORY="https://github.com/cfengine/Documentation") :exports none
 
 #+RESULTS: NumDocCommits
 | 207 |
@@ -125,19 +125,19 @@
 #+END_SRC
 
 #+Name: NumCoreContributors
-#+CALL: NumContributors(REPOSITORY="https://github.com/cfengine/core")
+#+CALL: NumContributors(REPOSITORY="https://github.com/cfengine/core") :exports none
 
 #+RESULTS: NumCoreContributors
 | 24 |
 
 #+Name: NumMPFContributors
-#+CALL: NumContributors(REPOSITORY="https://github.com/cfengine/masterfiles")
+#+CALL: NumContributors(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
 
 #+RESULTS: NumMPFContributors
 | 14 |
 
 #+Name: NumDocContributors
-#+CALL: NumContributors(REPOSITORY="https://github.com/cfengine/documentation")
+#+CALL: NumContributors(REPOSITORY="https://github.com/cfengine/documentation") :exports none
 
 #+RESULTS: NumDocContributors
 | 17 |
@@ -165,33 +165,28 @@
 #+END_SRC
 
 #+Name: NewCoreContributors
-#+CALL: NewContributors(REPOSITORY="https://github.com/cfengine/core")
+#+CALL: NewContributors(REPOSITORY="https://github.com/cfengine/core") :exports none
 
 #+RESULTS: NewCoreContributors
 | 9 |
 
 #+Name: NewMPFContributors
-#+CALL: NewContributors(REPOSITORY="https://github.com/cfengine/masterfiles")
+#+CALL: NewContributors(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
 
 #+RESULTS: NewMPFContributors
 | 4 |
 
 #+Name: NewDocContributors
-#+CALL: NewContributors(REPOSITORY="https://github.com/cfengine/documentation")
+#+CALL: NewContributors(REPOSITORY="https://github.com/cfengine/documentation") :exports none
 
 #+RESULTS: NewDocContributors
 | 6 |
 
 #+Name: Contributions since 2017-01-01 
-+------------------+------+-----+------+
 |                  | Core | MPF | Docs |
-+------------------+------+-----+------+
 | Commits          |  256 | 163 |  207 |
-+------------------+------+-----+------+
 | Contributors     |   24 |  14 |   17 |
-+------------------+------+-----+------+
 | New Contributors |    9 |   4 |    6 |
-+------------------+------+-----+------+
 #+TBLFM: @2$2=remote(NumCoreCommits,@>$0);::@2$3=remote(NumMPFCommits,@>$0);::@2$4=remote(NumDocCommits,@>$0);::@3$2=remote(NumCoreContributors,@>$0);::@3$3=remote(NumMPFContributors,@>$0);::@3$4=remote(NumDocContributors,@>$0);::@4$2=remote(NewCoreContributors,@>$0);::@4$3=remote(NewMPFContributors,@>$0);::@4$4=remote(NewDocContributors,@>$0);
 
 * Core Functionality
@@ -248,45 +243,6 @@ R: We can print a data container fully without creating a temporary variable: {
   ]
 }
 #+end_example
-** Multiple augments
-
-*NOTE:* Current implementation discussion in progress in [[jira:CFE-2741][CFE-2741]]. Please
-consider participating.
-
-#+Caption: Example =/tmp/def.json=
-#+BEGIN_SRC json
-{
-  "vars":{
-    "my_var": "defined in def.json",
-    "my_other_var": "Defined ONLY in def.json"
-  },
-  "augments": [
-    "/tmp/$(sys.flavor).json"
-  ]
-}
-#+END_SRC
-
-** Multiple augments
-
-#+Caption: Example =/tmp/centos_6.json=
-#+BEGIN_SRC json
-{
-  "vars": {
-    "my_var": "Overridden in centos_6.json",
-    "centos_6_var": "Defined ONLY in centos_6.json"
-  }
-}
-#+END_SRC
-
-** Multiple augments
-
-#+Caption: Execution output on CentOS 6
-#+BEGIN_EXAMPLE
-[root@hub tmp]# cf-agent -KIf ./example.cf 
-R: def.my_var == Overridden in centos_6.json
-R: def.my_other_var == Defined ONLY in def.json
-R: def.centos_6_var == Defined ONLY in centos_6.json
-#+END_EXAMPLE
 
 ** =inline_mustache=
 
@@ -328,6 +284,45 @@ Results in =/tmp/example.txt= having this content.
     "hello": "world"
   }
 #+END_SRC
+** Multiple augments
+
+*NOTE:* Current implementation discussion in progress in [[jira:CFE-2741][CFE-2741]]. Please
+consider participating.
+
+#+Caption: Example =/tmp/def.json=
+#+BEGIN_SRC json
+{
+  "vars":{
+    "my_var": "defined in def.json",
+    "my_other_var": "Defined ONLY in def.json"
+  },
+  "augments": [
+    "/tmp/$(sys.flavor).json"
+  ]
+}
+#+END_SRC
+
+** Multiple augments
+
+#+Caption: Example =/tmp/centos_6.json=
+#+BEGIN_SRC json
+{
+  "vars": {
+    "my_var": "Overridden in centos_6.json",
+    "centos_6_var": "Defined ONLY in centos_6.json"
+  }
+}
+#+END_SRC
+
+** Multiple augments
+
+#+Caption: Execution output on CentOS 6
+#+BEGIN_EXAMPLE
+[root@hub tmp]# cf-agent -KIf ./example.cf 
+R: def.my_var == Overridden in centos_6.json
+R: def.my_other_var == Defined ONLY in def.json
+R: def.centos_6_var == Defined ONLY in centos_6.json
+#+END_EXAMPLE
 
 ** =missing_ok=
 * MPF Functionality

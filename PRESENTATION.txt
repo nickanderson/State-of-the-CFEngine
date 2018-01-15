@@ -19,28 +19,25 @@ Releases
 
 
   ━━━━━━━━━━━━━━━━━━━━━
-         Date  Release 
+   Version        Date 
   ─────────────────────
-   2017-03-30    3.7.5 
-   2017-03-30   3.10.1 
-   2017-08-11   3.10.2 
-   2017-08-11   3.11.0 
-   2017-09-12    3.7.6 
+     3.7.5  2017-03-30 
+    3.10.1  2017-03-30 
+    3.10.2  2017-08-11 
+    3.11.0  2017-08-11 
+     3.7.6  2017-09-12 
   ━━━━━━━━━━━━━━━━━━━━━
 
 
 Contributions
 ═════════════
 
-  +------------------+------+-----+------+
-  |                  | Core | MPF | Docs |
-  +------------------+------+-----+------+
-  | Commits          |  256 | 163 |  207 |
-  +------------------+------+-----+------+
-  | Contributors     |   24 |  14 |   17 |
-  +------------------+------+-----+------+
-  | New Contributors |    9 |   2 |    4 |
-  +------------------+------+-----+------+
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+                     Core  MPF  Docs 
+   Commits            256  163   207 
+   Contributors        24   14    17 
+   New Contributors     9    4     6 
+  ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
 
 
 Core Functionality
@@ -101,54 +98,6 @@ Core Functionality
   └────
 
 
-Multiple augments
-─────────────────
-
-  *NOTE:* Current implementation discussion in progress in [CFE-2741].
-  Please consider participating.
-
-  ┌────
-  │ {
-  │   "vars":{
-  │     "my_var": "defined in def.json",
-  │     "my_other_var": "Defined ONLY in def.json"
-  │   },
-  │   "augments": [
-  │     "/tmp/$(sys.flavor).json"
-  │   ]
-  │ }
-  └────
-  Listing 2: Example `/tmp/def.json'
-
-
-[CFE-2741] https://tracker.mender.io/browse/CFE-2741
-
-
-Multiple augments
-─────────────────
-
-  ┌────
-  │ {
-  │   "vars": {
-  │     "my_var": "Overridden in centos_6.json",
-  │     "centos_6_var": "Defined ONLY in centos_6.json"
-  │   }
-  │ }
-  └────
-  Listing 3: Example `/tmp/centos_6.json'
-
-
-Multiple augments
-─────────────────
-
-  ┌────
-  │ [root@hub tmp]# cf-agent -KIf ./example.cf 
-  │ R: def.my_var == Overridden in centos_6.json
-  │ R: def.my_other_var == Defined ONLY in def.json
-  │ R: def.centos_6_var == Defined ONLY in centos_6.json
-  └────
-
-
 `inline_mustache'
 ─────────────────
 
@@ -171,7 +120,7 @@ Multiple augments
   │ 
   │ }
   └────
-  Listing 4: Example `template_method' `inline_mustache'
+  Listing 2: Example `template_method' `inline_mustache'
 
 
 `inline_mustache'
@@ -189,7 +138,55 @@ Multiple augments
   │   "hello": "world"
   │ }
   └────
-  Listing 5: Example `template_method' `inline_mustache'
+  Listing 3: Example `template_method' `inline_mustache'
+
+
+Multiple augments
+─────────────────
+
+  *NOTE:* Current implementation discussion in progress in [CFE-2741].
+  Please consider participating.
+
+  ┌────
+  │ {
+  │   "vars":{
+  │     "my_var": "defined in def.json",
+  │     "my_other_var": "Defined ONLY in def.json"
+  │   },
+  │   "augments": [
+  │     "/tmp/$(sys.flavor).json"
+  │   ]
+  │ }
+  └────
+  Listing 4: Example `/tmp/def.json'
+
+
+[CFE-2741] https://tracker.mender.io/browse/CFE-2741
+
+
+Multiple augments
+─────────────────
+
+  ┌────
+  │ {
+  │   "vars": {
+  │     "my_var": "Overridden in centos_6.json",
+  │     "centos_6_var": "Defined ONLY in centos_6.json"
+  │   }
+  │ }
+  └────
+  Listing 5: Example `/tmp/centos_6.json'
+
+
+Multiple augments
+─────────────────
+
+  ┌────
+  │ [root@hub tmp]# cf-agent -KIf ./example.cf 
+  │ R: def.my_var == Overridden in centos_6.json
+  │ R: def.my_other_var == Defined ONLY in def.json
+  │ R: def.centos_6_var == Defined ONLY in centos_6.json
+  └────
 
 
 `missing_ok'
