@@ -75,9 +75,9 @@
 | 2017-09-12 |   3.7.6 |
 
 * Contributions
-#+Name: NumCoreCommits
-#+BEGIN_SRC shell :dir /tmp/ :exports none :results table
-  REPOSITORY=https://github.com/cfengine/core
+#+Name: NumCommits
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  #REPOSITORY=https://github.com/cfengine/core
   TMP=$(mktemp --directory --quiet) 
   mkdir -p $TMP
   cd $TMP
@@ -90,117 +90,27 @@
   rm -rf "$TMP"
   echo "$NUMCOMMITS"
 #+END_SRC
+
+#+Name: NumCoreCommits
+#+CALL: NumCommits(REPOSITORY="https://github.com/cfengine/core")
 
 #+RESULTS: NumCoreCommits
 | 256 |
 
-#+Name: NumCoreContributors
-#+BEGIN_SRC shell :dir /tmp/ :exports none :results table
-  REPOSITORY=https://github.com/cfengine/core
-  TMP=$(mktemp --directory --quiet) 
-  mkdir -p $TMP
-  cd $TMP
-  git clone $REPOSITORY
-  REPO="$(basename $REPOSITORY)"
-  cd "$TMP/$REPO"
-  LASTYEAR=$(date -d "-1 year" '+%Y')
-  LASTNEWYEAR="$LASTYEAR-01-01"
-  NUMAUTHORS=$(git-stats --since "$LASTNEWYEAR" --authors --raw | jq '.authors | length')
-  rm -rf "$TMP"
-  echo "$NUMAUTHORS"
-#+END_SRC
-
-#+RESULTS: NumCoreContributors
-| 24 |
-
-#+Name: NewCoreContributors
-#+BEGIN_SRC shell :dir ~/CFEngine/core :exports none :results table
-  git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
-  rm /tmp/core-first-contributions.dat
-  while read Author; do
-    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
-    echo "$FirstCommit,$Author" >> /tmp/core-first-contributions.dat
-  done < /tmp/authors.txt 
-  egrep -c "^(2018|2017).*" /tmp/core-first-contributions.dat
-#+END_SRC
-
-#+RESULTS: NewCoreContributors
-| 9 |
-
 #+Name: NumMPFCommits
-#+BEGIN_SRC shell :dir /tmp/ :exports none :results table
-  REPOSITORY=https://github.com/cfengine/masterfiles
-  TMP=$(mktemp --directory --quiet) 
-  mkdir -p $TMP
-  cd $TMP
-  git clone $REPOSITORY
-  REPO="$(basename $REPOSITORY)"
-  cd "$TMP/$REPO"
-  LASTYEAR=$(date -d "-1 year" '+%Y')
-  LASTNEWYEAR="$LASTYEAR-01-01"
-  NUMCOMMITS=$(git --no-pager log --since "$LASTNEWYEAR" --oneline --no-merges | wc -l)
-  rm -rf "$TMP"
-  echo "$NUMCOMMITS"
-#+END_SRC
+#+CALL: NumCommits(REPOSITORY="https://github.com/cfengine/masterfiles")
 
 #+RESULTS: NumMPFCommits
 | 163 |
 
-#+Name: NumMPFContributors
-#+BEGIN_SRC shell :dir /tmp/ :exports none :results table
-  REPOSITORY=https://github.com/cfengine/masterfiles
-  TMP=$(mktemp --directory --quiet) 
-  mkdir -p $TMP
-  cd $TMP
-  git clone $REPOSITORY
-  REPO="$(basename $REPOSITORY)"
-  cd "$TMP/$REPO"
-  LASTYEAR=$(date -d "-1 year" '+%Y')
-  LASTNEWYEAR="$LASTYEAR-01-01"
-  NUMAUTHORS=$(git-stats --since "$LASTNEWYEAR" --authors --raw | jq '.authors | length')
-  rm -rf "$TMP"
-  echo "$NUMAUTHORS"
-#+END_SRC
-
-#+RESULTS: NumMPFContributors
-| 14 |
-
-#+Name: NewMPFContributors
-#+BEGIN_SRC shell :dir ~/CFEngine/masterfiles :exports none :results table
-  git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
-  rm /tmp/core-first-contributions.dat
-  while read Author; do
-    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
-    echo "$FirstCommit,$Author" >> /tmp/core-first-contributions.dat
-  done < /tmp/authors.txt 
-  egrep -c "^(2018|2017).*" /tmp/core-first-contributions.dat
-#+END_SRC
-
-#+RESULTS: NewMPFContributors
-| 2 |
-
 #+Name: NumDocCommits
-#+BEGIN_SRC shell :dir /tmp/ :exports none :results table
-  REPOSITORY=https://github.com/cfengine/documentation
-  TMP=$(mktemp --directory --quiet) 
-  mkdir -p $TMP
-  cd $TMP
-  git clone $REPOSITORY
-  REPO="$(basename $REPOSITORY)"
-  cd "$TMP/$REPO"
-  LASTYEAR=$(date -d "-1 year" '+%Y')
-  LASTNEWYEAR="$LASTYEAR-01-01"
-  NUMCOMMITS=$(git --no-pager log --since "$LASTNEWYEAR" --oneline --no-merges | wc -l)
-  rm -rf "$TMP"
-  echo "$NUMCOMMITS"
-#+END_SRC
+#+CALL: NumCommits(REPOSITORY="https://github.com/cfengine/Documentation")
 
 #+RESULTS: NumDocCommits
 | 207 |
 
-#+Name: NumDocContributors
-#+BEGIN_SRC shell :dir /tmp/ :exports none :results table
-  REPOSITORY=https://github.com/cfengine/documentation
+#+Name: NumContributors
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
   TMP=$(mktemp --directory --quiet) 
   mkdir -p $TMP
   cd $TMP
@@ -214,22 +124,63 @@
   echo "$NUMAUTHORS"
 #+END_SRC
 
+#+Name: NumCoreContributors
+#+CALL: NumContributors(REPOSITORY="https://github.com/cfengine/core")
+
+#+RESULTS: NumCoreContributors
+| 24 |
+
+#+Name: NumMPFContributors
+#+CALL: NumContributors(REPOSITORY="https://github.com/cfengine/masterfiles")
+
+#+RESULTS: NumMPFContributors
+| 14 |
+
+#+Name: NumDocContributors
+#+CALL: NumContributors(REPOSITORY="https://github.com/cfengine/documentation")
+
 #+RESULTS: NumDocContributors
 | 17 |
 
-#+Name: NewDocContributors
-#+BEGIN_SRC shell :dir ~/CFEngine/documentation :exports none :results table
+#+Name: NewContributors
+#+BEGIN_SRC shell :dir /tmp :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-1 year" '+%Y')
+  THISYEAR=$(date '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
   git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
-  rm /tmp/core-first-contributions.dat
+  CONTRIBUTORS="/$TMP/$REPO-first-contributions.dat"
+  rm -f $CONTRIBUTORS
   while read Author; do
     FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
-    echo "$FirstCommit,$Author" >> /tmp/core-first-contributions.dat
+    echo "$FirstCommit,$Author" >> $CONTRIBUTORS
   done < /tmp/authors.txt 
-  egrep -c "^(2018|2017).*" /tmp/core-first-contributions.dat
+  egrep -c "^($LASTYEAR|$THISYEAR).*" $CONTRIBUTORS 
+  rm -rf $TMP
 #+END_SRC
 
-#+RESULTS: NewDocContributors
+#+Name: NewCoreContributors
+#+CALL: NewContributors(REPOSITORY="https://github.com/cfengine/core")
+
+#+RESULTS: NewCoreContributors
+| 9 |
+
+#+Name: NewMPFContributors
+#+CALL: NewContributors(REPOSITORY="https://github.com/cfengine/masterfiles")
+
+#+RESULTS: NewMPFContributors
 | 4 |
+
+#+Name: NewDocContributors
+#+CALL: NewContributors(REPOSITORY="https://github.com/cfengine/documentation")
+
+#+RESULTS: NewDocContributors
+| 6 |
 
 #+Name: Contributions since 2017-01-01 
 +------------------+------+-----+------+
@@ -239,7 +190,7 @@
 +------------------+------+-----+------+
 | Contributors     |   24 |  14 |   17 |
 +------------------+------+-----+------+
-| New Contributors |    9 |   2 |    4 |
+| New Contributors |    9 |   4 |    6 |
 +------------------+------+-----+------+
 #+TBLFM: @2$2=remote(NumCoreCommits,@>$0);::@2$3=remote(NumMPFCommits,@>$0);::@2$4=remote(NumDocCommits,@>$0);::@3$2=remote(NumCoreContributors,@>$0);::@3$3=remote(NumMPFContributors,@>$0);::@3$4=remote(NumDocContributors,@>$0);::@4$2=remote(NewCoreContributors,@>$0);::@4$3=remote(NewMPFContributors,@>$0);::@4$4=remote(NewDocContributors,@>$0);
 
