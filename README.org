@@ -5,3 +5,6 @@ Typically this content is delivered by someone at Config Management Camp in Gent
 Belgium.
 
 [[https://htmlpreview.github.io/?https://github.com/nickanderson/State-of-the-CFEngine/blob/master/PRESENTATION.html][The presentation]] is generated from org-mode using org-reveal.
+
+- ~org-beamer-export-to-pdf~
+- ~org-reveal-export-to-html~

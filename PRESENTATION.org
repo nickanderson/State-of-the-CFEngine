@@ -22,6 +22,7 @@
 #+REVEAL_POSTAMBLE: <p> Created by Nick Anderson. </p>
 #+REVEAL_PLUGINS: (markdown notes)
 #+REVEAL_TITLE_SLIDE_BACKGROUND: ./orange-blue-tilt-right.png
+#+OPTIONS: H:1
 
 * 
 :PROPERTIES:
@@ -41,7 +42,7 @@
 #+END_SRC
 #+RESULTS:
 :END:
-5 releases since 2017-01-01
+7 releases since 2017-01-01
 
 :DRAWER:
 
@@ -73,6 +74,8 @@
 |  3.10.2 | 2017-08-11 |
 |  3.11.0 | 2017-08-11 |
 |   3.7.6 | 2017-09-12 |
+|  3.10.3 | 2018-02-02 |
+|   3.7.7 | 2018-02-02 |
 
 * Contributions
 #+Name: NumCommits
@@ -95,7 +98,7 @@
 #+CALL: NumCommits(REPOSITORY="https://github.com/cfengine/core") :exports none
 
 #+RESULTS: NumCoreCommits
-| 256 |
+| 265 |
 
 #+Name: NumMPFCommits
 #+CALL: NumCommits(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
@@ -191,6 +194,9 @@
 
 * Core Functionality
 ** =with= attribute
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 #+Name: With attribute usage example
 #+Caption: With attribute usage example policy
@@ -224,6 +230,9 @@ bundle agent main
 #+END_SRC
 
 ** =with= attribute
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 #+Caption: With attribute usage example policy output
 #+RESULTS: With attribute usage example
@@ -245,6 +254,9 @@ R: We can print a data container fully without creating a temporary variable: {
 #+end_example
 
 ** =inline_mustache=
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 #+BEGIN_NOTES
   You are no longer required to use an external file template. Now you can
@@ -270,6 +282,9 @@ R: We can print a data container fully without creating a temporary variable: {
 #+END_SRC
 
 ** =inline_mustache=
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 Results in =/tmp/example.txt= having this content.
 
@@ -285,6 +300,9 @@ Results in =/tmp/example.txt= having this content.
   }
 #+END_SRC
 ** Multiple augments
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 *NOTE:* Current implementation discussion in progress in [[jira:CFE-2741][CFE-2741]]. Please
 consider participating.
@@ -303,6 +321,9 @@ consider participating.
 #+END_SRC
 
 ** Multiple augments
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 #+Caption: Example =/tmp/centos_6.json=
 #+BEGIN_SRC json
@@ -315,6 +336,9 @@ consider participating.
 #+END_SRC
 
 ** Multiple augments
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 #+Caption: Execution output on CentOS 6
 #+BEGIN_EXAMPLE
@@ -325,8 +349,14 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 #+END_EXAMPLE
 
 ** =missing_ok=
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 * MPF Functionality
 ** Augments - Append the =bundlesequnece= of =promises.cf= and =update.cf=
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 - =control_common_bundlesequence_end=
 - =control_common_update_bundlesequence_end=
@@ -344,6 +374,9 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 - Agent errors if named bundle is missing.
 
 ** Augments - Log file retention and rotation limits
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 - =mpf_log_files_max_size= :: Max file size before rotation
 - =mpf_log_file_retention= :: Number of file rotations to keep
@@ -361,6 +394,9 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 #+END_SRC
 
 ** Augments - Execution schedule
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 - =control_executor_schedule= :: Classes that trigger execution of =cf-agent=.
  
@@ -373,6 +409,9 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 #+END_SRC 
 
 ** Augments - =splaytime=
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 - =control_executor_splaytime= :: Maximum number of minutes =exec_commad= should
      wait before executing.
@@ -386,6 +425,9 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 #+END_SRC
 
 ** Augments - =allowlegacyconnects=
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 - =control_server_allowlegacyconnects= :: List of subnets allowed to connect
      using legacy protocol (versions prior to 3.7.0).
@@ -399,6 +441,9 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 #+END_SRC
 
 ** Augments - =maxconnections=
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 - =control_serverd_maxconnections= :: Maximum number of connections allowed by
      =cf-serverd=.
@@ -412,6 +457,9 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 #+END_SRC
 
 ** Augments - Client initiated reporting (Enterprise)
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 - =control_hub_exclude_hosts= :: List of subnets to exclude from hub initiated
      report collection.
@@ -434,6 +482,9 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 #+END_SRC
 
 ** Augments - =files_single_copy=
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 - =control_agent_files_single_copy= :: List of regular expressions matching
      files that should not be copied more than once.
@@ -448,6 +499,9 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 #+END_SRC
 
 ** Augments - =default_repository=
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 - =mpf_control_agent_default_repository= :: List of classes class will cause
      these backups to be placed in =$(sys.workdir)/backups=.
@@ -469,6 +523,9 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 #+END_SRC
 
 ** =templates= shortcut 
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 - =dir_templates= :: Path to common template directory. Shortcut provided by
      =cf-serverd= as =templates/=.
@@ -497,6 +554,9 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 #+END_SRC
 
 ** Automatically restart components on related data change
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 #+BEGIN_NOTES
   While the agent itsef will reload its config upon notice of policy change this
@@ -516,6 +576,9 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 #+END_SRC
 
 ** Host info report now now renders inventory variables
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 #+BEGIN_SRC shell
   cf-agent -KIb host_info_report
@@ -555,6 +618,7 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 :PROPERTIES:
 :Attachments: alert-status-speed-comparison.webm
 :ID:       75971753-cddb-4739-a0a1-dcb66df44ab9
+:BEAMER_env: frame
 :END:
 
 - [[file:data/75/971753-cddb-4739-a0a1-dcb66df44ab9/alert-status-speed-comparison.webm][Testing]] with 50,000 host data sets
@@ -563,6 +627,7 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 :PROPERTIES:
 :ID:       f97c9b4d-d46f-4aee-bd68-630f44106b0e
 :Attachments: 2018-01-14_Selection_002_2018-01-14_13-21-21.png
+:BEAMER_env: frame
 :END:
 - Easily find hosts by name, ip or identity
 
@@ -573,6 +638,7 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 :PROPERTIES:
 :ID:       e90e4df9-0bb7-4a1e-84d5-25911497f93c
 :Attachments: 2018-01-10_Selection_001_2018-01-14_12-02-44.png
+:BEAMER_env: frame
 :END:
 
 #+DOWNLOADED: https://cfengine.com/wp-content/uploads/2018/01/2018-01-10_Selection_001.png @ 2018-01-14 12:02:44
@@ -582,6 +648,7 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 :PROPERTIES:
 :ID:       748d9e15-278e-46ac-822f-9e0f7e6b2830
 :Attachments: mail-settings-1024x537_2018-01-14_12-01-05.png
+:BEAMER_env: frame
 :END:
 
 - Exported reports can now be sent as attachments in emails
@@ -593,6 +660,7 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 :PROPERTIES:
 :ID:       294c1258-49f4-4c72-9f8d-2b7535cfbea8
 :Attachments: Authentication-settings_2018-01-14_12-04-18.png
+:BEAMER_env: frame
 :END:
 
 #+DOWNLOADED: https://cfengine.com/wp-content/uploads/2018/01/Authentication-settings.png @ 2018-01-14 12:04:18
@@ -602,17 +670,24 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 :PROPERTIES:
 :ID:       bf10ec4b-5b6b-4140-9336-fb7ab7808fed
 :Attachments: 2018-01-14_Selection_004_2018-01-14_14-03-29.png
+:BEAMER_env: frame
 :END:
 
 #+DOWNLOADED: /home/nickanderson/Pictures/Screenshots/2018-01-14_Selection_004.png @ 2018-01-14 14:03:32
 [[file:data/bf/10ec4b-5b6b-4140-9336-fb7ab7808fed/2018-01-14_Selection_004_2018-01-14_14-03-29.png]]
 
 ** New OOTB Inventory Attributes
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 - Policy Release Id
 - AIX OS Level
  
 ** Inventory API 
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 #+Caption: Example API Query
 #+BEGIN_SRC shell
@@ -622,6 +697,9 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 #+END_SRC
 
 ** Inventory API
+:PROPERTIES:
+:BEAMER_env: frame
+:END:
 
 #+Caption: Example Query Response
 #+BEGIN_SRC json
@@ -660,4 +738,3 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
     }
 }
 #+END_SRC
-

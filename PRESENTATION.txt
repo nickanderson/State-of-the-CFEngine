@@ -15,7 +15,7 @@
 Releases
 ════════
 
-  5 releases since 2017-01-01
+  7 releases since 2017-01-01
 
 
   ━━━━━━━━━━━━━━━━━━━━━
@@ -26,6 +26,8 @@ Releases
     3.10.2  2017-08-11 
     3.11.0  2017-08-11 
      3.7.6  2017-09-12 
+    3.10.3  2018-02-02 
+     3.7.7  2018-02-02 
   ━━━━━━━━━━━━━━━━━━━━━
 
 
@@ -43,8 +45,7 @@ Contributions
 Core Functionality
 ══════════════════
 
-`with' attribute
-────────────────
+◊ `with' attribute
 
   ┌────
   │ bundle agent main
@@ -77,8 +78,7 @@ Core Functionality
   Listing 1: With attribute usage example policy
 
 
-`with' attribute
-────────────────
+◊ `with' attribute
 
   ┌────
   │ R: For iterable 'a 1' we created variable 'a_1' and its value is 'a 1'
@@ -98,8 +98,7 @@ Core Functionality
   └────
 
 
-`inline_mustache'
-─────────────────
+◊ `inline_mustache'
 
   You are no longer required to use an external file template. Now you
   can provide the template directly within the policy.
@@ -123,8 +122,7 @@ Core Functionality
   Listing 2: Example `template_method' `inline_mustache'
 
 
-`inline_mustache'
-─────────────────
+◊ `inline_mustache'
 
   Results in `/tmp/example.txt' having this content.
 
@@ -141,8 +139,7 @@ Core Functionality
   Listing 3: Example `template_method' `inline_mustache'
 
 
-Multiple augments
-─────────────────
+◊ Multiple augments
 
   *NOTE:* Current implementation discussion in progress in [CFE-2741].
   Please consider participating.
@@ -161,11 +158,10 @@ Multiple augments
   Listing 4: Example `/tmp/def.json'
 
 
-[CFE-2741] https://tracker.mender.io/browse/CFE-2741
+  [CFE-2741] https://tracker.mender.io/browse/CFE-2741
 
 
-Multiple augments
-─────────────────
+◊ Multiple augments
 
   ┌────
   │ {
@@ -178,8 +174,7 @@ Multiple augments
   Listing 5: Example `/tmp/centos_6.json'
 
 
-Multiple augments
-─────────────────
+◊ Multiple augments
 
   ┌────
   │ [root@hub tmp]# cf-agent -KIf ./example.cf 
@@ -189,15 +184,13 @@ Multiple augments
   └────
 
 
-`missing_ok'
-────────────
+◊ `missing_ok'
 
 
 MPF Functionality
 ═════════════════
 
-Augments - Append the `bundlesequnece' of `promises.cf' and `update.cf'
-───────────────────────────────────────────────────────────────────────
+◊ Augments - Append the `bundlesequnece' of `promises.cf' and `update.cf'
 
   • `control_common_bundlesequence_end'
   • `control_common_update_bundlesequence_end'
@@ -215,8 +208,7 @@ Augments - Append the `bundlesequnece' of `promises.cf' and `update.cf'
   • Agent errors if named bundle is missing.
 
 
-Augments - Log file retention and rotation limits
-─────────────────────────────────────────────────
+◊ Augments - Log file retention and rotation limits
 
   `mpf_log_files_max_size'
         Max file size before rotation
@@ -237,8 +229,7 @@ Augments - Log file retention and rotation limits
   └────
 
 
-Augments - Execution schedule
-─────────────────────────────
+◊ Augments - Execution schedule
 
   `control_executor_schedule'
         Classes that trigger execution of `cf-agent'.
@@ -252,8 +243,7 @@ Augments - Execution schedule
   └────
 
 
-Augments - `splaytime'
-──────────────────────
+◊ Augments - `splaytime'
 
   `control_executor_splaytime'
         Maximum number of minutes `exec_commad' should wait before
@@ -268,8 +258,7 @@ Augments - `splaytime'
   └────
 
 
-Augments - `allowlegacyconnects'
-────────────────────────────────
+◊ Augments - `allowlegacyconnects'
 
   `control_server_allowlegacyconnects'
         List of subnets allowed to connect using legacy protocol
@@ -284,8 +273,7 @@ Augments - `allowlegacyconnects'
   └────
 
 
-Augments - `maxconnections'
-───────────────────────────
+◊ Augments - `maxconnections'
 
   `control_serverd_maxconnections'
         Maximum number of connections allowed by `cf-serverd'.
@@ -299,8 +287,7 @@ Augments - `maxconnections'
   └────
 
 
-Augments - Client initiated reporting (Enterprise)
-──────────────────────────────────────────────────
+◊ Augments - Client initiated reporting (Enterprise)
 
   `control_hub_exclude_hosts'
         List of subnets to exclude from hub initiated report collection.
@@ -324,8 +311,7 @@ Augments - Client initiated reporting (Enterprise)
   └────
 
 
-Augments - `files_single_copy'
-──────────────────────────────
+◊ Augments - `files_single_copy'
 
   `control_agent_files_single_copy'
         List of regular expressions matching files that should not be
@@ -341,8 +327,7 @@ Augments - `files_single_copy'
   └────
 
 
-Augments - `default_repository'
-───────────────────────────────
+◊ Augments - `default_repository'
 
   `mpf_control_agent_default_repository'
         List of classes class will cause these backups to be placed in
@@ -366,8 +351,7 @@ Augments - `default_repository'
   └────
 
 
-`templates' shortcut
-────────────────────
+◊ `templates' shortcut
 
   `dir_templates'
         Path to common template directory. Shortcut provided by
@@ -397,8 +381,7 @@ Augments - `default_repository'
   └────
 
 
-Automatically restart components on related data change
-───────────────────────────────────────────────────────
+◊ Automatically restart components on related data change
 
   While the agent itsef will reload its config upon notice of policy
   change this bundle specifically handles changes to variables used in
@@ -418,8 +401,7 @@ Automatically restart components on related data change
   └────
 
 
-Host info report now now renders inventory variables
-────────────────────────────────────────────────────
+◊ Host info report now now renders inventory variables
 
   ┌────
   │ cf-agent -KIb host_info_report
@@ -458,59 +440,51 @@ Host info report now now renders inventory variables
 Enterprise Functionality
 ════════════════════════
 
-UI responsiveness
-─────────────────
+◊ UI responsiveness
 
   • [Testing] with 50,000 host data sets
 
 
-[Testing]
-file:data/75/971753-cddb-4739-a0a1-dcb66df44ab9/alert-status-speed-comparison.webm
+  [Testing]
+  file:data/75/971753-cddb-4739-a0a1-dcb66df44ab9/alert-status-speed-comparison.webm
 
 
-Global Host Search
-──────────────────
+◊ Global Host Search
 
   • Easily find hosts by name, ip or identity
 
   [file:data/f9/7c9b4d-d46f-4aee-bd68-630f44106b0e/2018-01-14_Selection_002_2018-01-14_13-21-21.png]
 
 
-host count trend widget
-───────────────────────
+◊ host count trend widget
 
   [file:data/e9/0e4df9-0bb7-4a1e-84d5-25911497f93c/2018-01-10_Selection_001_2018-01-14_12-02-44.png]
 
 
-mail settings
-─────────────
+◊ mail settings
 
   • Exported reports can now be sent as attachments in emails
 
   [file:data/74/8d9e15-278e-46ac-822f-9e0f7e6b2830/mail-settings-1024x537_2018-01-14_12-01-05.png]
 
 
-LDAP settings API
-─────────────────
+◊ LDAP settings API
 
   [file:data/29/4c1258-49f4-4c72-9f8d-2b7535cfbea8/Authentication-settings_2018-01-14_12-04-18.png]
 
 
-default roles
-─────────────
+◊ default roles
 
   [file:data/bf/10ec4b-5b6b-4140-9336-fb7ab7808fed/2018-01-14_Selection_004_2018-01-14_14-03-29.png]
 
 
-New OOTB Inventory Attributes
-─────────────────────────────
+◊ New OOTB Inventory Attributes
 
   • Policy Release Id
   • AIX OS Level
 
 
-Inventory API
-─────────────
+◊ Inventory API
 
   ┌────
   │ curl --user admin -X POST \
@@ -520,8 +494,7 @@ Inventory API
   Listing 7: Example API Query
 
 
-Inventory API
-─────────────
+◊ Inventory API
 
   ┌────
   │ {

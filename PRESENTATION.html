@@ -1636,16 +1636,16 @@ body {
 </section>
 
 <section>
-<section id="slide-orga6c7b17" data-background="./2018-01-14_Selection_005.png">
-<h2 id="orga6c7b17"></h2>
+<section id="slide-orgf5ad007" data-background="./2018-01-14_Selection_005.png">
+<h2 id="orgf5ad007"></h2>
 
 </section>
 </section>
 <section>
-<section id="slide-orga64eb4e">
-<h2 id="orga64eb4e">Releases</h2>
+<section id="slide-org721af8f">
+<h2 id="org721af8f">Releases</h2>
 <p>
-5 releases since 2017-01-01
+7 releases since 2017-01-01
 </p>
 
 <p>
@@ -1690,15 +1690,25 @@ body {
 <td class="org-right">3.7.6</td>
 <td class="org-right">2017-09-12</td>
 </tr>
+
+<tr>
+<td class="org-right">3.10.3</td>
+<td class="org-right">2018-02-02</td>
+</tr>
+
+<tr>
+<td class="org-right">3.7.7</td>
+<td class="org-right">2018-02-02</td>
+</tr>
 </tbody>
 </table>
 
 </section>
 </section>
 <section>
-<section id="slide-orgcf15771">
-<h2 id="orgcf15771">Contributions</h2>
-<table id="org1b950cc" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<section id="slide-org0e37a3e">
+<h2 id="org0e37a3e">Contributions</h2>
+<table id="org6a0ed2a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 
 
 <colgroup>
@@ -1744,13 +1754,12 @@ body {
 </section>
 </section>
 <section>
-<section id="slide-org191215a">
-<h2 id="org191215a">Core Functionality</h2>
-<div class="outline-text-2" id="text-org191215a">
+<section id="slide-org6bc612c">
+<h2 id="org6bc612c">Core Functionality</h2>
+<div class="outline-text-2" id="text-org6bc612c">
 </div>
-</section>
-<section id="slide-orgf0b1676">
-<h3 id="orgf0b1676"><code>with</code> attribute</h3>
+<ul class="org-ul">
+<li><a id="org22b1cd2"></a><code>with</code> attribute<br />
 <div class="org-src-container">
 <label class="org-src-name">With attribute usage example policy</label>
 <pre  class="src src-cfengine3" id="With attribute usage example"><span style="color: #4f97d7;">bundle</span> <span style="color: #a45bad;">agent</span> <span style="color: #bc6ec5; font-weight: bold;">main</span>
@@ -1781,10 +1790,9 @@ body {
 <span style="color: #4f97d7;">}</span>
 </pre>
 </div>
+</li>
 
-</section>
-<section id="slide-org96db68f">
-<h3 id="org96db68f"><code>with</code> attribute</h3>
+<li><a id="org5b65707"></a><code>with</code> attribute<br />
 <pre class="example">
 R: For iterable 'a 1' we created variable 'a_1' and its value is 'a 1'
 R: For iterable 'b 2' we created variable 'b_2' and its value is 'b 2'
@@ -1801,10 +1809,9 @@ R: We can print a data container fully without creating a temporary variable: {
   ]
 }
 </pre>
+</li>
 
-</section>
-<section id="slide-org72dd5d2">
-<h3 id="org72dd5d2"><code>inline_mustache</code></h3>
+<li><a id="org960224a"></a><code>inline_mustache</code><br />
 <aside class="notes">
 <p>
 You are no longer required to use an external file template. Now you can
@@ -1831,10 +1838,9 @@ provide the template directly within the policy.
 <span style="color: #4f97d7;">}</span>
 </pre>
 </div>
+</li>
 
-</section>
-<section id="slide-orgbb0848a">
-<h3 id="orgbb0848a"><code>inline_mustache</code></h3>
+<li><a id="org09fb0cb"></a><code>inline_mustache</code><br />
 <p>
 Results in <code>/tmp/example.txt</code> having this content.
 </p>
@@ -1851,9 +1857,8 @@ Results in <code>/tmp/example.txt</code> having this content.
 }
 </pre>
 </div>
-</section>
-<section id="slide-org8a130bc">
-<h3 id="org8a130bc">Multiple augments</h3>
+</li>
+<li><a id="org0e9ecd5"></a>Multiple augments<br />
 <p>
 <b>NOTE:</b> Current implementation discussion in progress in <a href="https://tracker.mender.io/browse/CFE-2741">CFE-2741</a>. Please
 consider participating.
@@ -1872,10 +1877,9 @@ consider participating.
 <span style="color: #4f97d7;">}</span>
 </pre>
 </div>
+</li>
 
-</section>
-<section id="slide-org3de359a">
-<h3 id="org3de359a">Multiple augments</h3>
+<li><a id="org91159c1"></a>Multiple augments<br />
 <div class="org-src-container">
 <label class="org-src-name">Example <code>/tmp/centos_6.json</code></label>
 <pre  class="src src-json"><span style="color: #4f97d7;">{</span>
@@ -1886,30 +1890,28 @@ consider participating.
 <span style="color: #4f97d7;">}</span>
 </pre>
 </div>
+</li>
 
-</section>
-<section id="slide-org48ce1f4">
-<h3 id="org48ce1f4">Multiple augments</h3>
+<li><a id="org4b3ca7d"></a>Multiple augments<br />
 <pre class="example">
 [root@hub tmp]# cf-agent -KIf ./example.cf 
 R: def.my_var == Overridden in centos_6.json
 R: def.my_other_var == Defined ONLY in def.json
 R: def.centos_6_var == Defined ONLY in centos_6.json
 </pre>
+</li>
 
-</section>
-<section id="slide-org88e1605">
-<h3 id="org88e1605"><code>missing_ok</code></h3>
+<li><a id="orgd826656"></a><code>missing_ok</code><br /></li>
+</ul>
 </section>
 </section>
 <section>
-<section id="slide-orgaccd67c">
-<h2 id="orgaccd67c">MPF Functionality</h2>
-<div class="outline-text-2" id="text-orgaccd67c">
+<section id="slide-org0680dab">
+<h2 id="org0680dab">MPF Functionality</h2>
+<div class="outline-text-2" id="text-org0680dab">
 </div>
-</section>
-<section id="slide-org5b99a24">
-<h3 id="org5b99a24">Augments - Append the <code>bundlesequnece</code> of <code>promises.cf</code> and <code>update.cf</code></h3>
+<ul class="org-ul">
+<li><a id="org60a1b75"></a>Augments - Append the <code>bundlesequnece</code> of <code>promises.cf</code> and <code>update.cf</code><br />
 <ul>
 <li><code>control_common_bundlesequence_end</code></li>
 <li><code>control_common_update_bundlesequence_end</code></li>
@@ -1932,10 +1934,9 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 <li>Agent errors if named bundle is missing.</li>
 
 </ul>
+</li>
 
-</section>
-<section id="slide-orge5d34e2">
-<h3 id="orge5d34e2">Augments - Log file retention and rotation limits</h3>
+<li><a id="orge7185fa"></a>Augments - Log file retention and rotation limits<br />
 <dl>
 <dt><code>mpf_log_files_max_size</code></dt><dd>Max file size before rotation</dd>
 <dt><code>mpf_log_file_retention</code></dt><dd>Number of file rotations to keep</dd>
@@ -1955,10 +1956,9 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 <span style="color: #4f97d7;">}</span>
 </pre>
 </div>
+</li>
 
-</section>
-<section id="slide-org83bbb84">
-<h3 id="org83bbb84">Augments - Execution schedule</h3>
+<li><a id="org623dc4f"></a>Augments - Execution schedule<br />
 <dl>
 <dt><code>control_executor_schedule</code></dt><dd>Classes that trigger execution of <code>cf-agent</code>.</dd>
 
@@ -1973,10 +1973,9 @@ R: def.centos_6_var == Defined ONLY in centos_6.json
 <span style="color: #4f97d7;">}</span>
 </pre>
 </div>
+</li>
 
-</section>
-<section id="slide-org3dc6344">
-<h3 id="org3dc6344">Augments - <code>splaytime</code></h3>
+<li><a id="org4272de5"></a>Augments - <code>splaytime</code><br />
 <dl>
 <dt><code>control_executor_splaytime</code></dt><dd>Maximum number of minutes <code>exec_commad</code> should
 wait before executing.</dd>
@@ -1992,10 +1991,9 @@ wait before executing.</dd>
 <span style="color: #4f97d7;">}</span>
 </pre>
 </div>
+</li>
 
-</section>
-<section id="slide-org8efd48d">
-<h3 id="org8efd48d">Augments - <code>allowlegacyconnects</code></h3>
+<li><a id="org87ba3f8"></a>Augments - <code>allowlegacyconnects</code><br />
 <dl>
 <dt><code>control_server_allowlegacyconnects</code></dt><dd>List of subnets allowed to connect
 using legacy protocol (versions prior to 3.7.0).</dd>
@@ -2011,10 +2009,9 @@ using legacy protocol (versions prior to 3.7.0).</dd>
 <span style="color: #4f97d7;">}</span>
 </pre>
 </div>
+</li>
 
-</section>
-<section id="slide-orga1dde2e">
-<h3 id="orga1dde2e">Augments - <code>maxconnections</code></h3>
+<li><a id="org9d8ede8"></a>Augments - <code>maxconnections</code><br />
 <dl>
 <dt><code>control_serverd_maxconnections</code></dt><dd>Maximum number of connections allowed by
 <code>cf-serverd</code>.</dd>
@@ -2030,10 +2027,9 @@ using legacy protocol (versions prior to 3.7.0).</dd>
 <span style="color: #4f97d7;">}</span>
 </pre>
 </div>
+</li>
 
-</section>
-<section id="slide-org013502a">
-<h3 id="org013502a">Augments - Client initiated reporting (Enterprise)</h3>
+<li><a id="org6e475a8"></a>Augments - Client initiated reporting (Enterprise)<br />
 <dl>
 <dt><code>control_hub_exclude_hosts</code></dt><dd>List of subnets to exclude from hub initiated
 report collection.</dd>
@@ -2058,10 +2054,9 @@ initiated reporting.</dd>
 <span style="color: #4f97d7;">}</span>
 </pre>
 </div>
+</li>
 
-</section>
-<section id="slide-org55ea805">
-<h3 id="org55ea805">Augments - <code>files_single_copy</code></h3>
+<li><a id="org1fab36a"></a>Augments - <code>files_single_copy</code><br />
 <dl>
 <dt><code>control_agent_files_single_copy</code></dt><dd>List of regular expressions matching
 files that should not be copied more than once.</dd>
@@ -2078,10 +2073,9 @@ files that should not be copied more than once.</dd>
 <span style="color: #4f97d7;">}</span>
 </pre>
 </div>
+</li>
 
-</section>
-<section id="slide-org4a511db">
-<h3 id="org4a511db">Augments - <code>default_repository</code></h3>
+<li><a id="org01affeb"></a>Augments - <code>default_repository</code><br />
 <dl>
 <dt><code>mpf_control_agent_default_repository</code></dt><dd>List of classes class will cause
 these backups to be placed in <code>$(sys.workdir)/backups</code>.</dd>
@@ -2105,10 +2099,9 @@ these backups to be placed in <code>$(sys.workdir)/backups</code>.</dd>
 <span style="color: #4f97d7;">}</span>
 </pre>
 </div>
+</li>
 
-</section>
-<section id="slide-org4b1c691">
-<h3 id="org4b1c691"><code>templates</code> shortcut</h3>
+<li><a id="orgeae82c1"></a><code>templates</code> shortcut<br />
 <dl>
 <dt><code>dir_templates</code></dt><dd><p>
 Path to common template directory. Shortcut provided by
@@ -2143,10 +2136,9 @@ Path to common template directory. Shortcut provided by
 <span style="color: #4f97d7;">}</span>
 </pre>
 </div>
+</li>
 
-</section>
-<section id="slide-orga1bd4d5">
-<h3 id="orga1bd4d5">Automatically restart components on related data change</h3>
+<li><a id="org5fd55cd"></a>Automatically restart components on related data change<br />
 <aside class="notes">
 <p>
 While the agent itsef will reload its config upon notice of policy change this
@@ -2171,10 +2163,9 @@ restart on related data change should be enabled for.</dd>
 <span style="color: #4f97d7;">}</span>
 </pre>
 </div>
+</li>
 
-</section>
-<section id="slide-org60adfb0">
-<h3 id="org60adfb0">Host info report now now renders inventory variables</h3>
+<li><a id="orgf8a6bd6"></a>Host info report now now renders inventory variables<br />
 <div class="org-src-container">
 
 <pre  class="src src-shell">cf-agent -KIb host_info_report
@@ -2210,25 +2201,25 @@ restart on related data change should be enabled for.</dd>
     "default_gateway": "192.168.42.1",
 </pre>
 </div>
+</li>
+</ul>
 
 </section>
 </section>
 <section>
-<section id="slide-org6e32d23">
-<h2 id="org6e32d23">Enterprise Functionality</h2>
-<div class="outline-text-2" id="text-org6e32d23">
+<section id="slide-org090f542">
+<h2 id="org090f542">Enterprise Functionality</h2>
+<div class="outline-text-2" id="text-org090f542">
 </div>
-</section>
-<section id="slide-org92368d1">
-<h3 id="org92368d1"><a id="ID-75971753-cddb-4739-a0a1-dcb66df44ab9"></a>UI responsiveness</h3>
+<ul class="org-ul">
+<li><a id="orgd1e4edc"></a><a id="ID-75971753-cddb-4739-a0a1-dcb66df44ab9"></a>UI responsiveness<br />
 <ul>
 <li><a href="data/75/971753-cddb-4739-a0a1-dcb66df44ab9/alert-status-speed-comparison.webm">Testing</a> with 50,000 host data sets</li>
 
 </ul>
+</li>
 
-</section>
-<section id="slide-org5811763">
-<h3 id="org5811763"><a id="ID-f97c9b4d-d46f-4aee-bd68-630f44106b0e"></a>Global Host Search</h3>
+<li><a id="orgabe158e"></a><a id="ID-f97c9b4d-d46f-4aee-bd68-630f44106b0e"></a>Global Host Search<br />
 <ul>
 <li>Easily find hosts by name, ip or identity</li>
 
@@ -2280,11 +2271,9 @@ ApBtAJhZtvFREMBrCZ+BASDbAIBsAwCyDQDINgAg2wDINgAg2wCAbAMAsg0AyDYAINsAyDYAINsA
 gGwDALINAMg2ACDbAMg2ACDbAIBsA8Cr9F+VWzJtWX04KAAAAABJRU5ErkJggg==" />
 </p>
 </div>
+</li>
 
-</section>
-<section id="slide-org94a80db">
-<h3 id="org94a80db"><a id="ID-e90e4df9-0bb7-4a1e-84d5-25911497f93c"></a>host count trend widget</h3>
-
+<li><a id="orgd95e4ee"></a><a id="ID-e90e4df9-0bb7-4a1e-84d5-25911497f93c"></a>host count trend widget<br />
 <div class="figure">
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAdQAAAEqCAIAAAAj3TZSAAAAA3NCSVQICAjb4U/gAAAAEHRFWHRT
 b2Z0d2FyZQBTaHV0dGVyY4LQCQAAIABJREFUeNrt3XFUU1e+L/CfNicxoSROGnQwTGQR2klsqUCf
@@ -2494,10 +2483,9 @@ ZpZl+/r6bty4gVlgAIDJWLBgwcKFCzkcDpfLHfqGbWrhCwAAXhkRowsAABC+AAAIXwAA8I7/D+FK
 1rd57e0hAAAAAElFTkSuQmCC" />
 </p>
 </div>
+</li>
 
-</section>
-<section id="slide-orgb553396">
-<h3 id="orgb553396"><a id="ID-748d9e15-278e-46ac-822f-9e0f7e6b2830"></a>mail settings</h3>
+<li><a id="org16cae12"></a><a id="ID-748d9e15-278e-46ac-822f-9e0f7e6b2830"></a>mail settings<br />
 <ul>
 <li>Exported reports can now be sent as attachments in emails</li>
 
@@ -4123,11 +4111,9 @@ XAr+8Y9//E8N/NfVXIp3bG9XADSN/eEI2jFvvJqxU6G29viF2iVWH/XUxsY//vGPf/yXjxPBP/7x
 j/9usfqopzY2/vGP/2n75xYAAAAAAAAAgAXw/wGvPyIGTHNxLQAAAABJRU5ErkJggg==" />
 </p>
 </div>
+</li>
 
-</section>
-<section id="slide-org2a83bd1">
-<h3 id="org2a83bd1"><a id="ID-294c1258-49f4-4c72-9f8d-2b7535cfbea8"></a>LDAP settings API</h3>
-
+<li><a id="org2a81220"></a><a id="ID-294c1258-49f4-4c72-9f8d-2b7535cfbea8"></a>LDAP settings API<br />
 <div class="figure">
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABDsAAAL0CAYAAAAC3Tx5AAAgAElEQVR4AezdC1RTZ743/i9JSMIl
 YgVFwSpgNTIa4B2odsDWC33F2tEeW22ndmrtTc/q7aypzllq16p23lXtOqN2nWrPf2l7RuuZWlut
@@ -5934,11 +5920,9 @@ QAABBBBAAAFTCNDsMEWZSRIBBBBAAAEEEEAAAQQQQAAB8wjQ7DBPrckUAQQQQAABBBBAAAEEEEAA
 AVMI0OwwRZlJEgEEEEAAAQQQQAABBBBAAAHzCPwvp6besSdg/vgAAAAASUVORK5CYII=" />
 </p>
 </div>
+</li>
 
-</section>
-<section id="slide-org6ed17a6">
-<h3 id="org6ed17a6"><a id="ID-bf10ec4b-5b6b-4140-9336-fb7ab7808fed"></a>default roles</h3>
-
+<li><a id="orgd693cfa"></a><a id="ID-bf10ec4b-5b6b-4140-9336-fb7ab7808fed"></a>default roles<br />
 <div class="figure">
 <p><img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAABIcAAAGHCAIAAAClK6VrAAAAA3NCSVQICAjb4U/gAAAAEHRFWHRT
 b2Z0d2FyZQBTaHV0dGVyY4LQCQAAIABJREFUeNrs3X9cVOed9//PmRlmIDpjQAYjIlGmSgZsGaq3
@@ -6240,19 +6224,17 @@ AKgyAAAAVQYAAIAqAwAAUGUAAACoMgAAAFUGAACAKgMAAFBlAAAAqDIAAABVBgAAgCoDAABQZQAA
 AKgyAAAAVQYAAIAqAwAAUGUAAACoMgAAAFUGAACAKgMAADi2N3YUZPChdo3jAAAAAElFTkSuQmCC" />
 </p>
 </div>
+</li>
 
-</section>
-<section id="slide-org3034fdf">
-<h3 id="org3034fdf">New OOTB Inventory Attributes</h3>
+<li><a id="org04a8962"></a>New OOTB Inventory Attributes<br />
 <ul>
 <li>Policy Release Id</li>
 <li>AIX OS Level</li>
 
 </ul>
+</li>
 
-</section>
-<section id="slide-org3483b8d">
-<h3 id="org3483b8d">Inventory API</h3>
+<li><a id="orgc5df201"></a>Inventory API<br />
 <div class="org-src-container">
 <label class="org-src-name">Example API Query</label>
 <pre  class="src src-shell">curl --user admin -X POST <span style="color: #2d9574;">\</span>
@@ -6260,10 +6242,9 @@ AKgyAAAAVQYAAIAqAwAAUGUAAACoMgAAAFUGAACAKgMAADi2N3YUZPChdo3jAAAAAElFTkSuQmCC" />
   https://hub/api/inventory -d <span style="color: #2d9574;">'{ "select":[ "Host name", "OS type"]}'</span>
 </pre>
 </div>
+</li>
 
-</section>
-<section id="slide-orge13e900">
-<h3 id="orge13e900">Inventory API</h3>
+<li><a id="orge10eebf"></a>Inventory API<br />
 <div class="org-src-container">
 <label class="org-src-name">Example Query Response</label>
 <pre  class="src src-json"><span style="color: #4f97d7;">{</span>
@@ -6302,6 +6283,8 @@ AKgyAAAAVQYAAIAqAwAAUGUAAACoMgAAAFUGAACAKgMAADi2N3YUZPChdo3jAAAAAElFTkSuQmCC" />
 <span style="color: #4f97d7;">}</span>
 </pre>
 </div>
+</li>
+</ul>
 </section>
 </section>
 </div>
