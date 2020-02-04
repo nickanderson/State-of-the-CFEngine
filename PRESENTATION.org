@@ -22,14 +22,26 @@
 #+REVEAL_POSTAMBLE: <p> Created by Nick Anderson. </p>
 #+REVEAL_PLUGINS: (markdown notes)
 #+REVEAL_TITLE_SLIDE_BACKGROUND: ./orange-blue-tilt-right.png
-#+OPTIONS: H:1
+#+OPTIONS: H:3
+#+REVEAL_EXTRA_CSS: ./modifications.css
+#+MACRO: color @@html:<font color="$1">$2</font>@@
+#+PROPERTY: header-args :eval never-export
 
 * 
 :PROPERTIES:
 :REVEAL_BACKGROUND: ./2018-01-14_Selection_005.png
 :END:
 
-* Releases
+* {{{color(orange,Happy to be back)}}}                               :ATTACH:
+:PROPERTIES:
+:ID:       b50764c2-dbb0-4499-87af-3d8b90b3e8d5
+:REVEAL_BACKGROUND: ./data/b5/0764c2-dbb0-4499-87af-3d8b90b3e8d5/2020-02-03_05-35-14_nicks-bionic-back.png
+:END:
+
+#+DOWNLOADED: file:///home/nickanderson/Pictures/nicks-bionic-back.png @ 2020-02-03 05:35:14
+# [[file:data/b5/0764c2-dbb0-4499-87af-3d8b90b3e8d5/2020-02-03_05-35-14_nicks-bionic-back.png]]
+
+* Releases since 2018-02-05
 :DRAWER:
 #+BEGIN_SRC shell :dir ~/CFEngine/masterfiles :exports results :wrap text
   echo "$(git for-each-ref --sort=taggerdate --format '%(tag)_,,,_%(taggerdate:raw)' refs/tags \
@@ -42,7 +54,7 @@
 #+END_SRC
 #+RESULTS:
 :END:
-7 releases since 2017-01-01
+15 releases!
 
 :DRAWER:
 
@@ -63,22 +75,59 @@
                  { t=strftime("%Y-%m-%d",$2);
                  printf "%s %s\n", $1, t  }' \
     | egrep -v "build|PTV|\.0b" \
-    | egrep "2017|2018|Date"
+    | egrep "2020|2019|2018|Date"
 #+END_SRC
 :END:
+
+#+RESULTS: Release Dates
+|  Version |       Date |
+|----------+------------|
+|   3.10.4 | 2018-05-03 |
+|    3.7.8 | 2018-05-03 |
+|   3.12.0 | 2018-06-28 |
+|   3.10.5 | 2018-11-16 |
+|   3.13.0 | 2018-11-23 |
+|   3.12.1 | 2018-11-30 |
+|   3.10.6 | 2019-05-10 |
+|   3.12.2 | 2019-05-20 |
+| 3.12.2-2 | 2019-05-29 |
+|   3.14.0 | 2019-07-01 |
+| 3.12.2-3 | 2019-07-25 |
+| 3.14.0-2 | 2019-07-29 |
+|   3.12.3 | 2019-12-11 |
+|   3.10.7 | 2019-12-11 |
+|   3.15.0 | 2019-12-19 |
+
+** 2 LTS series reached End of Life                        :ATTACH:
+:PROPERTIES:
+:ID:       73c1edf0-7bfc-42a5-9df8-d3097ad85f6f
+:END:
+
+| Version |       Date |
+|---------+------------|
+|   3.7.8 | 2018-05-03 |
+|  3.10.7 | 2019-12-11 |
+
+#+DOWNLOADED: http://sf.co.ua/15/03/wallpaper-1d7b28.jpg @ 2020-01-16 14:32:30
+[[file:data/73/c1edf0-7bfc-42a5-9df8-d3097ad85f6f/2020-01-16_14-32-30_wallpaper-1d7b28.jpg]]
+
+** 2 LTS series born                                                :ATTACH:
+:PROPERTIES:
+:ID:       5e7bdcfc-e94e-41e3-8245-836238b07399
+:END:
+
 #+RESULTS: Release Dates
 | Version |       Date |
 |---------+------------|
-|   3.7.5 | 2017-03-30 |
-|  3.10.1 | 2017-03-30 |
-|  3.10.2 | 2017-08-11 |
-|  3.11.0 | 2017-08-11 |
-|   3.7.6 | 2017-09-12 |
-|  3.10.3 | 2018-02-02 |
-|   3.7.7 | 2018-02-02 |
+|  3.12.0 | 2018-06-28 |
+|  3.15.0 | 2019-12-19 |
+
+#+DOWNLOADED: https://vignette.wikia.nocookie.net/pixar/images/4/41/I2_-_Jack-Jack.png/revision/latest/top-crop/width/360/height/450?cb=20180621022350 @ 2020-01-16 14:45:47
+[[file:data/5e/7bdcfc-e94e-41e3-8245-836238b07399/2020-01-16_14-45-47_450.png]]
 
 * Contributions
-#+Name: NumCommits
+** 2009                                         :noexport:
+#+Name: NumCommits2009
 #+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
   #REPOSITORY=https://github.com/cfengine/core
   TMP=$(mktemp --directory --quiet) 
@@ -87,32 +136,32 @@
   git clone $REPOSITORY
   REPO="$(basename $REPOSITORY)"
   cd "$TMP/$REPO"
-  LASTYEAR=$(date -d "-1 year" '+%Y')
+  LASTYEAR=$(date -d "-2 year" '+%Y')
   LASTNEWYEAR="$LASTYEAR-01-01"
-  NUMCOMMITS=$(git --no-pager log --since "$LASTNEWYEAR" --oneline --no-merges | wc -l)
+  NUMCOMMITS=$(git --no-pager log --since "2009-01-01" --until "2010-01-01" --oneline --no-merges | wc -l)
   rm -rf "$TMP"
   echo "$NUMCOMMITS"
 #+END_SRC
 
-#+Name: NumCoreCommits
-#+CALL: NumCommits(REPOSITORY="https://github.com/cfengine/core") :exports none
+#+Name: NumCoreCommits2009
+#+CALL: NumCommits2009(REPOSITORY="https://github.com/cfengine/core") :exports none
 
-#+RESULTS: NumCoreCommits
-| 265 |
+#+RESULTS: NumCoreCommits2009
+| 528 |
 
-#+Name: NumMPFCommits
-#+CALL: NumCommits(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+#+Name: NumMPFCommits2009
+#+CALL: NumCommits2009(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
 
-#+RESULTS: NumMPFCommits
-| 163 |
+#+RESULTS: NumMPFCommits2009
+| 0 |
 
-#+Name: NumDocCommits
-#+CALL: NumCommits(REPOSITORY="https://github.com/cfengine/Documentation") :exports none
+#+Name: NumDocCommits2009
+#+CALL: NumCommits2009(REPOSITORY="https://github.com/cfengine/Documentation") :exports none
 
-#+RESULTS: NumDocCommits
-| 207 |
+#+RESULTS: NumDocCommits2009
+| 0 |
 
-#+Name: NumContributors
+#+Name: NumContributors2009
 #+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
   TMP=$(mktemp --directory --quiet) 
   mkdir -p $TMP
@@ -120,32 +169,32 @@
   git clone $REPOSITORY
   REPO="$(basename $REPOSITORY)"
   cd "$TMP/$REPO"
-  LASTYEAR=$(date -d "-1 year" '+%Y')
+  LASTYEAR=$(date -d "-2 year" '+%Y')
   LASTNEWYEAR="$LASTYEAR-01-01"
-  NUMAUTHORS=$(git-stats --since "$LASTNEWYEAR" --authors --raw | jq '.authors | length')
+  NUMAUTHORS=$(git-stats --since "2009-01-01" --until "2010-01-01" --authors --raw | jq '.authors | length')
   rm -rf "$TMP"
   echo "$NUMAUTHORS"
 #+END_SRC
 
-#+Name: NumCoreContributors
-#+CALL: NumContributors(REPOSITORY="https://github.com/cfengine/core") :exports none
+#+Name: NumCoreContributors2009
+#+CALL: NumContributors2009(REPOSITORY="https://github.com/cfengine/core") :exports none
 
-#+RESULTS: NumCoreContributors
-| 24 |
+#+RESULTS: NumCoreContributors2009
+| 2 |
 
-#+Name: NumMPFContributors
-#+CALL: NumContributors(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+#+Name: NumMPFContributors2009
+#+CALL: NumContributors2009(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
 
-#+RESULTS: NumMPFContributors
-| 14 |
+#+RESULTS: NumMPFContributors2009
+| 1 |
 
-#+Name: NumDocContributors
-#+CALL: NumContributors(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+#+Name: NumDocContributors2009
+#+CALL: NumContributors2009(REPOSITORY="https://github.com/cfengine/documentation") :exports none
 
-#+RESULTS: NumDocContributors
-| 17 |
+#+RESULTS: NumDocContributors2009
+| 1 |
 
-#+Name: NewContributors
+#+Name: NewContributors2009
 #+BEGIN_SRC shell :dir /tmp :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
   TMP=$(mktemp --directory --quiet) 
   mkdir -p $TMP
@@ -153,7 +202,7 @@
   git clone $REPOSITORY
   REPO="$(basename $REPOSITORY)"
   cd "$TMP/$REPO"
-  LASTYEAR=$(date -d "-1 year" '+%Y')
+  LASTYEAR=$(date -d "-2 year" '+%Y')
   THISYEAR=$(date '+%Y')
   LASTNEWYEAR="$LASTYEAR-01-01"
   git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
@@ -163,578 +212,1723 @@
     FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
     echo "$FirstCommit,$Author" >> $CONTRIBUTORS
   done < /tmp/authors.txt 
-  egrep -c "^($LASTYEAR|$THISYEAR).*" $CONTRIBUTORS 
+  egrep -c "^(2009).*" $CONTRIBUTORS 
   rm -rf $TMP
 #+END_SRC
 
-#+Name: NewCoreContributors
-#+CALL: NewContributors(REPOSITORY="https://github.com/cfengine/core") :exports none
+#+Name: NewCoreContributors2009
+#+CALL: NewContributors2009(REPOSITORY="https://github.com/cfengine/core") :exports none
 
-#+RESULTS: NewCoreContributors
+#+RESULTS: NewCoreContributors2009
+| 1 |
+
+#+Name: NewMPFContributors2009
+#+CALL: NewContributors2009(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NewMPFContributors2009
+| 0 |
+
+#+Name: NewDocContributors2009
+#+CALL: NewContributors2009(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NewDocContributors2009
+| 0 |
+
+#+Name: Contributions 2009
+|                  | Core | MPF | Docs |
+| Commits          |  528 |   0 |    0 |
+| Contributors     |    2 |   1 |    1 |
+| New Contributors |    1 |   0 |    0 |
+#+TBLFM: @2$2=remote(NumCoreCommits2009,@>$0);::@2$3=remote(NumMPFCommits2009,@>$0);::@2$4=remote(NumDocCommits2009,@>$0);::@3$2=remote(NumCoreContributors2009,@>$0);::@3$3=remote(NumMPFContributors2009,@>$0);::@3$4=remote(NumDocContributors2009,@>$0);::@4$2=remote(NewCoreContributors2009,@>$0);::@4$3=remote(NewMPFContributors2009,@>$0);::@4$4=remote(NewDocContributors2009,@>$0);
+** 2010                                         :noexport:
+#+Name: NumCommits2010
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  #REPOSITORY=https://github.com/cfengine/core
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMCOMMITS=$(git --no-pager log --since "2010-01-01" --until "2011-01-01" --oneline --no-merges | wc -l)
+  rm -rf "$TMP"
+  echo "$NUMCOMMITS"
+#+END_SRC
+
+#+Name: NumCoreCommits2010
+#+CALL: NumCommits2010(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreCommits2010
+| 932 |
+
+#+Name: NumMPFCommits2010
+#+CALL: NumCommits2010(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFCommits2010
+| 0 |
+
+#+Name: NumDocCommits2010
+#+CALL: NumCommits2010(REPOSITORY="https://github.com/cfengine/Documentation") :exports none
+
+#+RESULTS: NumDocCommits2010
+| 0 |
+
+#+Name: NumContributors2010
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMAUTHORS=$(git-stats --since "2010-01-01" --until "2011-01-01" --authors --raw | jq '.authors | length')
+  rm -rf "$TMP"
+  echo "$NUMAUTHORS"
+#+END_SRC
+
+#+Name: NumCoreContributors2010
+#+CALL: NumContributors2010(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreContributors2010
+| 3 |
+
+#+Name: NumMPFContributors2010
+#+CALL: NumContributors2010(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFContributors2010
+| 1 |
+
+#+Name: NumDocContributors2010
+#+CALL: NumContributors2010(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NumDocContributors2010
+| 1 |
+
+#+Name: NewContributors2010
+#+BEGIN_SRC shell :dir /tmp :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  THISYEAR=$(date '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
+  CONTRIBUTORS="/$TMP/$REPO-first-contributions.dat"
+  rm -f $CONTRIBUTORS
+  while read Author; do
+    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
+    echo "$FirstCommit,$Author" >> $CONTRIBUTORS
+  done < /tmp/authors.txt 
+  egrep -c "^(2010).*" $CONTRIBUTORS 
+  rm -rf $TMP
+#+END_SRC
+
+#+Name: NewCoreContributors2010
+#+CALL: NewContributors2010(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NewCoreContributors2010
+| 1 |
+
+#+Name: NewMPFContributors2010
+#+CALL: NewContributors2010(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NewMPFContributors2010
+| 0 |
+
+#+Name: NewDocContributors2010
+#+CALL: NewContributors2010(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NewDocContributors2010
+| 0 |
+
+#+Name: Contributions 2010
+|                  | Core | MPF | Docs |
+| Commits          |  932 |   0 |    0 |
+| Contributors     |    3 |   1 |    1 |
+| New Contributors |    1 |   0 |    0 |
+#+TBLFM: @2$2=remote(NumCoreCommits2010,@>$0);::@2$3=remote(NumMPFCommits2010,@>$0);::@2$4=remote(NumDocCommits2010,@>$0);::@3$2=remote(NumCoreContributors2010,@>$0);::@3$3=remote(NumMPFContributors2010,@>$0);::@3$4=remote(NumDocContributors2010,@>$0);::@4$2=remote(NewCoreContributors2010,@>$0);::@4$3=remote(NewMPFContributors2010,@>$0);::@4$4=remote(NewDocContributors2010,@>$0);
+** 2011                                         :noexport:
+#+Name: NumCommits2011
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  #REPOSITORY=https://github.com/cfengine/core
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMCOMMITS=$(git --no-pager log --since "2011-01-01" --until "2012-01-01" --oneline --no-merges | wc -l)
+  rm -rf "$TMP"
+  echo "$NUMCOMMITS"
+#+END_SRC
+
+#+Name: NumCoreCommits2011
+#+CALL: NumCommits2011(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreCommits2011
+| 1695 |
+
+#+Name: NumMPFCommits2011
+#+CALL: NumCommits2011(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFCommits2011
+| 44 |
+
+#+Name: NumDocCommits2011
+#+CALL: NumCommits2011(REPOSITORY="https://github.com/cfengine/Documentation") :exports none
+
+#+RESULTS: NumDocCommits2011
+| 0 |
+
+#+Name: NumContributors2011
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMAUTHORS=$(git-stats --since "2011-01-01" --until "2012-01-01" --authors --raw | jq '.authors | length')
+  rm -rf "$TMP"
+  echo "$NUMAUTHORS"
+#+END_SRC
+
+#+Name: NumCoreContributors2011
+#+CALL: NumContributors2011(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreContributors2011
 | 9 |
 
-#+Name: NewMPFContributors
-#+CALL: NewContributors(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+#+Name: NumMPFContributors2011
+#+CALL: NumContributors2011(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
 
-#+RESULTS: NewMPFContributors
-| 4 |
+#+RESULTS: NumMPFContributors2011
+| 5 |
 
-#+Name: NewDocContributors
-#+CALL: NewContributors(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+#+Name: NumDocContributors2011
+#+CALL: NumContributors2011(REPOSITORY="https://github.com/cfengine/documentation") :exports none
 
-#+RESULTS: NewDocContributors
+#+RESULTS: NumDocContributors2011
+| 1 |
+
+#+Name: NewContributors2011
+#+BEGIN_SRC shell :dir /tmp :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  THISYEAR=$(date '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
+  CONTRIBUTORS="/$TMP/$REPO-first-contributions.dat"
+  rm -f $CONTRIBUTORS
+  while read Author; do
+    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
+    echo "$FirstCommit,$Author" >> $CONTRIBUTORS
+  done < /tmp/authors.txt 
+  egrep -c "^(2011).*" $CONTRIBUTORS 
+  rm -rf $TMP
+#+END_SRC
+
+#+Name: NewCoreContributors2011
+#+CALL: NewContributors2011(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NewCoreContributors2011
 | 6 |
 
-#+Name: Contributions since 2017-01-01 
+#+Name: NewMPFContributors2011
+#+CALL: NewContributors2011(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NewMPFContributors2011
+| 5 |
+
+#+Name: NewDocContributors2011
+#+CALL: NewContributors2011(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NewDocContributors2011
+| 0 |
+
+#+Name: Contributions 2011
 |                  | Core | MPF | Docs |
-| Commits          |  256 | 163 |  207 |
-| Contributors     |   24 |  14 |   17 |
-| New Contributors |    9 |   4 |    6 |
-#+TBLFM: @2$2=remote(NumCoreCommits,@>$0);::@2$3=remote(NumMPFCommits,@>$0);::@2$4=remote(NumDocCommits,@>$0);::@3$2=remote(NumCoreContributors,@>$0);::@3$3=remote(NumMPFContributors,@>$0);::@3$4=remote(NumDocContributors,@>$0);::@4$2=remote(NewCoreContributors,@>$0);::@4$3=remote(NewMPFContributors,@>$0);::@4$4=remote(NewDocContributors,@>$0);
-
-* Core Functionality
-** =with= attribute
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-#+Name: With attribute usage example
-#+Caption: With attribute usage example policy
-#+BEGIN_SRC cfengine3 :exports both
-bundle agent main
-{
-  vars:
-      "todo" slist => { "a 1", "b 2", "c 3" };
-      # Here, `with` is the canonified version of $(todo), letting us avoid an
-
-      # intermediate canonification array.
-      "$(with)" string => "$(todo)", with => canonify($(todo));
-
-      "complex" data => '
-{
-  "x": 200,
-  "y": [ 1, 2, null, true, false ]
-}
-';
-
-  reports:
-      "For iterable '$(todo)' we created variable '$(with)' and its value is '$(todo)'"
-        with => canonify($(todo));
-
-      "We can print a data container compactly without creating a temporary variable: $(with)"
-        with => format("%S", complex);
-
-      "We can print a data container fully without creating a temporary variable: $(with)"
-        with => storejson(complex);
-}
+| Commits          | 1695 |  44 |    0 |
+| Contributors     |    9 |   5 |    1 |
+| New Contributors |    6 |   5 |    0 |
+#+TBLFM: @2$2=remote(NumCoreCommits2011,@>$0);::@2$3=remote(NumMPFCommits2011,@>$0);::@2$4=remote(NumDocCommits2011,@>$0);::@3$2=remote(NumCoreContributors2011,@>$0);::@3$3=remote(NumMPFContributors2011,@>$0);::@3$4=remote(NumDocContributors2011,@>$0);::@4$2=remote(NewCoreContributors2011,@>$0);::@4$3=remote(NewMPFContributors2011,@>$0);::@4$4=remote(NewDocContributors2011,@>$0);
+** 2012                                         :noexport:
+#+Name: NumCommits2012
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  #REPOSITORY=https://github.com/cfengine/core
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMCOMMITS=$(git --no-pager log --since "2012-01-01" --until "2013-01-01" --oneline --no-merges | wc -l)
+  rm -rf "$TMP"
+  echo "$NUMCOMMITS"
 #+END_SRC
 
-** =with= attribute
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
+#+Name: NumCoreCommits2012
+#+CALL: NumCommits2012(REPOSITORY="https://github.com/cfengine/core") :exports none
 
-#+Caption: With attribute usage example policy output
-#+RESULTS: With attribute usage example
+#+RESULTS: NumCoreCommits2012
+| 1808 |
+
+#+Name: NumMPFCommits2012
+#+CALL: NumCommits2012(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFCommits2012
+| 40 |
+
+#+Name: NumDocCommits2012
+#+CALL: NumCommits2012(REPOSITORY="https://github.com/cfengine/Documentation") :exports none
+
+#+RESULTS: NumDocCommits2012
+| 0 |
+
+#+Name: NumContributors2012
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMAUTHORS=$(git-stats --since "2012-01-01" --until "2013-01-01" --authors --raw | jq '.authors | length')
+  rm -rf "$TMP"
+  echo "$NUMAUTHORS"
+#+END_SRC
+
+#+Name: NumCoreContributors2012
+#+CALL: NumContributors2012(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreContributors2012
+| 32 |
+
+#+Name: NumMPFContributors2012
+#+CALL: NumContributors2012(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFContributors2012
+| 12 |
+
+#+Name: NumDocContributors2012
+#+CALL: NumContributors2012(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NumDocContributors2012
+| 1 |
+
+#+Name: NewContributors2012
+#+BEGIN_SRC shell :dir /tmp :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  THISYEAR=$(date '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
+  CONTRIBUTORS="/$TMP/$REPO-first-contributions.dat"
+  rm -f $CONTRIBUTORS
+  while read Author; do
+    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
+    echo "$FirstCommit,$Author" >> $CONTRIBUTORS
+  done < /tmp/authors.txt 
+  egrep -c "^(2012).*" $CONTRIBUTORS 
+  rm -rf $TMP
+#+END_SRC
+
+#+Name: NewCoreContributors2012
+#+CALL: NewContributors2012(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NewCoreContributors2012
+| 23 |
+
+#+Name: NewMPFContributors2012
+#+CALL: NewContributors2012(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NewMPFContributors2012
+| 8 |
+
+#+Name: NewDocContributors2012
+#+CALL: NewContributors2012(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NewDocContributors2012
+| 0 |
+
+#+Name: Contributions 2012
+|                  | Core | MPF | Docs |
+| Commits          | 1808 |  40 |    0 |
+| Contributors     |   32 |  12 |    1 |
+| New Contributors |   23 |   8 |    0 |
+#+TBLFM: @2$2=remote(NumCoreCommits2012,@>$0);::@2$3=remote(NumMPFCommits2012,@>$0);::@2$4=remote(NumDocCommits2012,@>$0);::@3$2=remote(NumCoreContributors2012,@>$0);::@3$3=remote(NumMPFContributors2012,@>$0);::@3$4=remote(NumDocContributors2012,@>$0);::@4$2=remote(NewCoreContributors2012,@>$0);::@4$3=remote(NewMPFContributors2012,@>$0);::@4$4=remote(NewDocContributors2012,@>$0);
+** 2013                                         :noexport:
+#+Name: NumCommits2013
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  #REPOSITORY=https://github.com/cfengine/core
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMCOMMITS=$(git --no-pager log --since "2013-01-01" --until "2014-01-01" --oneline --no-merges | wc -l)
+  rm -rf "$TMP"
+  echo "$NUMCOMMITS"
+#+END_SRC
+
+#+Name: NumCoreCommits2013
+#+CALL: NumCommits2013(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreCommits2013
+| 2865 |
+
+#+Name: NumMPFCommits2013
+#+CALL: NumCommits2013(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFCommits2013
+| 219 |
+
+#+Name: NumDocCommits2013
+#+CALL: NumCommits2013(REPOSITORY="https://github.com/cfengine/Documentation") :exports none
+
+#+RESULTS: NumDocCommits2013
+| 929 |
+
+#+Name: NumContributors2013
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMAUTHORS=$(git-stats --since "2013-01-01" --until "2014-01-01" --authors --raw | jq '.authors | length')
+  rm -rf "$TMP"
+  echo "$NUMAUTHORS"
+#+END_SRC
+
+#+Name: NumCoreContributors2013
+#+CALL: NumContributors2013(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreContributors2013
+| 51 |
+
+#+Name: NumMPFContributors2013
+#+CALL: NumContributors2013(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFContributors2013
+| 38 |
+
+#+Name: NumDocContributors2013
+#+CALL: NumContributors2013(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NumDocContributors2013
+| 28 |
+
+#+Name: NewContributors2013
+#+BEGIN_SRC shell :dir /tmp :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  THISYEAR=$(date '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
+  CONTRIBUTORS="/$TMP/$REPO-first-contributions.dat"
+  rm -f $CONTRIBUTORS
+  while read Author; do
+    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
+    echo "$FirstCommit,$Author" >> $CONTRIBUTORS
+  done < /tmp/authors.txt 
+  egrep -c "^(2013).*" $CONTRIBUTORS 
+  rm -rf $TMP
+#+END_SRC
+
+#+Name: NewCoreContributors2013
+#+CALL: NewContributors2013(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NewCoreContributors2013
+| 40 |
+
+#+Name: NewMPFContributors2013
+#+CALL: NewContributors2013(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NewMPFContributors2013
+| 29 |
+
+#+Name: NewDocContributors2013
+#+CALL: NewContributors2013(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NewDocContributors2013
+| 29 |
+
+#+Name: Contributions 2013
+|                  | Core | MPF | Docs |
+| Commits          | 2865 | 219 |  929 |
+| Contributors     |   51 |  38 |   28 |
+| New Contributors |   40 |  29 |   29 |
+#+TBLFM: @2$2=remote(NumCoreCommits2013,@>$0);::@2$3=remote(NumMPFCommits2013,@>$0);::@2$4=remote(NumDocCommits2013,@>$0);::@3$2=remote(NumCoreContributors2013,@>$0);::@3$3=remote(NumMPFContributors2013,@>$0);::@3$4=remote(NumDocContributors2013,@>$0);::@4$2=remote(NewCoreContributors2013,@>$0);::@4$3=remote(NewMPFContributors2013,@>$0);::@4$4=remote(NewDocContributors2013,@>$0);
+** 2014                                         :noexport:
+#+Name: NumCommits2014
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  #REPOSITORY=https://github.com/cfengine/core
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMCOMMITS=$(git --no-pager log --since "2014-01-01" --until "2015-01-01" --oneline --no-merges | wc -l)
+  rm -rf "$TMP"
+  echo "$NUMCOMMITS"
+#+END_SRC
+
+#+Name: NumCoreCommits2014
+#+CALL: NumCommits2014(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreCommits2014
+| 2411 |
+
+#+Name: NumMPFCommits2014
+#+CALL: NumCommits2014(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFCommits2014
+| 518 |
+
+#+Name: NumDocCommits2014
+#+CALL: NumCommits2014(REPOSITORY="https://github.com/cfengine/Documentation") :exports none
+
+#+RESULTS: NumDocCommits2014
+| 1200 |
+
+#+Name: NumContributors2014
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMAUTHORS=$(git-stats --since "2014-01-01" --until "2015-01-01" --authors --raw | jq '.authors | length')
+  rm -rf "$TMP"
+  echo "$NUMAUTHORS"
+#+END_SRC
+
+#+Name: NumCoreContributors2014
+#+CALL: NumContributors2014(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreContributors2014
+| 48 |
+
+#+Name: NumMPFContributors2014
+#+CALL: NumContributors2014(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFContributors2014
+| 34 |
+
+#+Name: NumDocContributors2014
+#+CALL: NumContributors2014(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NumDocContributors2014
+| 34 |
+
+#+Name: NewContributors2014
+#+BEGIN_SRC shell :dir /tmp :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  THISYEAR=$(date '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
+  CONTRIBUTORS="/$TMP/$REPO-first-contributions.dat"
+  rm -f $CONTRIBUTORS
+  while read Author; do
+    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
+    echo "$FirstCommit,$Author" >> $CONTRIBUTORS
+  done < /tmp/authors.txt 
+  egrep -c "^(2014).*" $CONTRIBUTORS 
+  rm -rf $TMP
+#+END_SRC
+
+#+Name: NewCoreContributors2014
+#+CALL: NewContributors2014(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NewCoreContributors2014
+| 16 |
+
+#+Name: NewMPFContributors2014
+#+CALL: NewContributors2014(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NewMPFContributors2014
+| 21 |
+
+#+Name: NewDocContributors2014
+#+CALL: NewContributors2014(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NewDocContributors2014
+| 17 |
+
+#+Name: Contributions 2014
+|                  | Core | MPF | Docs |
+| Commits          | 2411 | 518 | 1200 |
+| Contributors     |   48 |  34 |   34 |
+| New Contributors |   16 |  21 |   17 |
+#+TBLFM: @2$2=remote(NumCoreCommits2014,@>$0);::@2$3=remote(NumMPFCommits2014,@>$0);::@2$4=remote(NumDocCommits2014,@>$0);::@3$2=remote(NumCoreContributors2014,@>$0);::@3$3=remote(NumMPFContributors2014,@>$0);::@3$4=remote(NumDocContributors2014,@>$0);::@4$2=remote(NewCoreContributors2014,@>$0);::@4$3=remote(NewMPFContributors2014,@>$0);::@4$4=remote(NewDocContributors2014,@>$0);
+** 2015                                         :noexport:
+#+Name: NumCommits2015
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  #REPOSITORY=https://github.com/cfengine/core
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMCOMMITS=$(git --no-pager log --since "2015-01-01" --until "2016-01-01" --oneline --no-merges | wc -l)
+  rm -rf "$TMP"
+  echo "$NUMCOMMITS"
+#+END_SRC
+
+#+Name: NumCoreCommits2015
+#+CALL: NumCommits2015(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreCommits2015
+| 699 |
+
+#+Name: NumMPFCommits2015
+#+CALL: NumCommits2015(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFCommits2015
+| 245 |
+
+#+Name: NumDocCommits2015
+#+CALL: NumCommits2015(REPOSITORY="https://github.com/cfengine/Documentation") :exports none
+
+#+RESULTS: NumDocCommits2015
+| 334 |
+
+#+Name: NumContributors2015
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMAUTHORS=$(git-stats --since "2015-01-01" --until "2016-01-01" --authors --raw | jq '.authors | length')
+  rm -rf "$TMP"
+  echo "$NUMAUTHORS"
+#+END_SRC
+
+#+Name: NumCoreContributors2015
+#+CALL: NumContributors2015(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreContributors2015
+| 29 |
+
+#+Name: NumMPFContributors2015
+#+CALL: NumContributors2015(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFContributors2015
+| 22 |
+
+#+Name: NumDocContributors2015
+#+CALL: NumContributors2015(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NumDocContributors2015
+| 21 |
+
+#+Name: NewContributors2015
+#+BEGIN_SRC shell :dir /tmp :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  THISYEAR=$(date '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
+  CONTRIBUTORS="/$TMP/$REPO-first-contributions.dat"
+  rm -f $CONTRIBUTORS
+  while read Author; do
+    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
+    echo "$FirstCommit,$Author" >> $CONTRIBUTORS
+  done < /tmp/authors.txt 
+  egrep -c "^(2015).*" $CONTRIBUTORS 
+  rm -rf $TMP
+#+END_SRC
+
+#+Name: NewCoreContributors2015
+#+CALL: NewContributors2015(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NewCoreContributors2015
+| 9 |
+
+#+Name: NewMPFContributors2015
+#+CALL: NewContributors2015(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NewMPFContributors2015
+| 8 |
+
+#+Name: NewDocContributors2015
+#+CALL: NewContributors2015(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NewDocContributors2015
+| 7 |
+
+#+Name: Contributions 2015
+|                  | Core | MPF | Docs |
+| Commits          |  699 | 245 |  334 |
+| Contributors     |   29 |  22 |   21 |
+| New Contributors |    9 |   8 |    7 |
+#+TBLFM: @2$2=remote(NumCoreCommits2015,@>$0);::@2$3=remote(NumMPFCommits2015,@>$0);::@2$4=remote(NumDocCommits2015,@>$0);::@3$2=remote(NumCoreContributors2015,@>$0);::@3$3=remote(NumMPFContributors2015,@>$0);::@3$4=remote(NumDocContributors2015,@>$0);::@4$2=remote(NewCoreContributors2015,@>$0);::@4$3=remote(NewMPFContributors2015,@>$0);::@4$4=remote(NewDocContributors2015,@>$0);
+** 2016                                         :noexport:
+#+Name: NumCommits2016
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  #REPOSITORY=https://github.com/cfengine/core
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMCOMMITS=$(git --no-pager log --since "2016-01-01" --until "2017-01-01" --oneline --no-merges | wc -l)
+  rm -rf "$TMP"
+  echo "$NUMCOMMITS"
+#+END_SRC
+
+#+Name: NumCoreCommits2016
+#+CALL: NumCommits2016(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreCommits2016
+| 587 |
+
+#+Name: NumMPFCommits2016
+#+CALL: NumCommits2016(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFCommits2016
+| 228 |
+
+#+Name: NumDocCommits2016
+#+CALL: NumCommits2016(REPOSITORY="https://github.com/cfengine/Documentation") :exports none
+
+#+RESULTS: NumDocCommits2016
+| 383 |
+
+#+Name: NumContributors2016
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMAUTHORS=$(git-stats --since "2016-01-01" --until "2017-01-01" --authors --raw | jq '.authors | length')
+  rm -rf "$TMP"
+  echo "$NUMAUTHORS"
+#+END_SRC
+
+#+Name: NumCoreContributors2016
+#+CALL: NumContributors2016(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreContributors2016
+| 23 |
+
+#+Name: NumMPFContributors2016
+#+CALL: NumContributors2016(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFContributors2016
+| 20 |
+
+#+Name: NumDocContributors2016
+#+CALL: NumContributors2016(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NumDocContributors2016
+| 15 |
+
+#+Name: NewContributors2016
+#+BEGIN_SRC shell :dir /tmp :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  THISYEAR=$(date '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
+  CONTRIBUTORS="/$TMP/$REPO-first-contributions.dat"
+  rm -f $CONTRIBUTORS
+  while read Author; do
+    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
+    echo "$FirstCommit,$Author" >> $CONTRIBUTORS
+  done < /tmp/authors.txt 
+  egrep -c "^(2016).*" $CONTRIBUTORS 
+  rm -rf $TMP
+#+END_SRC
+
+#+Name: NewCoreContributors2016
+#+CALL: NewContributors2016(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NewCoreContributors2016
+| 6 |
+
+#+Name: NewMPFContributors2016
+#+CALL: NewContributors2016(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NewMPFContributors2016
+| 8 |
+
+#+Name: NewDocContributors2016
+#+CALL: NewContributors2016(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NewDocContributors2016
+| 4 |
+
+#+Name: Contributions 2016
+|                  | Core | MPF | Docs |
+| Commits          |  587 | 228 |  383 |
+| Contributors     |   23 |  20 |   15 |
+| New Contributors |    6 |   8 |    4 |
+#+TBLFM: @2$2=remote(NumCoreCommits2016,@>$0);::@2$3=remote(NumMPFCommits2016,@>$0);::@2$4=remote(NumDocCommits2016,@>$0);::@3$2=remote(NumCoreContributors2016,@>$0);::@3$3=remote(NumMPFContributors2016,@>$0);::@3$4=remote(NumDocContributors2016,@>$0);::@4$2=remote(NewCoreContributors2016,@>$0);::@4$3=remote(NewMPFContributors2016,@>$0);::@4$4=remote(NewDocContributors2016,@>$0);
+** 2017
+#+Name: NumCommits2017
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  #REPOSITORY=https://github.com/cfengine/core
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMCOMMITS=$(git --no-pager log --since "2017-01-01" --until "2018-01-01" --oneline --no-merges | wc -l)
+  rm -rf "$TMP"
+  echo "$NUMCOMMITS"
+#+END_SRC
+
+#+Name: NumCoreCommits2017
+#+CALL: NumCommits2017(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreCommits2017
+| 244 |
+
+#+Name: NumMPFCommits2017
+#+CALL: NumCommits2017(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFCommits2017
+| 154 |
+
+#+Name: NumDocCommits2017
+#+CALL: NumCommits2017(REPOSITORY="https://github.com/cfengine/Documentation") :exports none
+
+#+RESULTS: NumDocCommits2017
+| 186 |
+
+#+Name: NumContributors2017
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMAUTHORS=$(git-stats --since "2017-01-01" --until "2018-01-01" --authors --raw | jq '.authors | length')
+  rm -rf "$TMP"
+  echo "$NUMAUTHORS"
+#+END_SRC
+
+#+Name: NumCoreContributors2017
+#+CALL: NumContributors2017(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreContributors2017
+| 23 |
+
+#+Name: NumMPFContributors2017
+#+CALL: NumContributors2017(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFContributors2017
+| 13 |
+
+#+Name: NumDocContributors2017
+#+CALL: NumContributors2017(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NumDocContributors2017
+| 17 |
+
+#+Name: NewContributors2017
+#+BEGIN_SRC shell :dir /tmp :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  THISYEAR=$(date '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
+  CONTRIBUTORS="/$TMP/$REPO-first-contributions.dat"
+  rm -f $CONTRIBUTORS
+  while read Author; do
+    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
+    echo "$FirstCommit,$Author" >> $CONTRIBUTORS
+  done < /tmp/authors.txt 
+  egrep -c "^(2017).*" $CONTRIBUTORS 
+  rm -rf $TMP
+#+END_SRC
+
+#+Name: NewCoreContributors2017
+#+CALL: NewContributors2017(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NewCoreContributors2017
+| 9 |
+
+#+Name: NewMPFContributors2017
+#+CALL: NewContributors2017(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NewMPFContributors2017
+| 3 |
+
+#+Name: NewDocContributors2017
+#+CALL: NewContributors2017(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NewDocContributors2017
+| 7 |
+
+#+Name: Contributions 2017
+|                  | Core | MPF | Docs |
+| Commits          |  244 | 154 |  186 |
+| Contributors     |   23 |  13 |   17 |
+| New Contributors |    9 |   3 |    7 |
+#+TBLFM: @2$2=remote(NumCoreCommits2017,@>$0);::@2$3=remote(NumMPFCommits2017,@>$0);::@2$4=remote(NumDocCommits2017,@>$0);::@3$2=remote(NumCoreContributors2017,@>$0);::@3$3=remote(NumMPFContributors2017,@>$0);::@3$4=remote(NumDocContributors2017,@>$0);::@4$2=remote(NewCoreContributors2017,@>$0);::@4$3=remote(NewMPFContributors2017,@>$0);::@4$4=remote(NewDocContributors2017,@>$0);
+** 2018
+#+Name: NumCommits2018
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  #REPOSITORY=https://github.com/cfengine/core
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMCOMMITS=$(git --no-pager log --since "2018-01-01" --until "2019-01-01" --oneline --no-merges | wc -l)
+  rm -rf "$TMP"
+  echo "$NUMCOMMITS"
+#+END_SRC
+
+#+Name: NumCoreCommits2018
+#+CALL: NumCommits2018(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreCommits2018
+| 492 |
+
+#+Name: NumMPFCommits2018
+#+CALL: NumCommits2018(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFCommits2018
+| 163 |
+
+#+Name: NumDocCommits2018
+#+CALL: NumCommits2018(REPOSITORY="https://github.com/cfengine/Documentation") :exports none
+
+#+RESULTS: NumDocCommits2018
+| 231 |
+
+#+Name: NumContributors2018
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMAUTHORS=$(git-stats --since "2018-01-01" --until "2019-01-01" --authors --raw | jq '.authors | length')
+  rm -rf "$TMP"
+  echo "$NUMAUTHORS"
+#+END_SRC
+
+#+Name: NumCoreContributors2018
+#+CALL: NumContributors2018(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreContributors2018
+| 18 |
+
+#+Name: NumMPFContributors2018
+#+CALL: NumContributors2018(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFContributors2018
+| 22 |
+
+#+Name: NumDocContributors2018
+#+CALL: NumContributors2018(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NumDocContributors2018
+| 11 |
+
+#+Name: NewContributors2018
+#+BEGIN_SRC shell :dir /tmp :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  THISYEAR=$(date '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
+  CONTRIBUTORS="/$TMP/$REPO-first-contributions.dat"
+  rm -f $CONTRIBUTORS
+  while read Author; do
+    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
+    echo "$FirstCommit,$Author" >> $CONTRIBUTORS
+  done < /tmp/authors.txt 
+  egrep -c "^(2018).*" $CONTRIBUTORS 
+  rm -rf $TMP
+#+END_SRC
+
+#+Name: NewCoreContributors2018
+#+CALL: NewContributors2018(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NewCoreContributors2018
+| 7 |
+
+#+Name: NewMPFContributors2018
+#+CALL: NewContributors2018(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NewMPFContributors2018
+| 9 |
+
+#+Name: NewDocContributors2018
+#+CALL: NewContributors2018(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NewDocContributors2018
+| 7 |
+
+#+Name: Contributions 2018
+|                  | Core | MPF | Docs |
+| Commits          |  492 | 163 |  231 |
+| Contributors     |   18 |  22 |   11 |
+| New Contributors |    7 |   9 |    7 |
+#+TBLFM: @2$2=remote(NumCoreCommits2018,@>$0);::@2$3=remote(NumMPFCommits2018,@>$0);::@2$4=remote(NumDocCommits2018,@>$0);::@3$2=remote(NumCoreContributors2018,@>$0);::@3$3=remote(NumMPFContributors2018,@>$0);::@3$4=remote(NumDocContributors2018,@>$0);::@4$2=remote(NewCoreContributors2018,@>$0);::@4$3=remote(NewMPFContributors2018,@>$0);::@4$4=remote(NewDocContributors2018,@>$0);
+
+** 2019
+#+Name: NumCommits2019
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  #REPOSITORY=https://github.com/cfengine/core
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMCOMMITS=$(git --no-pager log --since "2019-01-01" --until "2020-01-01" --oneline --no-merges | wc -l)
+  rm -rf "$TMP"
+  echo "$NUMCOMMITS"
+#+END_SRC
+
+#+Name: NumCoreCommits2019
+#+CALL: NumCommits2019(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreCommits2019
+| 612 |
+
+#+Name: NumMPFCommits2019
+#+CALL: NumCommits2019(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFCommits2019
+| 255 |
+
+#+Name: NumDocCommits2019
+#+CALL: NumCommits2019(REPOSITORY="https://github.com/cfengine/Documentation") :exports none
+
+#+RESULTS: NumDocCommits2019
+| 172 |
+
+#+Name: NumContributors2019
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMAUTHORS=$(git-stats --since "2019-01-01" --until "2020-01-01" --authors --raw | jq '.authors | length')
+  rm -rf "$TMP"
+  echo "$NUMAUTHORS"
+#+END_SRC
+
+#+Name: NumCoreContributors2019
+#+CALL: NumContributors2019(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreContributors2019
+| 22 |
+
+#+Name: NumMPFContributors2019
+#+CALL: NumContributors2019(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFContributors2019
+| 20 |
+
+#+Name: NumDocContributors2019
+#+CALL: NumContributors2019(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NumDocContributors2019
+| 15 |
+
+#+Name: NewContributors2019
+#+BEGIN_SRC shell :dir /tmp :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  THISYEAR=$(date '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
+  CONTRIBUTORS="/$TMP/$REPO-first-contributions.dat"
+  rm -f $CONTRIBUTORS
+  while read Author; do
+    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
+    echo "$FirstCommit,$Author" >> $CONTRIBUTORS
+  done < /tmp/authors.txt 
+  egrep -c "^(2019).*" $CONTRIBUTORS 
+  rm -rf $TMP
+#+END_SRC
+
+#+Name: NewCoreContributors2019
+#+CALL: NewContributors2019(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NewCoreContributors2019
+| 9 |
+
+#+Name: NewMPFContributors2019
+#+CALL: NewContributors2019(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NewMPFContributors2019
+| 8 |
+
+#+Name: NewDocContributors2019
+#+CALL: NewContributors2019(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NewDocContributors2019
+| 3 |
+
+#+Name: Contributions 2019
+|                  | Core | MPF | Docs |
+| Commits          |  612 | 255 |  172 |
+| Contributors     |   22 |  20 |   15 |
+| New Contributors |    9 |   8 |    3 |
+#+TBLFM: @2$2=remote(NumCoreCommits2019,@>$0);::@2$3=remote(NumMPFCommits2019,@>$0);::@2$4=remote(NumDocCommits2019,@>$0);::@3$2=remote(NumCoreContributors2019,@>$0);::@3$3=remote(NumMPFContributors2019,@>$0);::@3$4=remote(NumDocContributors2019,@>$0);::@4$2=remote(NewCoreContributors2019,@>$0);::@4$3=remote(NewMPFContributors2019,@>$0);::@4$4=remote(NewDocContributors2019,@>$0);
+
+** 2020 :noexport:
+#+Name: NumCommits2020
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  #REPOSITORY=https://github.com/cfengine/core
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMCOMMITS=$(git --no-pager log --since "2020-01-01" --until "2021-01-01" --oneline --no-merges | wc -l)
+  rm -rf "$TMP"
+  echo "$NUMCOMMITS"
+#+END_SRC
+
+#+Name: NumCoreCommits2020
+#+CALL: NumCommits2020(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreCommits2020
+| 17 |
+
+#+Name: NumMPFCommits2020
+#+CALL: NumCommits2020(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFCommits2020
+| 12 |
+
+#+Name: NumDocCommits2020
+#+CALL: NumCommits2020(REPOSITORY="https://github.com/cfengine/Documentation") :exports none
+
+#+RESULTS: NumDocCommits2020
+| 7 |
+
+#+Name: NumContributors2020
+#+BEGIN_SRC shell :dir /tmp/ :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  NUMAUTHORS=$(git-stats --since "2020-01-01" --until "2021-01-01" --authors --raw | jq '.authors | length')
+  rm -rf "$TMP"
+  echo "$NUMAUTHORS"
+#+END_SRC
+
+#+Name: NumCoreContributors2020
+#+CALL: NumContributors2020(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NumCoreContributors2020
+| 4 |
+
+#+Name: NumMPFContributors2020
+#+CALL: NumContributors2020(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NumMPFContributors2020
+| 5 |
+
+#+Name: NumDocContributors2020
+#+CALL: NumContributors2020(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NumDocContributors2020
+| 4 |
+
+#+Name: NewContributors2020
+#+BEGIN_SRC shell :dir /tmp :exports none :results table :var REPOSITORY="https://github.com/cfengine/core"
+  TMP=$(mktemp --directory --quiet) 
+  mkdir -p $TMP
+  cd $TMP
+  git clone $REPOSITORY
+  REPO="$(basename $REPOSITORY)"
+  cd "$TMP/$REPO"
+  LASTYEAR=$(date -d "-2 year" '+%Y')
+  THISYEAR=$(date '+%Y')
+  LASTNEWYEAR="$LASTYEAR-01-01"
+  git --no-pager log --format="%aN" | sort -u  > /tmp/authors.txt
+  CONTRIBUTORS="/$TMP/$REPO-first-contributions.dat"
+  rm -f $CONTRIBUTORS
+  while read Author; do
+    FirstCommit=$(git --no-pager log --author "$Author" --format="%cI" | sort | head -n 1)
+    echo "$FirstCommit,$Author" >> $CONTRIBUTORS
+  done < /tmp/authors.txt 
+  egrep -c "^(2020).*" $CONTRIBUTORS 
+  rm -rf $TMP
+#+END_SRC
+
+#+Name: NewCoreContributors2020
+#+CALL: NewContributors2020(REPOSITORY="https://github.com/cfengine/core") :exports none
+
+#+RESULTS: NewCoreContributors2020
+| 0 |
+
+#+Name: NewMPFContributors2020
+#+CALL: NewContributors2020(REPOSITORY="https://github.com/cfengine/masterfiles") :exports none
+
+#+RESULTS: NewMPFContributors2020
+| 0 |
+
+#+Name: NewDocContributors2020
+#+CALL: NewContributors2020(REPOSITORY="https://github.com/cfengine/documentation") :exports none
+
+#+RESULTS: NewDocContributors2020
+| 1 |
+
+#+Name: Contributions 2020
+|                  | Core | MPF | Docs |
+| Commits          |   17 |  12 |    7 |
+| Contributors     |    4 |   5 |    4 |
+| New Contributors |    0 |   0 |    1 |
+#+TBLFM: @2$2=remote(NumCoreCommits2020,@>$0);::@2$3=remote(NumMPFCommits2020,@>$0);::@2$4=remote(NumDocCommits2020,@>$0);::@3$2=remote(NumCoreContributors2020,@>$0);::@3$3=remote(NumMPFContributors2020,@>$0);::@3$4=remote(NumDocContributors2020,@>$0);::@4$2=remote(NewCoreContributors2020,@>$0);::@4$3=remote(NewMPFContributors2020,@>$0);::@4$4=remote(NewDocContributors2020,@>$0);
+
+* Core
+#+BEGIN_SRC sh :exports none
+  cf-promises --syntax-description json | jq '.functions | keys[]' > ./data/functions.3.15.0.txt
+#+END_SRC
+
+#+BEGIN_SRC sh :exports none :results output
+  exec 2&>1
+  diff -u ./data/functions.3.11.0.txt ./data/functions.3.15.0.txt | grep +
+  :
+#+END_SRC
+
+#+RESULTS:
 #+begin_example
-R: For iterable 'a 1' we created variable 'a_1' and its value is 'a 1'
-R: For iterable 'b 2' we created variable 'b_2' and its value is 'b 2'
-R: For iterable 'c 3' we created variable 'c_3' and its value is 'c 3'
-R: We can print a data container compactly without creating a temporary variable: {"x":200,"y":[1,2,null,true,false]}
-R: We can print a data container fully without creating a temporary variable: {
-  "x": 200,
-  "y": [
-    1,
-    2,
-    null,
-    true,
-    false
-  ]
-}
++++ ./data/functions.3.15.0.txt	2020-01-17 08:40:23.716939284 -0600
+@@ -2,6 +2,7 @@
++"basename"
+@@ -10,6 +11,7 @@
++"classfiltercsv"
+@@ -51,6 +53,7 @@
++"hash_to_int"
+@@ -109,6 +112,7 @@
++"read_module_protocol"
+@@ -149,6 +153,7 @@
++"string_replace"
 #+end_example
 
-** =inline_mustache=
+** ~basename()~
+- New in 3.15.0
+- Convenient and familiar
+#+BEGIN_SRC cfengine3 :include-stdlib nil :log-level info :exports both :bundlesequence example_basename :command-in-result t
+bundle agent example_basename
+{
+  vars:
+      "basename" -> { "CFE-3196" }
+        string => basename( $(this.promise_filename) );
+
+      "basename_wo_extension" -> { "CFE-3196" }
+        string => basename( $(this.promise_filename), ".cf" );
+  reports:
+
+      "basename = '$(basename)'";
+      "basename without '.cf' extension = '$(basename_wo_extension)'";
+}
+#+END_SRC
+
+#+RESULTS:
+: # cf-agent --bundlesequence example_basename --no-lock --log-level info --file /home/nickanderson/src/presentations/state-of-the-cfengine/cfengine3-NiK6sU
+:     info: Using command line specified bundlesequence
+: R: basename = 'cfengine3-NiK6sU'
+: R: basename without '.cf' extension = 'cfengine3-NiK6sU'
+
+** ~classfiltercsv()~
+- New in 3.15.0
+- Useful to reduce logic and speed policy
+*** ~classfiltercsv()~ Input
 :PROPERTIES:
-:BEAMER_env: frame
+:ID:       93e4c3bb-c7c3-44cc-a6e6-56c3ac41a897
 :END:
 
-#+BEGIN_NOTES
-  You are no longer required to use an external file template. Now you can
-  provide the template directly within the policy.
-#+END_NOTES
+#+BEGIN_SRC  sh :results output :exports results
+dos2unix ./data/classfiltercsv.csv
+#+END_SRC
 
-#+Caption: Example =template_method= =inline_mustache=
-#+BEGIN_SRC cfengine3
-  bundle agent main
+#+BEGIN_SRC csv :tangle ./data/classfiltercsv.csv
+ClassExpr,Sort,Token,Value
+# This is a comment
+any,A,net.ipv4.ip_forward,ANYVALUE
+example_class1,z,net.ipv4.ip_forward,ANYVALUE
+example_class2,a,net.ipv4.ip_forward,127.0.0.3
+not_defined,Z,net.ipv4.ip_forward,NOT_DEFINED
+example_class3.example_class2.example_class1,1,net.ipv4.ip_forward,127.0.0.4
+also_undefined,0,net.ipv4.ip_forward,NOT_DEFINED
+#+END_SRC
+
+- *NOTE:* CRLF (Windows/DOS)  line endings required per RFC
+
+*** ~classfiltercsv()~ Example Policy
+
+#+NAME: example_classfiltercsv
+#+BEGIN_SRC cfengine3 :include-stdlib nil :log-level error :exports both :bundlesequence example_classfiltercsv
+  bundle agent example_classfiltercsv
+  {
+    classes:
+        "example_class1";
+        "example_class2";
+        "example_class3";
+
+    vars:
+        "data_file" string => "$(this.promise_dirname)/data/classfiltercsv.csv";
+        "d" data => classfiltercsv($(data_file), "true", 0, 1);
+
+    reports:
+        "Filtered data: $(with)" with => string_mustache("{{%-top-}}", d);
+  }
+#+END_SRC
+
+*** ~classfiltercsv()~ Policy Output
+
+#+RESULTS: example_classfiltercsv
+#+begin_example
+R: Filtered data: [
+  {
+    "Sort": "A",
+    "Token": "net.ipv4.ip_forward",
+    "Value": "ANYVALUE"
+  },
+  {
+    "Sort": "a",
+    "Token": "net.ipv4.ip_forward",
+    "Value": "127.0.0.3"
+  },
+  {
+    "Sort": "z",
+    "Token": "net.ipv4.ip_forward",
+    "Value": "127.0.0.4"
+  },
+  {
+    "Sort": "z",
+    "Token": "net.ipv4.ip_forward",
+    "Value": "ANYVALUE"
+  }
+]
+#+end_example
+
+*** ~classfiltercsv()~ For more... 
+Checkout Jay Goldberg's talk "Data-Driven Configuration with CFEngine's classfiltercsv function" tomorrow, 16:50–17:15, B.2.009
+** ~hash_to_int()~
+- New in 3.12.0
+- Useful for distributed grouping and orchestration (re-implement select_class)
+
+#+BEGIN_SRC cfengine3 :include-stdlib nil :log-level info :exports both :bundlesequence example_hash_to_int
+  bundle agent example_hash_to_int
   {
     vars:
-      "d" data => '{ "hello": "world", "feature": [ "render", "inline", "mustache" ] }';
+        "hello"  int => hash_to_int(0, 1000, "hello");
+        "world"  int => hash_to_int(0, 1000, "world");
+
+        # Hash can vary on hostkey or policy hub:
+        "hour"   int => hash_to_int(0, 24, "$(sys.key_digest)");
+        "minute" int => hash_to_int(0, 60, "$(sys.policy_hub)");
+
+    reports:
+        "'hello' hashed to: $(hello)";
+        "'world' hashed to: $(world)";
+
+  }
+#+END_SRC
+
+#+RESULTS:
+:     info: Using command line specified bundlesequence
+: R: 'hello' hashed to: 172
+: R: 'world' hashed to: 760
+
+** ~string_replace()~
+- New in 3.12.1
+- Convenience, more simple version of ~regex_replace()~
+  
+#+BEGIN_SRC cfengine3 :include-stdlib t :log-level error :exports both :bundlesequence example_string_replace
+  bundle agent example_string_replace
+  {
+    vars:
+        "my_string" string => "This is not the string you are looking for";
+
+    reports:
+        "$(with)" with => string_replace( $(my_string), "not ", "" );
+  }
+#+END_SRC
+
+#+RESULTS:
+: R: This is the string you are looking for
+
+** ~read_module_protocol()~
+- New in 3.15.0
+- Useful for leveraging cached output from module protocol
+- More light weight and less noisy than using ~cat~
+*** ~read_module_protocol()~ Example usage
+#+BEGIN_SRC cfengine3 :include-stdlib t :log-level info :exports both
+  bundle agent cache_maintenance
+  # Creates a module protocol cache, refreshes it if minute is 30-35
+  {
+    vars:
+        "file"
+          string => "$(this.promise_dirname)/cached_module";
+
+    classes:
+        "cache_refresh"
+          if => not(fileexists("$(file)"));
+      Min30_35::
+        "cache_refresh";
 
     files:
+      cache_refresh::
+        "$(file)"
+          create => "true",
+          template_method => "inline_mustache",
+          edit_template_string => "=my_variable=$(sys.date)";
+  }
+#+END_SRC
 
-      "/tmp/example.txt"
+*** ~read_module_protocol()~ Example usage continued ...
+
+#+BEGIN_SRC cfengine3 :include-stdlib t :log-level info :exports both
+  bundle agent demo
+  # Demonstrates read_module_protocol function, prints a variable from it
+  {
+    classes:
+        "cache_was_read"
+          if => read_module_protocol("$(cache_maintenance.file)");
+
+    reports:
+      cache_was_read::
+        "Module cache was read!";
+        "cached_module.my_variable = $(cached_module.my_variable)";
+  }
+  bundle agent __main__
+  {
+    methods:
+        "cache_maintenance"
+          handle => "cache_maintenance_done";
+        "demo"
+          depends_on => { "cache_maintenance_done" };
+  }
+#+END_SRC
+
+#+RESULTS:
+: R: Module cache was read!
+: R: cached_module.my_variable = Mon Feb  3 05:32:05 2020
+
+*** ~read_module_protocol()~ Example output
+#+RESULTS:
+: R: Module cache was read!
+: R: cached_module.my_variable = Mon Feb  3 05:32:05 2020
+
+** =body copy_from missing_ok=
+- New in 3.12.0
+- Promise KEPT if source file is missing (except for remote 
+- Useful for opportunistic copies (host specific data)
+
+*** =body copy_from missing_ok= Example
+
+#+BEGIN_SRC cfengine3 :include-stdlib t :log-level error :exports both
+  bundle agent main
+  {
+    files:
+        "/tmp/my.file"
+          copy_from => local_if_available( "/tmp/$(sys.fqhost).json" ),
+          classes => results( "bundle", "copy_from_local" );
+
+        "/tmp/my.file"
+          copy_from => server_if_available( "/tmp/$(sys.fqhost).json" ),
+          classes => results( "bundle", "copy_from_server" );
+
+    reports:
+        "$(with)"
+          with => string_mustache( "Classes:$(const.n){{#-top-}}{{.}}$(const.n){{/-top-}}",
+                                   sort( classesmatching( "copy_from_.*" ), lex));
+  }
+  body copy_from local_if_available(file)
+  {
+          source => "$(file)";
+          missing_ok => "true";
+  }
+  body copy_from server_if_available(file)
+  {
+          source => "$(file)";
+          missing_ok => "true";
+          servers => { "127.0.0.1" };
+  }
+#+END_SRC
+
+*** =body copy_from missing_ok= Example output
+
+#+RESULTS:
+#+begin_example
+   error: No suitable server found
+R: Classes:
+copy_from_local_kept
+copy_from_local_reached
+copy_from_server_error
+copy_from_server_failed
+copy_from_server_not_kept
+copy_from_server_reached
+
+R: Yet/tmp/nickanderson-thinkpad-w550s.json doesn't exist
+#+end_example
+
+** =body control hub query_timeout=
+- New in 3.12.0
+- *Enterprise specific*
+
+** =body storage mount_type= =panfs= & =cifs=
+- New in 3.15.0
+- Thanks SURF Sara!
+
+** =body packge_module interpreter=
+- New in 3.13.0, 3.12.2
+** =body package_module module_path=
+- New in 3.13.0, 3.12.2
+** =commands= promise =inform=
+- New in 3.15.0
+- Useful for suppressing noise from commands that do not produce output
+#+BEGIN_SRC cfengine3 :include-stdlib t :log-level info :exports both
+  bundle agent main
+  {
+    commands:
+        "$(paths.false)";
+        "$(paths.true)" inform => "false";
+  }
+#+END_SRC
+
+#+RESULTS:
+:     info: Executing 'no timeout' ... '/bin/false'
+:    error: Finished command related to promiser '/bin/false' -- an error occurred, returned 1
+:     info: Completed execution of '/bin/false'
+
+** =files= promise =edit_template_string=
+- New in 3.12.0
+- Useful for self contained policy
+#+BEGIN_SRC cfengine3 :include-stdlib t :log-level info :exports both
+  bundle agent main
+  {
+    files:
+      "/tmp/now.txt"
         create => "true",
-        template_method => "inline_mustache",
-        edit_template_string => "{{%-top-}}",
-        template_data => @(d);
-
+        edit_template_string => "{{{sys.date}}}";
+    reports:
+      "/tmp/now.txt"
+        printfile => cat( $(this.promiser) );
   }
 #+END_SRC
 
-** =inline_mustache=
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-Results in =/tmp/example.txt= having this content.
-
-#+Caption: Example =template_method= =inline_mustache=
-#+BEGIN_SRC text
-  {
-    "feature": [
-      "render",
-      "inline",
-      "mustache"
-    ],
-    "hello": "world"
-  }
-#+END_SRC
-** Multiple augments
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-*NOTE:* Current implementation discussion in progress in [[jira:CFE-2741][CFE-2741]]. Please
-consider participating.
-
-#+Caption: Example =/tmp/def.json=
-#+BEGIN_SRC json
-{
-  "vars":{
-    "my_var": "defined in def.json",
-    "my_other_var": "Defined ONLY in def.json"
-  },
-  "augments": [
-    "/tmp/$(sys.flavor).json"
-  ]
-}
-#+END_SRC
+#+RESULTS:
+:     info: Created file '/tmp/now.txt', mode 0600
+: R: /tmp/now.txt
 
 ** Multiple augments
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
+- New in 3.12.0
 
-#+Caption: Example =/tmp/centos_6.json=
-#+BEGIN_SRC json
-{
-  "vars": {
-    "my_var": "Overridden in centos_6.json",
-    "centos_6_var": "Defined ONLY in centos_6.json"
-  }
-}
+#+BEGIN_SRC sh :dir /tmp/multiple-augments/ :results output :exports output
+   find .
 #+END_SRC
 
-** Multiple augments
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
+#+RESULTS:
+: .
+: ./def.json
+: ./ubuntu_19.json
+: ./example.cf
 
-#+Caption: Execution output on CentOS 6
-#+BEGIN_EXAMPLE
-[root@hub tmp]# cf-agent -KIf ./example.cf 
-R: def.my_var == Overridden in centos_6.json
-R: def.my_other_var == Defined ONLY in def.json
-R: def.centos_6_var == Defined ONLY in centos_6.json
-#+END_EXAMPLE
+*** Multiple augments: =def.json=
 
-** =missing_ok=
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-* MPF Functionality
-** Augments - Append the =bundlesequnece= of =promises.cf= and =update.cf=
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-- =control_common_bundlesequence_end=
-- =control_common_update_bundlesequence_end=
-
-#+BEGIN_SRC json
-{
-  "vars":{
-    "control_common_bundlesequence_end": [ "mybundle1", "mybundle2" ],
-    "control_common_update_bundlesequence_end": [ "my_updatebundle1", "mybundle2" ]
-  }
-}
-#+END_SRC
-
-- Order of bundle actuation not guaranteed.
-- Agent errors if named bundle is missing.
-
-** Augments - Log file retention and rotation limits
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-- =mpf_log_files_max_size= :: Max file size before rotation
-- =mpf_log_file_retention= :: Number of file rotations to keep
-- =mpf_log_dir_retention= :: Number of file rotations to keep in =outputs=,
-     =reports=, and the Enterprise application log directory.
-
-#+BEGIN_SRC json
-{
-  "vars": {
-    "mpf_log_file_retention": "5",
-    "mpf_log_file_max_size": "10M",
-    "mpf_log_dir_retention": "7"
-  }
-}
-#+END_SRC
-
-** Augments - Execution schedule
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-- =control_executor_schedule= :: Classes that trigger execution of =cf-agent=.
- 
-#+BEGIN_SRC json
-{
-  "vars": {
-    "control_executor_schedule": [ "Min00", "Min30" ]
-  }
-}
-#+END_SRC 
-
-** Augments - =splaytime=
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-- =control_executor_splaytime= :: Maximum number of minutes =exec_commad= should
-     wait before executing.
-
-#+BEGIN_SRC json
-{
-  "vars": {
-    "control_executor_splaytime": "3"
-  }
-}
-#+END_SRC
-
-** Augments - =allowlegacyconnects=
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-- =control_server_allowlegacyconnects= :: List of subnets allowed to connect
-     using legacy protocol (versions prior to 3.7.0).
-
-#+BEGIN_SRC json
-{
-  "vars": {
-    "control_server_allowlegacyconnects": [ "0.0.0.0/0" ]
-  }
-}
-#+END_SRC
-
-** Augments - =maxconnections=
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-- =control_serverd_maxconnections= :: Maximum number of connections allowed by
-     =cf-serverd=.
-
-#+BEGIN_SRC json
-{
-  "vars":{
-      "control_serverd_maxconnections": "1000"
-  }
-}
-#+END_SRC
-
-** Augments - Client initiated reporting (Enterprise)
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-- =control_hub_exclude_hosts= :: List of subnets to exclude from hub initiated
-     report collection.
-- =client_initiated_reporting_enabled= :: List of classes that if defined should
-     initiate reporting to an enterprise hub.
-- =control_server_call_collect_interval= :: Number of minutes between client
-     initiated reporting.
-
-#+BEGIN_SRC json
+#+CAPTION: def.json
+#+BEGIN_SRC json :tangle /tmp/multiple-augments/def.json
   {
       "vars": {
-          "control_server_call_collect_interval": "1",
-          "control_hub_exclude_hosts": [ "0.0.0.0/0" ]
-      },
-
-      "classes" {
-          "client_initiated_reporting_enabled": [ "any" ]
-      }
+        "my_var": "This is my_var, set in def.json",
+        "my_platform_specific_var": "This is my_platform_specific_var, set in def.json"
+    },
+      "augments": [ "$(sys.flavor).json" ]
   }
 #+END_SRC
 
-** Augments - =files_single_copy=
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
+*** Multiple augments: =$(sys.flavor).json=
 
-- =control_agent_files_single_copy= :: List of regular expressions matching
-     files that should not be copied more than once.
-
-#+BEGIN_SRC json
-{
-  "vars":{
-    "control_agent_files_single_copy": [ ".*" ]
-  }
-
-}
-#+END_SRC
-
-** Augments - =default_repository=
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-- =mpf_control_agent_default_repository= :: List of classes class will cause
-     these backups to be placed in =$(sys.workdir)/backups=.
-
-- =control_agent_default_backup= :: Directory where backups should be placed
-     (defaults to =$(sys.workdir/backups=).
-
-#+BEGIN_SRC json
-
-{
-  "classes": {
-    "mpf_control_agent_default_repository": [ "any" ]
-  },
-
-  "vars": {
-    "control_agent_default_repository": "/var/cfengine/edit_backups"
-  }
-}
-#+END_SRC
-
-** =templates= shortcut 
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-- =dir_templates= :: Path to common template directory. Shortcut provided by
-     =cf-serverd= as =templates/=.
- 
-  #+BEGIN_SRC json
+#+CAPTION: ubuntu_19.json
+#+BEGIN_SRC json :tangle /tmp/multiple-augments/ubuntu_19.json
   {
       "vars": {
-          "dir_templates": "/var/cfengine/mytemplates"
-          }
-  }
-  #+END_SRC 
-
-#+BEGIN_SRC cfengine3
-  bundle agent example
-  {
-    files:
-
-      "$(def.dir_templates)/mytemplate.mustache" -> { "myservice" }
-
-        copy_from => remote_dcp( "templates/mytemplate.mustache",
-                                 $(sys.policy_server) ),
-      
-        comment => "mytemplate is necessary in order to render
-                    myservice configuration file.";
-  }
-#+END_SRC
-
-** Automatically restart components on related data change
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-#+BEGIN_NOTES
-  While the agent itsef will reload its config upon notice of policy change this
-  bundle specifically handles changes to variables used in the MPF which may come
-  from external data sources which are unknown to the components themselves.
-#+END_NOTES
-
-- =mpf_augments_control_enabled= :: List of classes that automatic component
-     restart on related data change should be enabled for.
-
-#+BEGIN_SRC json
-{
-  "classes":{
-      "mpf_augments_control_enabled": [ "any" ]
-  }
-}
-#+END_SRC
-
-** Host info report now now renders inventory variables
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-#+BEGIN_SRC shell
-  cf-agent -KIb host_info_report
-#+END_SRC
-
-#+Caption: Sample from inventory section of host info report
-#+BEGIN_SRC text
-### Inventory
-
-#### Variables tagged for inventory
-
-{
-  "default:cfe_autorun_inventory_disk.free": "5.00",
-  "default:cfe_autorun_inventory_listening_ports.ports": [
-    "22",
-    "25",
-    "53",
-  ],
-  "default:cfe_autorun_inventory_memory.total": "32050.27",
-  "default:sys.arch": "x86_64",
-  "default:sys.cf_version": "3.11.0",
-  "default:sys.class": "linux",
-  "default:sys.cpus": "4",
-  "default:sys.flavor": "ubuntu_17",
-  "default:sys.hardware_addresses": [
-    "5c:e0:c5:9f:f3:8f",
-    "52:54:00:6b:62:06",
-    "02:42:79:79:f6:02",
-    "0a:00:27:00:00:00"
-  ],
-  "default:sys.inet": {
-    "default_gateway": "192.168.42.1",
-#+END_SRC 
-
-* Enterprise Functionality
-** UI responsiveness                                                :ATTACH:
-:PROPERTIES:
-:Attachments: alert-status-speed-comparison.webm
-:ID:       75971753-cddb-4739-a0a1-dcb66df44ab9
-:BEAMER_env: frame
-:END:
-
-- [[file:data/75/971753-cddb-4739-a0a1-dcb66df44ab9/alert-status-speed-comparison.webm][Testing]] with 50,000 host data sets
-
-** Global Host Search                                               :ATTACH:
-:PROPERTIES:
-:ID:       f97c9b4d-d46f-4aee-bd68-630f44106b0e
-:Attachments: 2018-01-14_Selection_002_2018-01-14_13-21-21.png
-:BEAMER_env: frame
-:END:
-- Easily find hosts by name, ip or identity
-
-#+DOWNLOADED: /home/nickanderson/Pictures/Screenshots/2018-01-14_Selection_002.png @ 2018-01-14 13:21:24
-[[file:data/f9/7c9b4d-d46f-4aee-bd68-630f44106b0e/2018-01-14_Selection_002_2018-01-14_13-21-21.png]]
-
-** host count trend widget                                          :ATTACH:
-:PROPERTIES:
-:ID:       e90e4df9-0bb7-4a1e-84d5-25911497f93c
-:Attachments: 2018-01-10_Selection_001_2018-01-14_12-02-44.png
-:BEAMER_env: frame
-:END:
-
-#+DOWNLOADED: https://cfengine.com/wp-content/uploads/2018/01/2018-01-10_Selection_001.png @ 2018-01-14 12:02:44
-[[file:data/e9/0e4df9-0bb7-4a1e-84d5-25911497f93c/2018-01-10_Selection_001_2018-01-14_12-02-44.png]]
-
-** mail settings                                                    :ATTACH:
-:PROPERTIES:
-:ID:       748d9e15-278e-46ac-822f-9e0f7e6b2830
-:Attachments: mail-settings-1024x537_2018-01-14_12-01-05.png
-:BEAMER_env: frame
-:END:
-
-- Exported reports can now be sent as attachments in emails
-
-#+DOWNLOADED: https://cfengine.com/wp-content/uploads/2018/01/mail-settings-1024x537.png @ 2018-01-14 12:01:05
-[[file:data/74/8d9e15-278e-46ac-822f-9e0f7e6b2830/mail-settings-1024x537_2018-01-14_12-01-05.png]]
-
-** LDAP settings API                                                :ATTACH:
-:PROPERTIES:
-:ID:       294c1258-49f4-4c72-9f8d-2b7535cfbea8
-:Attachments: Authentication-settings_2018-01-14_12-04-18.png
-:BEAMER_env: frame
-:END:
-
-#+DOWNLOADED: https://cfengine.com/wp-content/uploads/2018/01/Authentication-settings.png @ 2018-01-14 12:04:18
-[[file:data/29/4c1258-49f4-4c72-9f8d-2b7535cfbea8/Authentication-settings_2018-01-14_12-04-18.png]]
-
-** default roles                                                    :ATTACH:
-:PROPERTIES:
-:ID:       bf10ec4b-5b6b-4140-9336-fb7ab7808fed
-:Attachments: 2018-01-14_Selection_004_2018-01-14_14-03-29.png
-:BEAMER_env: frame
-:END:
-
-#+DOWNLOADED: /home/nickanderson/Pictures/Screenshots/2018-01-14_Selection_004.png @ 2018-01-14 14:03:32
-[[file:data/bf/10ec4b-5b6b-4140-9336-fb7ab7808fed/2018-01-14_Selection_004_2018-01-14_14-03-29.png]]
-
-** New OOTB Inventory Attributes
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-- Policy Release Id
-- AIX OS Level
- 
-** Inventory API 
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-#+Caption: Example API Query
-#+BEGIN_SRC shell
-  curl --user admin -X POST \
-    -H 'content-type: application/json' \
-    https://hub/api/inventory -d '{ "select":[ "Host name", "OS type"]}'
-#+END_SRC
-
-** Inventory API
-:PROPERTIES:
-:BEAMER_env: frame
-:END:
-
-#+Caption: Example Query Response
-#+BEGIN_SRC json
-{
-    "data": [
-        {
-            "header": [
-                {
-                    "columnName": "Host name",
-                    "columnType": "STRING"
-                },
-                {
-                    "columnName": "OS type",
-                    "columnType": "STRING"
-                }
-            ],
-            "queryTimeMs": 11,
-            "rowCount": 2,
-            "rows": [
-                [
-                    "host001",
-                    "linux"
-                ],
-                [
-                    "hub",
-                    "linux"
-                ]
-            ]
-        }
-    ],
-    "meta": {
-        "count": 1,
-        "page": 1,
-        "timestamp": 1515607751,
-        "total": 1
+        "my_platform_specific_var": "This is my_platform_specific_var, set in ubuntu_19.json"
     }
-}
+  }
 #+END_SRC
+
+*** Multiple augments: policy
+
+#+CAPTION: example.cf
+#+BEGIN_SRC cfengine3 :include-stdlib t :log-level info :exports both :tangle /tmp/multiple-augments/example.cf
+  bundle agent main
+  {
+      reports:
+        "$(sys.flavor)";
+        "$(def.my_var)";
+        "$(def.my_platform_specific_var)";
+  } 
+#+END_SRC
+
+*** Multiple augments: Policy run and output
+
+#+CAPTION: Policy run and output
+#+BEGIN_SRC sh :dir /tmp/multiple-augments/ :results output :exports both
+  cf-agent -KIf ./example.cf 
+#+END_SRC
+
+#+RESULTS:
+: R: ubuntu_19
+: R: This is my_var, set in def.json
+: R: This is my_platform_specific_var, set in ubuntu_19.json
+
+** Augments classes by class expression
+- New in 3.14.0, 3.12.2
+** Improved CI
+- Valgrind
+- ASAM
+- LGTM
+
+* Enterprise
+
+- Federated Reporting
+- Policy Analyzer
+- Alert conditions
+  - File changes
+  - Custom SQL
+- Dashboard widgets
+  - Newly bootstrapped hosts trend
+  - Decommissioned hosts trend
+- Improved report builder
+  - Extend with custom schema
+- File integrity monitoring UI
+- Fine grained permissions for RBAC
+- Export/Import settings
+- APIs
+  - Inventory
+  - File changes
+- New OOTB Inventory
+  - AWS EC2 region, instance type, instance id, availability zone
+  - System UUID
+  - Setuid files
+  - Root owned setuid files
+* Tooling
+- cf-remote :: Install CFEngine on remote hosts, provision vms on cloud providers
+- cf-check :: Validate and repair lmdbs
+- cf-bottom :: Tom, the new cfengine team member, triggers builds in jenkins
+-  :: 
+* Thank you  
+
+- Made with spacemacs, using org-mode, ob-cfengine3, and org-reveal, with love
